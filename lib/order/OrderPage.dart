@@ -440,7 +440,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                   tabs: [
                     Tab(
                       child: Text(
-                        'cooking',
+                        'จัดของ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -449,7 +449,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                     ),
                     Tab(
                       child: Text(
-                        'sending',
+                        'กำลังขนส่ง',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -458,7 +458,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                     ),
                     Tab(
                       child: Text(
-                        'complete',
+                        'สำเร็จ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -789,7 +789,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                                                           transaction.roomNo == '' || transaction.roomNo == '0' || transaction.roomNo == null
                                                               ? SizedBox.shrink()
                                                               : Text(
-                                                                  "เลขที่ห้อง# ${transaction.roomNo} ",
+                                                                  "บ้านเลขที่ ${transaction.roomNo} ",
                                                                 ),
                                                           Text(
                                                             "สถานะ: ${transaction.receivedStatus} ",
@@ -799,7 +799,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                                                       transaction.Hn == '' || transaction.Hn == null
                                                           ? SizedBox.shrink()
                                                           : Text(
-                                                              "HN# ${transaction.Hn ?? ' - '}",
+                                                              "เบอร์โทร# ${transaction.Hn ?? ' - '}",
                                                             ),
                                                       transaction.customerName == '' || transaction.customerName == null
                                                           ? SizedBox.shrink()
