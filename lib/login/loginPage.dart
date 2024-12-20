@@ -91,12 +91,19 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: size.height * 0.1,
               ),
-              Image.asset('assets/images/bannerLogin.png'),
+              // Image.asset('assets/images/bannerLogin.png'),
+              Text(
+                'ระบบจัดการสต็อก',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               SizedBox(
                 height: size.height * 0.1,
               ),
               Text(
-                'เข้าสู่ระบบ',
+                'login',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

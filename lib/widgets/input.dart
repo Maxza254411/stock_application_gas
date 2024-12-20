@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class InputTextFormField extends StatefulWidget {
-  InputTextFormField(
-      {super.key,
-      this.width,
-      this.height,
-      this.controller,
-      this.hintText,
-      this.label,
-      this.prefixIcon,
-      this.obscureText,
-      this.suffixIcon,
-      this.onFieldSubmitted,
-      this.keyboardType});
+  InputTextFormField({
+    super.key,
+    this.width,
+    this.height,
+    this.controller,
+    this.hintText,
+    this.label,
+    this.prefixIcon,
+    this.obscureText,
+    this.suffixIcon,
+    this.onFieldSubmitted,
+    this.keyboardType,
+    this.format,
+    this.validator,
+  });
 
   double? width;
   double? height;
@@ -24,12 +28,15 @@ class InputTextFormField extends StatefulWidget {
   Widget? suffixIcon;
   void Function(String)? onFieldSubmitted;
   TextInputType? keyboardType;
+  List<TextInputFormatter>? format;
+  String? Function(String?)? validator;
 
   @override
   State<InputTextFormField> createState() => _InputTextFormFieldState();
 }
 
 class _InputTextFormFieldState extends State<InputTextFormField> {
+  TextEditingController phone = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -42,6 +49,8 @@ class _InputTextFormFieldState extends State<InputTextFormField> {
           obscureText: widget.obscureText ?? false,
           onFieldSubmitted: widget.onFieldSubmitted,
           keyboardType: widget.keyboardType,
+          inputFormatters: widget.format,
+          validator: widget.validator,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
             label: widget.label,
@@ -61,5 +70,29 @@ class _InputTextFormFieldState extends State<InputTextFormField> {
             ),
           ),
         ));
+  }
+}
+
+class PhoneNumberFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    String text = newValue.text.replaceAll(RegExp(r'\D'), ''); // ลบตัวที่ไม่ใช่ตัวเลข
+    String formatted = '';
+
+    for (int i = 0; i < text.length; i++) {
+      if (i == 3) {
+        formatted += '-';
+      } else if (i == 6) {
+        formatted += '-';
+      }
+      formatted += text[i];
+    }
+
+    if (formatted.length > 13) formatted = formatted.substring(0, 13);
+
+    return TextEditingValue(
+      text: formatted,
+      selection: TextSelection.collapsed(offset: formatted.length),
+    );
   }
 }

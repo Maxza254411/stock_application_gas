@@ -8,6 +8,7 @@ import 'package:stock_application_gas/Models/device.dart';
 import 'package:stock_application_gas/Models/panel.dart';
 import 'package:stock_application_gas/Product/ProductPage.dart';
 import 'package:stock_application_gas/Product/service/productController.dart';
+import 'package:stock_application_gas/fristpage.dart';
 import 'package:stock_application_gas/login/loginPage.dart';
 import 'package:stock_application_gas/widgets/Dialog.dart';
 import 'package:stock_application_gas/widgets/Switch.dart';
@@ -765,7 +766,7 @@ class _SettingPageState extends State<SettingPage> {
                   return AlertDialogYes(
                     description: 'บันทึกสำเร็จ',
                     pressYes: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => FirstPage()));
                     },
                     title: 'แจ้งเตือน',
                   );
