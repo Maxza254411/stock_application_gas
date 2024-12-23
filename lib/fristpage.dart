@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:stock_application_gas/Product/ProductPage.dart';
+import 'package:stock_application_gas/Product/SettingPage.dart';
 import 'package:stock_application_gas/constants.dart';
 import 'package:stock_application_gas/order/OrderPage.dart';
 import 'package:stock_application_gas/orderPage.dart';
@@ -32,8 +33,8 @@ class _FirstPageState extends State<FirstPage> {
       } else if (selectedIndex == 1) {
         currentPage = OrderPage();
       } else if (selectedIndex == 2) {
-        //   currentPage = InformationPage();
-        // } else if (selectedIndex == 3) {
+        currentPage = SettingPage();
+      } else if (selectedIndex == 3) {
         //   currentPage = AdvicePage();
         // } else if (selectedIndex == 4) {
         //   currentPage = SettingPage();

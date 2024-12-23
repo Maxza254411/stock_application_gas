@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:stock_application_gas/Models/metaPage.dart';
-import 'package:stock_application_gas/models/reservedatas.dart';
+import 'package:stock_application_gas/Models/reservedatas.dart';
 
 part 'orderDate.g.dart';
 

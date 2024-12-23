@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: domain == null
-            ? SettingAPIPage()
+            ? LoginPage()
             : token == null
                 ? LoginPage()
                 : FirstPage(),

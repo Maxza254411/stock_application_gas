@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stock_application_gas/Models/nextpayment.dart';
 import 'package:stock_application_gas/Models/order.dart';
+import 'package:stock_application_gas/Models/reservedatas.dart';
 import 'package:stock_application_gas/constants.dart';
 
 class AlertDialogYes extends StatefulWidget {
@@ -153,7 +154,7 @@ class AlertDialogSuccessNew extends StatefulWidget {
   final String title, description;
   final VoidCallback? pressYes;
   final VoidCallback? pressNo;
-  final Order order;
+  final Reservedatas order;
   NextPayment? payment;
 
   @override
@@ -249,22 +250,22 @@ class _AlertDialogSuccessNewState extends State<AlertDialogSuccessNew> {
                 SizedBox(
                   height: 15,
                 ),
-                InkWell(
-                  onTap: widget.pressYes,
-                  child: Container(
-                    width: size.width * 0.8,
-                    height: size.height * 0.065,
-                    decoration:
-                        BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8), border: Border.all(color: Color(0xFF1264E3))),
-                    child: Center(
-                      child: Text(
-                        textAlign: TextAlign.center,
-                        'พิมใบเสร็จ',
-                        style: TextStyle(color: Color(0xFF1264E3), fontSize: 16),
-                      ),
-                    ),
-                  ),
-                ),
+                // InkWell(
+                //   onTap: widget.pressYes,
+                //   child: Container(
+                //     width: size.width * 0.8,
+                //     height: size.height * 0.065,
+                //     decoration:
+                //         BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8), border: Border.all(color: Color(0xFF1264E3))),
+                //     child: Center(
+                //       child: Text(
+                //         textAlign: TextAlign.center,
+                //         'พิมใบเสร็จ',
+                //         style: TextStyle(color: Color(0xFF1264E3), fontSize: 16),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ],

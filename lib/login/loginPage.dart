@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_application_gas/Product/ProductPage.dart';
+import 'package:stock_application_gas/constants.dart';
 import 'package:stock_application_gas/fristpage.dart';
 import 'package:stock_application_gas/login/loginService.dart';
 import 'package:stock_application_gas/login/settingAPI.dart';
@@ -47,96 +48,104 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return SettingAPIPage();
-                      }));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(8),
-                      width: size.width * 0.25,
-                      height: size.height * 0.06,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                          child: Text(
-                        'แก้ไข API',
-                        style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-                      )),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      domain ?? '',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: size.height * 0.1,
-              ),
-              // Image.asset('assets/images/bannerLogin.png'),
-              Text(
-                'ระบบจัดการสต็อก',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: size.height * 0.1,
-              ),
-              Text(
-                'login',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              InputTextFormField(
-                width: size.width * 0.8,
-                controller: username,
-                hintText: 'ชื่อผู้ใช้งาน',
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              InputTextFormField(
-                width: size.width * 0.8,
-                controller: password,
-                hintText: 'รหัสผ่าน',
-                obscureText: _obscureText,
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _obscureText = !_obscureText;
-                    });
-                  },
-                  icon: Icon(
-                    _obscureText ? Icons.visibility : Icons.visibility_off,
-                  ),
-                ),
-              ),
+      body: Container(
+        height: size.height * 1,
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.blue,
+              Colors.white,
             ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     GestureDetector(
+                //       onTap: () {
+                //         Navigator.push(context, MaterialPageRoute(builder: (context) {
+                //           return SettingAPIPage();
+                //         }));
+                //       },
+                //       child: Container(
+                //         margin: EdgeInsets.all(8),
+                //         width: size.width * 0.25,
+                //         height: size.height * 0.06,
+                //         decoration: BoxDecoration(
+                //           color: Colors.blue,
+                //           borderRadius: BorderRadius.circular(10),
+                //         ),
+                //         child: Center(
+                //             child: Text(
+                //           'แก้ไข API',
+                //           style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                //         )),
+                //       ),
+                //     ),
+                //     Padding(
+                //       padding: const EdgeInsets.all(8.0),
+                //       child: Text(
+                //         domain ?? '',
+                //         style: TextStyle(
+                //           fontSize: 15,
+                //           fontWeight: FontWeight.bold,
+                //           color: Colors.grey,
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                SizedBox(
+                  height: size.height * 0.1,
+                ),
+                // Image.asset('assets/images/bannerLogin.png'),
+                Text(
+                  'ระบบจัดการสต็อก',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+                SizedBox(
+                  height: size.height * 0.1,
+                ),
+                Text(
+                  'login',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                InputTextFormField(
+                  width: size.width * 0.8,
+                  controller: username,
+                  hintText: 'ชื่อผู้ใช้งาน',
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                InputTextFormField(
+                  width: size.width * 0.8,
+                  controller: password,
+                  hintText: 'รหัสผ่าน',
+                  obscureText: _obscureText,
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                    icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -147,9 +156,10 @@ class _LoginPageState extends State<LoginPage> {
             if (username.text != '' && password.text != '') {
               try {
                 LoadingDialog.open(context);
-                final login = await LoginService.login(username.text, password.text);
                 final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
                 final SharedPreferences prefs = await _prefs;
+                await prefs.setString('domain', publicUrl);
+                final login = await LoginService.login(username.text, password.text);
                 await prefs.setString('token', login);
                 if (!mounted) return;
                 LoadingDialog.close(context);

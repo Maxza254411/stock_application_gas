@@ -206,17 +206,17 @@ class _ProductPageState extends State<ProductPage> {
       backgroundColor: kTextButtonColor,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return SettingPage();
-            }));
-          },
-          child: Icon(
-            Icons.list,
-            color: Colors.white,
-          ),
-        ),
+        // leading: GestureDetector(
+        //   onTap: () {
+        //     Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //       return SettingPage();
+        //     }));
+        //   },
+        //   child: Icon(
+        //     Icons.list,
+        //     color: Colors.white,
+        //   ),
+        // ),
         centerTitle: true,
         title: Text(
           "รายการ",
@@ -261,134 +261,95 @@ class _ProductPageState extends State<ProductPage> {
             children: [
               controller.panels.isEmpty || selectPanel == null
                   ? SizedBox.shrink()
-                  : Container(
-                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                      height: size.height * 0.09,
-                      width: double.infinity,
-                      color: kTabColor,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            height: size.height * 0.1,
-                            width: size.width * 0.9,
-                            child: DropdownSearch<Panel>(
-                              selectedItem: selectPanel,
-                              // items: listProvinec,
-                              items: controller.panels,
-                              itemAsString: (item) => item.name,
-                              popupProps: PopupProps.menu(
-                                constraints: BoxConstraints(maxHeight: 450),
-                                // showSearchBox: true,
-                                fit: FlexFit.loose,
-                                // menuProps: MenuProps(
-                                //   backgroundColor: Color.fromARGB(243, 158, 158, 158),
-                                // ),
-                                // containerBuilder: (context, popupWidget) => Container(
-                                //   decoration: BoxDecoration(
-                                //     borderRadius: BorderRadius.circular(25),
-                                //     border: Border.all(color: Colors.grey, width: 3),
-                                //   ),
-                                //   child: popupWidget,
-                                // ),
-                                itemBuilder: (context, item, isSelected) => Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        item.name,
-                                        style: TextStyle(
-                                          color: Colors.black,
+                  : Column(children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        height: size.height * 0.09,
+                        width: double.infinity,
+                        color: kTabColor,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              height: size.height * 0.1,
+                              width: size.width * 0.9,
+                              child: DropdownSearch<Panel>(
+                                selectedItem: selectPanel,
+                                // items: listProvinec,
+                                items: controller.panels,
+                                itemAsString: (item) => item.name,
+                                popupProps: PopupProps.menu(
+                                  constraints: BoxConstraints(maxHeight: 450),
+                                  // showSearchBox: true,
+                                  fit: FlexFit.loose,
+                                  // menuProps: MenuProps(
+                                  //   backgroundColor: Color.fromARGB(243, 158, 158, 158),
+                                  // ),
+                                  // containerBuilder: (context, popupWidget) => Container(
+                                  //   decoration: BoxDecoration(
+                                  //     borderRadius: BorderRadius.circular(25),
+                                  //     border: Border.all(color: Colors.grey, width: 3),
+                                  //   ),
+                                  //   child: popupWidget,
+                                  // ),
+                                  itemBuilder: (context, item, isSelected) => Container(
+                                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          item.name,
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
                                         ),
-                                      ),
-                                      // Divider()
-                                    ],
+                                        // Divider()
+                                      ],
+                                    ),
                                   ),
+                                  // searchFieldProps: TextFieldProps(
+                                  //   cursorColor: Colors.black,
+                                  //   style: TextStyle(color: Colors.black, fontSize: 16),
+                                  //   decoration: InputDecoration(
+                                  //     hintText: 'เลือกพาเนล',
+                                  //     hintStyle: TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
+                                  //     prefixIcon: Icon(Icons.search),
+                                  //     prefixIconColor: Colors.black,
+                                  //     enabledBorder: underlineInputBorder,
+                                  //     focusedBorder: underlineInputBorder,
+                                  //   ),
+                                  // ),
                                 ),
-                                // searchFieldProps: TextFieldProps(
-                                //   cursorColor: Colors.black,
-                                //   style: TextStyle(color: Colors.black, fontSize: 16),
-                                //   decoration: InputDecoration(
-                                //     hintText: 'เลือกพาเนล',
-                                //     hintStyle: TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
-                                //     prefixIcon: Icon(Icons.search),
-                                //     prefixIconColor: Colors.black,
-                                //     enabledBorder: underlineInputBorder,
-                                //     focusedBorder: underlineInputBorder,
-                                //   ),
-                                // ),
-                              ),
-                              dropdownDecoratorProps: DropDownDecoratorProps(
-                                baseStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  fontFamily: 'Prompt',
-                                ),
-                                dropdownSearchDecoration: InputDecoration(
-                                  hintText: 'SelectPanel',
-                                  hintStyle: TextStyle(
+                                dropdownDecoratorProps: DropDownDecoratorProps(
+                                  baseStyle: TextStyle(
                                     color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
                                     fontFamily: 'Prompt',
                                   ),
-                                  border: InputBorder.none,
-                                  suffixIconColor: Colors.grey,
+                                  dropdownSearchDecoration: InputDecoration(
+                                    hintText: 'SelectPanel',
+                                    hintStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Prompt',
+                                    ),
+                                    border: InputBorder.none,
+                                    suffixIconColor: Colors.grey,
+                                  ),
                                 ),
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectPanel = value;
+                                    if (value != null) {
+                                      getItemPanel(panel: value.id);
+                                    }
+                                  });
+                                },
                               ),
-                              onChanged: (value) {
-                                setState(() {
-                                  selectPanel = value;
-                                  if (value != null) {
-                                    getItemPanel(panel: value.id);
-                                  }
-                                });
-                              },
                             ),
-                          ),
-
-                          // Container(
-                          //   height: size.height * 0.08,
-                          //   width: size.width * 0.5,
-                          //   color: kTabColor,
-                          //   child: DropdownButtonHideUnderline(
-                          //     child: DropdownButton<Panel>(
-                          //       isExpanded: true,
-                          //       hint: Text(
-                          //         'เลือกพาเนล',
-                          //         style: TextStyle(
-                          //           fontSize: 14,
-                          //           fontFamily: 'IBMPlexSansThai',
-                          //           color: Colors.black,
-                          //         ),
-                          //       ),
-                          //       items: controller.panels.map((Panel item) {
-                          //         return DropdownMenuItem<Panel>(
-                          //           value: item,
-                          //           child: Text(
-                          //             item.name,
-                          //             style: TextStyle(
-                          //               fontSize: 14,
-                          //               fontFamily: 'IBMPlexSansThai',
-                          //               color: Colors.black,
-                          //             ),
-                          //           ),
-                          //         );
-                          //       }).toList(),
-                          //       value: selectPanel,
-                          //       onChanged: (Panel? pn) {
-                          //         setState(() {
-                          //           selectPanel = pn;
-                          //           if (pn != null) {
-                          //             getItemPanel(panel: pn.id);
-                          //           }
-                          //         });
-                          //       },
-                          //     ),
-                          //   ),
-                          // ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
+                    ]),
               SizedBox(
                 height: 10,
               ),

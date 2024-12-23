@@ -9,7 +9,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:intl/intl.dart';
 import 'package:stock_application_gas/login/loginPage.dart';
-import 'package:stock_application_gas/models/reservedatas.dart';
+import 'package:stock_application_gas/Models/reservedatas.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart' as picker;
 import 'package:stock_application_gas/order/DetailOrder/DetailOrder.dart';
 import 'package:stock_application_gas/order/OrderService.dart';
@@ -172,51 +172,45 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
         leadingWidth: 80,
         leading: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('Ver. 1.0.9b1'),
-            ),
-          ],
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         centerTitle: true,
         automaticallyImplyLeading: false,
         title: Text(
           "รายการ",
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25, color: Colors.white),
         ),
-        actions: [
-          GestureDetector(
-            onTap: () async {
-              final out = await showDialog(
-                context: context,
-                builder: (context) => AlertDialogLockOut(
-                  title: 'แจ้งเตือน',
-                  description: 'ยืนยันที่จะออกจากระบบ',
-                  pressYes: () {
-                    Navigator.pop(context, true);
-                  },
-                  pressNo: () {
-                    Navigator.pop(context, false);
-                  },
-                ),
-              );
-              if (out == true) {
-                await clearToken();
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginPage()), (route) => true);
-              }
-            },
-            child: Container(
-              width: 35,
-              height: 35,
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Image.asset(
-                "assets/images/Vector-2.png",
-              ),
-            ),
-          ),
-        ],
+        // actions: [
+        //   GestureDetector(
+        //     onTap: () async {
+        //       final out = await showDialog(
+        //         context: context,
+        //         builder: (context) => AlertDialogLockOut(
+        //           title: 'แจ้งเตือน',
+        //           description: 'ยืนยันที่จะออกจากระบบ',
+        //           pressYes: () {
+        //             Navigator.pop(context, true);
+        //           },
+        //           pressNo: () {
+        //             Navigator.pop(context, false);
+        //           },
+        //         ),
+        //       );
+        //       if (out == true) {
+        //         await clearToken();
+        //         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginPage()), (route) => true);
+        //       }
+        //     },
+        //     child: Container(
+        //       width: 35,
+        //       height: 35,
+        //       padding: const EdgeInsets.symmetric(horizontal: 8),
+        //       child: Image.asset(
+        //         "assets/images/Vector-2.png",
+        //       ),
+        //     ),
+        //   ),
+        // ],
       ),
       body: Container(
           width: double.infinity,
@@ -225,48 +219,48 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InputTextFormField(
-                        width: size.width * 0.55,
-                        height: size.height * 0.06,
-                        hintText: 'ค้นหาเลขห้อง',
-                        controller: roomNo,
-                        // onFieldSubmitted: (p0) async {
-                        //   LoadingDialog.open(context);
-                        //   await getOrder(status: status, roomNo: roomNo.text == '' ? null : roomNo.text);
-                        //   if (!mounted) return;
-                        //   LoadingDialog.close(context);
-                        // },
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          LoadingDialog.open(context);
-                          await getOrder(status: status, roomNo: roomNo.text == '' ? null : roomNo.text);
-                          if (!mounted) return;
-                          LoadingDialog.close(context);
-                          roomNo.clear();
-                        },
-                        child: Container(
-                          width: size.width * 0.3,
-                          height: size.height * 0.06,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                              child: Text(
-                            'ค้นหา',
-                            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-                          )),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 16),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       InputTextFormField(
+                //         width: size.width * 0.55,
+                //         height: size.height * 0.06,
+                //         hintText: 'ค้นหาเลขห้อง',
+                //         controller: roomNo,
+                //         // onFieldSubmitted: (p0) async {
+                //         //   LoadingDialog.open(context);
+                //         //   await getOrder(status: status, roomNo: roomNo.text == '' ? null : roomNo.text);
+                //         //   if (!mounted) return;
+                //         //   LoadingDialog.close(context);
+                //         // },
+                //       ),
+                //       GestureDetector(
+                //         onTap: () async {
+                //           LoadingDialog.open(context);
+                //           await getOrder(status: status, roomNo: roomNo.text == '' ? null : roomNo.text);
+                //           if (!mounted) return;
+                //           LoadingDialog.close(context);
+                //           roomNo.clear();
+                //         },
+                //         child: Container(
+                //           width: size.width * 0.3,
+                //           height: size.height * 0.06,
+                //           decoration: BoxDecoration(
+                //             color: Colors.blue,
+                //             borderRadius: BorderRadius.circular(10),
+                //           ),
+                //           child: Center(
+                //               child: Text(
+                //             'ค้นหา',
+                //             style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                //           )),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 SizedBox(
                   height: 10,
                 ),
@@ -396,43 +390,43 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                   controller: _tabController,
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey,
-                  dividerColor: Colors.transparent,
-                  indicatorColor: Colors.transparent,
                   indicator: BoxDecoration(
-                    color: ui.Color.fromARGB(248, 203, 203, 203),
+                    color: Color.fromARGB(248, 203, 203, 203),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   onTap: (value) async {
+                    // เปิด Loading Dialog
+                    LoadingDialog.open(context);
+
+                    // ล้างข้อมูลเก่า
                     listOrder.clear();
-                    if (value == 0) {
-                      LoadingDialog.open(context);
-                      setState(() {
-                        status = 'cooking';
-                      });
-                      await getOrder(
-                          status: 'cooking',
-                          date: stringTime ??
-                              '\$btw:${DateFormat('yyyy-MM-dd').format(DateTime.now())} 00:00:00,${DateFormat('yyyy-MM-dd').format(DateTime.now())} 23:59:59');
-                      LoadingDialog.close(context);
-                    } else if (value == 1) {
-                      LoadingDialog.open(context);
-                      setState(() {
-                        status = 'sending';
-                      });
-                      await getOrder(
-                          status: 'sending',
-                          date: stringTime ??
-                              '\$btw:${DateFormat('yyyy-MM-dd').format(DateTime.now())} 00:00:00,${DateFormat('yyyy-MM-dd').format(DateTime.now())} 23:59:59');
-                      LoadingDialog.close(context);
+
+                    // สร้าง Map สำหรับสถานะต่างๆ
+                    final statusMap = {
+                      0: 'cooking',
+                      1: 'sending',
+                      2: 'complete',
+                    };
+
+                    // อัพเดตสถานะตาม Tab ที่เลือก
+                    final selectedStatus = statusMap[value];
+                    if (selectedStatus != null) {
+                      final dateRange = stringTime ??
+                          '\$btw:${DateFormat('yyyy-MM-dd').format(DateTime.now())} 00:00:00,${DateFormat('yyyy-MM-dd').format(DateTime.now())} 23:59:59';
+                      try {
+                        await getOrder(status: selectedStatus, date: dateRange);
+                        setState(() {
+                          status = selectedStatus;
+                        });
+                      } catch (e) {
+                        // จัดการข้อผิดพลาด (แสดง Error Message หรือแจ้งผู้ใช้)
+                        print("Error: $e");
+                      } finally {
+                        // ปิด Loading Dialog
+                        LoadingDialog.close(context);
+                      }
                     } else {
-                      LoadingDialog.open(context);
-                      setState(() {
-                        status = 'complete';
-                      });
-                      await getOrder(
-                          status: 'complete',
-                          date: stringTime ??
-                              '\$btw:${DateFormat('yyyy-MM-dd').format(DateTime.now())} 00:00:00,${DateFormat('yyyy-MM-dd').format(DateTime.now())} 23:59:59');
+                      // ปิด Loading Dialog ในกรณีที่ไม่มีสถานะ
                       LoadingDialog.close(context);
                     }
                   },
@@ -467,6 +461,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
+
                 SizedBox(
                   height: size.height * 1,
                   child: TabBarView(
@@ -502,69 +497,66 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                                               var transaction = listOrder[index];
                                               return InkWell(
                                                 onTap: () async {
-                                                  // await capturePngPag();
-                                                  // Printing().printSummary(picture: pngBytesPag);
                                                   if (transaction.receivedStatus == 'sending' || transaction.receivedStatus == 'complete') {
                                                     Navigator.push(context, MaterialPageRoute(builder: (context) {
                                                       return DetailOrder(transaction: transaction);
                                                     }));
                                                   } else {
-                                                    final statusOrder = await showDialog(
-                                                        barrierDismissible: false,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return AlertDialog(
-                                                            title: Text(
-                                                              'ยืนยันการอัพเดทสถานะ',
-                                                              style: TextStyle(fontWeight: FontWeight.bold),
-                                                            ),
-                                                            content: Text(
-                                                              'ยืนยันที่จะเปลี่ยนแปลงสถานะของออเดอร์ใช่หรือไม่',
-                                                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-                                                            ),
-                                                            actions: [
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  Navigator.pop(context, false);
-                                                                },
-                                                                child: Container(
-                                                                  width: size.width * 0.3,
-                                                                  height: size.height * 0.06,
-                                                                  decoration: BoxDecoration(
-                                                                      color: Colors.white,
-                                                                      borderRadius: BorderRadius.circular(10),
-                                                                      border: Border.all(color: Colors.red)),
-                                                                  child: Center(
-                                                                      child: Text(
-                                                                    'ยกเลิก',
-                                                                    style: TextStyle(color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold),
-                                                                  )),
+                                                    final statusOrder = await showDialog<bool>(
+                                                      barrierDismissible: false,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return AlertDialog(
+                                                          backgroundColor: Colors.white,
+                                                          title: Text(
+                                                            'ยืนยันการอัพเดทสถานะ',
+                                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                                          ),
+                                                          content: Text(
+                                                            'ยืนยันที่จะเปลี่ยนแปลงสถานะของออเดอร์ใช่หรือไม่',
+                                                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                                                          ),
+                                                          actions: [
+                                                            // ปุ่มยกเลิก
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(context, false);
+                                                              },
+                                                              style: TextButton.styleFrom(
+                                                                backgroundColor: Colors.white,
+                                                                side: BorderSide(color: Colors.red),
+                                                                shape: RoundedRectangleBorder(
+                                                                  borderRadius: BorderRadius.circular(10),
                                                                 ),
                                                               ),
-                                                              SizedBox(
-                                                                width: 20,
+                                                              child: Text(
+                                                                'ยกเลิก',
+                                                                style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
                                                               ),
-                                                              GestureDetector(
-                                                                onTap: () {
-                                                                  Navigator.pop(context, true);
-                                                                },
-                                                                child: Container(
-                                                                  width: size.width * 0.3,
-                                                                  height: size.height * 0.06,
-                                                                  decoration: BoxDecoration(
-                                                                    color: Colors.blue,
-                                                                    borderRadius: BorderRadius.circular(10),
-                                                                  ),
-                                                                  child: Center(
-                                                                      child: Text(
-                                                                    'ตกลง',
-                                                                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-                                                                  )),
+                                                            ),
+                                                            SizedBox(width: 10),
+                                                            // ปุ่มตกลง
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(context, true);
+                                                              },
+                                                              style: TextButton.styleFrom(
+                                                                backgroundColor: Colors.blue,
+                                                                shape: RoundedRectangleBorder(
+                                                                  borderRadius: BorderRadius.circular(10),
                                                                 ),
                                                               ),
-                                                            ],
-                                                          );
-                                                        });
+                                                              child: Text(
+                                                                'ตกลง',
+                                                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+
+                                                    // ตรวจสอบสถานะที่ผู้ใช้เลือก
 
                                                     if (statusOrder == true) {
                                                       try {
@@ -612,7 +604,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                                                                   "บ้านเลขที่# ${transaction.roomNo} ",
                                                                 ),
                                                           Text(
-                                                            "สถานะ: ${transaction.receivedStatus} ",
+                                                            "สถานะ: ${transaction.receivedStatus == 'cooking' ? 'จัดของ' : transaction.receivedStatus == 'sending' ? 'ขนส่ง' : 'สำเร็จ'} ",
                                                           ),
                                                         ],
                                                       ),
@@ -792,7 +784,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                                                                   "บ้านเลขที่ ${transaction.roomNo} ",
                                                                 ),
                                                           Text(
-                                                            "สถานะ: ${transaction.receivedStatus} ",
+                                                            "สถานะ: ${transaction.receivedStatus == 'sending' ? 'ขนส่ง' : ''} ",
                                                           ),
                                                         ],
                                                       ),
@@ -970,17 +962,17 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                                                           transaction.roomNo == '' || transaction.roomNo == '0' || transaction.roomNo == null
                                                               ? SizedBox.shrink()
                                                               : Text(
-                                                                  "เลขที่ห้อง# ${transaction.roomNo} ",
+                                                                  "บ้านเลขที่# ${transaction.roomNo} ",
                                                                 ),
                                                           Text(
-                                                            "สถานะ: ${transaction.receivedStatus} ",
+                                                            "สถานะ: ${transaction.receivedStatus == 'complete' ? 'สำเร็จ' : '-'} ",
                                                           ),
                                                         ],
                                                       ),
                                                       transaction.Hn == '' || transaction.Hn == null
                                                           ? SizedBox.shrink()
                                                           : Text(
-                                                              "HN# ${transaction.Hn ?? ' - '}",
+                                                              "เบอร์โทร# ${transaction.Hn ?? ' - '}",
                                                             ),
                                                       transaction.customerName == '' || transaction.customerName == null
                                                           ? SizedBox.shrink()

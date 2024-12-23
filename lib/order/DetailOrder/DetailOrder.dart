@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:stock_application_gas/models/reservedatas.dart';
+import 'package:stock_application_gas/Models/reservedatas.dart';
+import 'package:stock_application_gas/selectPayment/selectPyment.dart';
 
 class DetailOrder extends StatefulWidget {
   const DetailOrder({super.key, required this.transaction});
@@ -15,7 +16,9 @@ class _DetailOrderState extends State<DetailOrder> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text('รายละเอียด'),
         centerTitle: true,
       ),
@@ -28,7 +31,7 @@ class _DetailOrderState extends State<DetailOrder> {
               widget.transaction.roomNo == '' || widget.transaction.roomNo == '0' || widget.transaction.roomNo == null
                   ? SizedBox.shrink()
                   : Text(
-                      'เลขที่ห้อง# ${widget.transaction.roomNo}',
+                      'บ้านเลขที่# ${widget.transaction.roomNo}',
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
@@ -37,7 +40,7 @@ class _DetailOrderState extends State<DetailOrder> {
               widget.transaction.Hn == '' || widget.transaction.Hn == '0' || widget.transaction.Hn == null
                   ? SizedBox.shrink()
                   : Text(
-                      'HN# ${widget.transaction.Hn}',
+                      'เบอร์โทร# ${widget.transaction.Hn}',
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
@@ -242,57 +245,33 @@ class _DetailOrderState extends State<DetailOrder> {
           ),
         ),
       ),
-      // bottomNavigationBar: widget.transaction.receivedStatus == 'complete'
-      //     ? Padding(
-      //         padding: const EdgeInsets.all(16),
-      //         child: InkWell(
-      //           onTap: () {
-      //             Navigator.push(context, MaterialPageRoute(builder: (context) {
-      //               return ReprintPage(
-      //                 order: widget.transaction,
-      //               );
-      //             }));
-      //           },
-      //           child: Container(
-      //             width: size.width * 0.8,
-      //             height: size.height * 0.06,
-      //             decoration: BoxDecoration(
-      //               color: Colors.blue,
-      //               borderRadius: BorderRadius.circular(10),
-      //             ),
-      //             child: Center(
-      //                 child: Text(
-      //               'พิมพ์ใบเสร็จ',
-      //               style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-      //             )),
-      //           ),
-      //         ),
-      //       )
-      //     : Padding(
-      //         padding: const EdgeInsets.all(16),
-      //         child: InkWell(
-      //           onTap: () {
-      //             Navigator.push(context, MaterialPageRoute(builder: (context) {
-      //               return Selectpyment(
-      //                 orderID: widget.transaction,
-      //               );
-      //             }));
-      //           },
-      //           child: Container(
-      //             width: size.width * 0.8,
-      //             height: size.height * 0.06,
-      //             decoration: BoxDecoration(
-      //               color: Colors.blue,
-      //               borderRadius: BorderRadius.circular(10),
-      //             ),
-      //             child: Center(
-      //                 child: Text(
-      //               'ชำระเงิน',
-      //               style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-      //             )),
-      //           ),
-      //         ),
-      //       ),
+      bottomNavigationBar: widget.transaction.receivedStatus == 'complete'
+          ? SizedBox.shrink()
+          : Padding(
+              padding: const EdgeInsets.all(16),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Selectpyment(
+                      orderID: widget.transaction,
+                    );
+                  }));
+                },
+                child: Container(
+                  width: size.width * 0.8,
+                  height: size.height * 0.06,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                      child: Text(
+                    'ชำระเงิน',
+                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                  )),
+                ),
+              ),
+            ),
     );
   }
 }

@@ -8,6 +8,7 @@ import 'package:stock_application_gas/Models/device.dart';
 import 'package:stock_application_gas/Models/panel.dart';
 import 'package:stock_application_gas/Product/ProductPage.dart';
 import 'package:stock_application_gas/Product/service/productController.dart';
+import 'package:stock_application_gas/constants.dart';
 import 'package:stock_application_gas/fristpage.dart';
 import 'package:stock_application_gas/login/loginPage.dart';
 import 'package:stock_application_gas/widgets/Dialog.dart';
@@ -56,6 +57,12 @@ class _SettingPageState extends State<SettingPage> {
           }
       },
     );
+  }
+
+  Future<void> clearToken() async {
+    SharedPreferences prefs = await _prefs;
+    prefs = await SharedPreferences.getInstance();
+    await prefs.remove('token');
   }
 
   Future<void> getSharedPreferences() async {
@@ -170,416 +177,388 @@ class _SettingPageState extends State<SettingPage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text('Ver. 1.0.3b1'),
+        backgroundColor: Colors.black,
+        title: Text(
+          'การตั้งค่าทั้งหมด',
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
+        actions: [
+          GestureDetector(
+            onTap: () async {
+              final out = await showDialog(
+                context: context,
+                builder: (context) => AlertDialogLockOut(
+                  title: 'แจ้งเตือน',
+                  description: 'ยืนยันที่จะออกจากระบบ',
+                  pressYes: () {
+                    Navigator.pop(context, true);
+                  },
+                  pressNo: () {
+                    Navigator.pop(context, false);
+                  },
+                ),
+              );
+              if (out == true) {
+                await clearToken();
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginPage()), (route) => true);
+              }
+            },
+            child: Container(
+              width: 35,
+              height: 35,
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Image.asset(
+                "assets/images/Vector-2.png",
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
       backgroundColor: Colors.white,
       body: Consumer<ProductController>(
         builder: (context, controller, child) => SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: size.width * 0.7,
-                    child: Card(
-                      surfaceTintColor: Colors.white,
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      elevation: 2,
-                      child: DropdownSearch<Branch>(
-                        selectedItem: selectBranch,
-                        // items: listProvinec,
-                        items: controller.branchs,
-                        itemAsString: (item) => item.name ?? '',
-                        popupProps: PopupProps.menu(
-                          // showSearchBox: true,
-                          fit: FlexFit.loose,
-                          constraints: BoxConstraints(),
-                          // menuProps: MenuProps(
-                          //   backgroundColor: Color.fromARGB(243, 158, 158, 158),
-                          // ),
-                          // containerBuilder: (context, popupWidget) => Container(
-                          //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.circular(25),
-                          //     border: Border.all(color: Colors.grey, width: 3),
-                          //   ),
-                          //   child: popupWidget,
-                          // ),
-                          itemBuilder: (context, item, isSelected) => Container(
-                            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  item.name ?? '',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                  ),
+          child: Center(
+            child: Column(
+              children: [
+                // Container(
+                //   height: size.height * 0.12,
+                //   width: double.infinity,
+                //   color: kButtonColor,
+                //   child: Padding(
+                //     padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+
+                //         Column(
+                //           crossAxisAlignment: CrossAxisAlignment.start,
+                //           children: [
+                //             SizedBox(height: 10),
+                //             Row(
+                //               children: [
+                //                 SizedBox(width: 15),
+                //                 Text(
+                //                   'ชื่อ : ',
+                //                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                //                 ),
+                //               ],
+                //             ),
+                //             SizedBox(height: 4),
+                //             Row(
+                //               children: [
+                //                 SizedBox(width: 15),
+                //                 Text(
+                //                   'เพศ : ',
+                //                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                //                 ),
+                //                 // Text(
+                //                 //   patientHistory?.sex_name ?? '-',
+                //                 //   style: TextStyle(color: textColor),
+                //                 // ),
+                //               ],
+                //             ),
+                //             SizedBox(height: 4),
+                //           ],
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
+
+                SizedBox(
+                  width: double.infinity,
+                  child: Card(
+                    surfaceTintColor: Colors.white,
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    elevation: 2,
+                    child: DropdownSearch<Branch>(
+                      selectedItem: selectBranch,
+                      // items: listProvinec,
+                      items: controller.branchs,
+                      itemAsString: (item) => item.name ?? '',
+                      popupProps: PopupProps.menu(
+                        fit: FlexFit.loose,
+                        constraints: BoxConstraints(),
+                        itemBuilder: (context, item, isSelected) => Container(
+                          margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                item.name ?? '',
+                                style: TextStyle(
+                                  color: Colors.black,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          // searchFieldProps: TextFieldProps(
-                          //   cursorColor: Colors.black,
-                          //   style: TextStyle(color: Colors.black, fontSize: 16),
-                          //   decoration: InputDecoration(
-                          //     hintText: 'เลือกพาเนล',
-                          //     hintStyle: TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
-                          //     prefixIcon: Icon(Icons.search),
-                          //     prefixIconColor: Colors.black,
-                          //     enabledBorder: underlineInputBorder,
-                          //     focusedBorder: underlineInputBorder,
-                          //   ),
-                          // ),
                         ),
-                        dropdownDecoratorProps: DropDownDecoratorProps(
-                          textAlignVertical: TextAlignVertical.center,
-                          baseStyle: TextStyle(
+                      ),
+                      dropdownDecoratorProps: DropDownDecoratorProps(
+                        textAlignVertical: TextAlignVertical.center,
+                        baseStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          fontFamily: 'Prompt',
+                        ),
+                        dropdownSearchDecoration: InputDecoration(
+                          prefix: SizedBox(
+                            width: 15,
+                          ),
+                          hintText: 'SelectBranch',
+                          hintStyle: TextStyle(
                             color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
                             fontFamily: 'Prompt',
                           ),
-                          dropdownSearchDecoration: InputDecoration(
-                            prefix: SizedBox(
-                              width: 15,
-                            ),
-                            hintText: 'SelectBranch',
-                            hintStyle: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Prompt',
-                            ),
-                            border: InputBorder.none,
-                            suffixIconColor: Colors.grey,
-                          ),
+                          border: InputBorder.none,
+                          suffixIconColor: Colors.grey,
                         ),
-                        onChanged: (va) {
-                          setState(() {
-                            selectBranch = null;
-                            selectDevice = null;
-                            selectPanel = null;
-                            selectBranch = va;
-                            getListDevice(branch: va!.id.toString());
-                            getlistPanel(branch: va.id.toString());
-                          });
-                        },
                       ),
+                      onChanged: (va) {
+                        setState(() {
+                          selectBranch = null;
+                          selectDevice = null;
+                          selectPanel = null;
+                          selectBranch = va;
+                          getListDevice(branch: va!.id.toString());
+                          getlistPanel(branch: va.id.toString());
+                        });
+                      },
                     ),
                   ),
+                ),
+                controller.devices.isEmpty || selectBranch == null
+                    ? SizedBox.shrink()
+                    : SizedBox(
+                        width: double.infinity,
+                        child: Card(
+                          surfaceTintColor: Colors.white,
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          elevation: 2,
+                          child: DropdownSearch<Device>(
+                            selectedItem: selectDevice,
+                            // items: listProvinec,
+                            items: controller.devices,
+                            itemAsString: (item) => item.name ?? '',
+                            popupProps: PopupProps.menu(
+                              // showSearchBox: true,
+                              fit: FlexFit.loose,
+                              constraints: BoxConstraints(),
 
-                  // SizedBox(
-                  //   width: size.width * 0.7,
-                  //   child: Card(
-                  //     surfaceTintColor: Colors.white,
-                  //     color: Colors.white,
-                  //     shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(8.0),
-                  //     ),
-                  //     elevation: 2,
-                  //     child: DropdownButtonHideUnderline(
-                  //       child: DropdownButton2<Branch>(
-                  //         isExpanded: true,
-                  //         hint: Text(
-                  //           'SelectBranch ',
-                  //           style: TextStyle(
-                  //             fontSize: 14,
-                  //             fontFamily: 'IBMPlexSansThai',
-                  //             color: Theme.of(context).hintColor,
-                  //           ),
-                  //         ),
-                  //         items: controller.branchs
-                  //             .map((Branch item) => DropdownMenuItem<Branch>(
-                  //                   value: item,
-                  //                   child: Text(
-                  //                     item.name!,
-                  //                     style: TextStyle(
-                  //                       fontSize: 14,
-                  //                       fontFamily: 'IBMPlexSansThai',
-                  //                     ),
-                  //                   ),
-                  //                 ))
-                  //             .toList(),
-                  //         value: selectBranch,
-                  //         onChanged: (va) {
-                  //           setState(() {
-                  //             selectBranch = null;
-                  //             selectDevice = null;
-                  //             selectPanel = null;
-                  //             selectBranch = va;
-                  //             getListDevice(branch: va!.id.toString());
-                  //             getlistPanel(branch: va.id.toString());
-                  //           });
-                  //         },
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-
-                  SizedBox(
-                    height: 30,
-                  ),
-                  controller.devices.isEmpty || selectBranch == null
-                      ? SizedBox.shrink()
-                      : SizedBox(
-                          width: size.width * 0.7,
-                          child: Card(
-                            surfaceTintColor: Colors.white,
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            elevation: 2,
-                            child: DropdownSearch<Device>(
-                              selectedItem: selectDevice,
-                              // items: listProvinec,
-                              items: controller.devices,
-                              itemAsString: (item) => item.name ?? '',
-                              popupProps: PopupProps.menu(
-                                // showSearchBox: true,
-                                fit: FlexFit.loose,
-                                constraints: BoxConstraints(),
-                                // menuProps: MenuProps(
-                                //   backgroundColor: Color.fromARGB(243, 158, 158, 158),
-                                // ),
-                                // containerBuilder: (context, popupWidget) => Container(
-                                //   decoration: BoxDecoration(
-                                //     borderRadius: BorderRadius.circular(25),
-                                //     border: Border.all(color: Colors.grey, width: 3),
-                                //   ),
-                                //   child: popupWidget,
-                                // ),
-                                itemBuilder: (context, item, isSelected) => Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        item.name ?? '',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                        ),
+                              itemBuilder: (context, item, isSelected) => Container(
+                                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item.name ?? '',
+                                      style: TextStyle(
+                                        color: Colors.black,
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                                // searchFieldProps: TextFieldProps(
-                                //   cursorColor: Colors.black,
-                                //   style: TextStyle(color: Colors.black, fontSize: 16),
-                                //   decoration: InputDecoration(
-                                //     hintText: 'เลือกพาเนล',
-                                //     hintStyle: TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
-                                //     prefixIcon: Icon(Icons.search),
-                                //     prefixIconColor: Colors.black,
-                                //     enabledBorder: underlineInputBorder,
-                                //     focusedBorder: underlineInputBorder,
-                                //   ),
-                                // ),
                               ),
-                              dropdownDecoratorProps: DropDownDecoratorProps(
-                                textAlignVertical: TextAlignVertical.center,
-                                baseStyle: TextStyle(
+                            ),
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              textAlignVertical: TextAlignVertical.center,
+                              baseStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                fontFamily: 'Prompt',
+                              ),
+                              dropdownSearchDecoration: InputDecoration(
+                                prefix: SizedBox(
+                                  width: 15,
+                                ),
+                                hintText: 'SelectDevice',
+                                hintStyle: TextStyle(
                                   color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
                                   fontFamily: 'Prompt',
                                 ),
-                                dropdownSearchDecoration: InputDecoration(
-                                  prefix: SizedBox(
-                                    width: 15,
-                                  ),
-                                  hintText: 'SelectDevice',
-                                  hintStyle: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'Prompt',
-                                  ),
-                                  border: InputBorder.none,
-                                  suffixIconColor: Colors.grey,
-                                ),
+                                border: InputBorder.none,
+                                suffixIconColor: Colors.grey,
                               ),
-                              onChanged: (dv) {
-                                setState(() {
-                                  selectDevice = dv;
-                                  selectPanel = null;
-                                });
-                              },
                             ),
+                            onChanged: (dv) {
+                              setState(() {
+                                selectDevice = dv;
+                                selectPanel = null;
+                              });
+                            },
                           ),
                         ),
-
-                  // SizedBox(
-                  //     width: size.width * 0.7,
-                  //     child: Card(
-                  //       surfaceTintColor: Colors.white,
-                  //       color: Colors.white,
-                  //       shape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(8.0),
-                  //       ),
-                  //       elevation: 2,
-                  //       child: DropdownButtonHideUnderline(
-                  //         child: DropdownButton2<Device>(
-                  //           isExpanded: true,
-                  //           hint: Text(
-                  //             'SelectDevice',
-                  //             style: TextStyle(
-                  //               fontSize: 14,
-                  //               fontFamily: 'IBMPlexSansThai',
-                  //               color: Theme.of(context).hintColor,
-                  //             ),
-                  //           ),
-                  //           items: controller.devices
-                  //               .map((Device item) => DropdownMenuItem<Device>(
-                  //                     value: item,
-                  //                     child: Text(
-                  //                       item.name ?? '',
-                  //                       style: TextStyle(
-                  //                         fontSize: 14,
-                  //                         fontFamily: 'IBMPlexSansThai',
-                  //                       ),
-                  //                     ),
-                  //                   ))
-                  //               .toList(),
-                  //           value: selectDevice,
-                  //           onChanged: (dv) {
-                  //             setState(() {
-                  //               selectDevice = dv;
-                  //               selectPanel = null;
-                  //             });
-                  //           },
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-
-                  SizedBox(
-                    height: 30,
-                  ),
-                  controller.panels.isEmpty || selectBranch == null
-                      ? SizedBox.shrink()
-                      : SizedBox(
-                          width: size.width * 0.7,
-                          child: Card(
-                            surfaceTintColor: Colors.white,
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            elevation: 2,
-                            child: DropdownSearch<Panel>(
-                              selectedItem: selectPanel,
-                              // items: listProvinec,
-                              items: controller.panels,
-                              itemAsString: (item) => item.name,
-                              popupProps: PopupProps.menu(
-                                // showSearchBox: true,
-                                fit: FlexFit.loose,
-                                constraints: BoxConstraints(),
-                                // menuProps: MenuProps(
-                                //   backgroundColor: Color.fromARGB(243, 158, 158, 158),
-                                // ),
-                                // containerBuilder: (context, popupWidget) => Container(
-                                //   decoration: BoxDecoration(
-                                //     borderRadius: BorderRadius.circular(25),
-                                //     border: Border.all(color: Colors.grey, width: 3),
-                                //   ),
-                                //   child: popupWidget,
-                                // ),
-                                itemBuilder: (context, item, isSelected) => Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        item.name,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                        ),
+                      ),
+                controller.panels.isEmpty || selectBranch == null
+                    ? SizedBox.shrink()
+                    : SizedBox(
+                        width: double.infinity,
+                        child: Card(
+                          surfaceTintColor: Colors.white,
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          elevation: 2,
+                          child: DropdownSearch<Panel>(
+                            selectedItem: selectPanel,
+                            // items: listProvinec,
+                            items: controller.panels,
+                            itemAsString: (item) => item.name,
+                            popupProps: PopupProps.menu(
+                              // showSearchBox: true,
+                              fit: FlexFit.loose,
+                              constraints: BoxConstraints(),
+                              // menuProps: MenuProps(
+                              //   backgroundColor: Color.fromARGB(243, 158, 158, 158),
+                              // ),
+                              // containerBuilder: (context, popupWidget) => Container(
+                              //   decoration: BoxDecoration(
+                              //     borderRadius: BorderRadius.circular(25),
+                              //     border: Border.all(color: Colors.grey, width: 3),
+                              //   ),
+                              //   child: popupWidget,
+                              // ),
+                              itemBuilder: (context, item, isSelected) => Container(
+                                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item.name,
+                                      style: TextStyle(
+                                        color: Colors.black,
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                                // searchFieldProps: TextFieldProps(
-                                //   cursorColor: Colors.black,
-                                //   style: TextStyle(color: Colors.black, fontSize: 16),
-                                //   decoration: InputDecoration(
-                                //     hintText: 'เลือกพาเนล',
-                                //     hintStyle: TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
-                                //     prefixIcon: Icon(Icons.search),
-                                //     prefixIconColor: Colors.black,
-                                //     enabledBorder: underlineInputBorder,
-                                //     focusedBorder: underlineInputBorder,
-                                //   ),
-                                // ),
                               ),
-                              dropdownDecoratorProps: DropDownDecoratorProps(
-                                textAlignVertical: TextAlignVertical.center,
-                                baseStyle: TextStyle(
+                              // searchFieldProps: TextFieldProps(
+                              //   cursorColor: Colors.black,
+                              //   style: TextStyle(color: Colors.black, fontSize: 16),
+                              //   decoration: InputDecoration(
+                              //     hintText: 'เลือกพาเนล',
+                              //     hintStyle: TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
+                              //     prefixIcon: Icon(Icons.search),
+                              //     prefixIconColor: Colors.black,
+                              //     enabledBorder: underlineInputBorder,
+                              //     focusedBorder: underlineInputBorder,
+                              //   ),
+                              // ),
+                            ),
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              textAlignVertical: TextAlignVertical.center,
+                              baseStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                fontFamily: 'Prompt',
+                              ),
+                              dropdownSearchDecoration: InputDecoration(
+                                prefix: SizedBox(
+                                  width: 15,
+                                ),
+                                hintText: 'SelectPanel',
+                                hintStyle: TextStyle(
                                   color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
                                   fontFamily: 'Prompt',
                                 ),
-                                dropdownSearchDecoration: InputDecoration(
-                                  prefix: SizedBox(
-                                    width: 15,
-                                  ),
-                                  hintText: 'SelectPanel',
-                                  hintStyle: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'Prompt',
-                                  ),
-                                  border: InputBorder.none,
-                                  suffixIconColor: Colors.grey,
-                                ),
+                                border: InputBorder.none,
+                                suffixIconColor: Colors.grey,
                               ),
-                              onChanged: (pn) {
-                                setState(() {
-                                  selectPanel = pn;
-                                });
-                              },
                             ),
+                            onChanged: (pn) {
+                              setState(() {
+                                selectPanel = pn;
+                              });
+                            },
                           ),
                         ),
-                  Row(
-                    children: [
-                      OpenAndCloseSwitch(
-                        size: size,
-                        open: opennumroom,
-                        showTextOpen: 'เปิดเลขห้อง',
-                        showTextClose: 'ปิดเลขห้อง',
-                        onChanged: (value) async {
-                          final SharedPreferences prefs = await SharedPreferences.getInstance();
-                          if (opennumroom == false) {
-                            final numroom = await showDialog(
-                                context: context,
-                                builder: (context) => AlertDialogYesNo2(
-                                      title: 'แจ้งเตือน',
-                                      description: 'ต้องการเปิดเลขห้องหรือไม่',
-                                      pressYes: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                      pressNo: () {
-                                        Navigator.pop(context, false);
-                                      },
-                                      orderNo: '',
-                                    ));
-                            if (numroom == true) {
-                              setState(() {
-                                opennumroom = value;
-                                prefs.setBool('statusnumroom', value);
-                              });
-                              //Navigator.push(context, MaterialPageRoute(builder: (context) => Printter()));
-                            }
-                          } else {
-                            final numroom = await showDialog(
-                              context: context,
-                              builder: (context) => AlertDialogYesNo2(
+                      ),
+                SizedBox(
+                  height: 10,
+                ),
+                // OpenAndCloseSwitch(
+                //   size: size,
+                //   open: opennumroom,
+                //   showTextOpen: 'เปิดเลขห้อง',
+                //   showTextClose: 'ปิดเลขห้อง',
+                //   onChanged: (value) async {
+                //     final SharedPreferences prefs = await SharedPreferences.getInstance();
+                //     if (opennumroom == false) {
+                //       final numroom = await showDialog(
+                //           context: context,
+                //           builder: (context) => AlertDialogYesNo2(
+                //                 title: 'แจ้งเตือน',
+                //                 description: 'ต้องการเปิดเลขห้องหรือไม่',
+                //                 pressYes: () {
+                //                   Navigator.pop(context, true);
+                //                 },
+                //                 pressNo: () {
+                //                   Navigator.pop(context, false);
+                //                 },
+                //                 orderNo: '',
+                //               ));
+                //       if (numroom == true) {
+                //         setState(() {
+                //           opennumroom = value;
+                //           prefs.setBool('statusnumroom', true);
+                //         });
+                //         //Navigator.push(context, MaterialPageRoute(builder: (context) => Printter()));
+                //       }
+                //     } else {
+                //       final numroom = await showDialog(
+                //         context: context,
+                //         builder: (context) => AlertDialogYesNo2(
+                //           title: 'แจ้งเตือน',
+                //           description: 'ต้องการปิดเลขห้องหรือไม่',
+                //           pressYes: () {
+                //             Navigator.pop(context, true);
+                //           },
+                //           pressNo: () {
+                //             Navigator.pop(context, false);
+                //           },
+                //           orderNo: '',
+                //         ),
+                //       );
+                //       if (numroom == true) {
+                //         setState(() {
+                //           opennumroom = value;
+                //           prefs.setBool('statusnumroom', value);
+                //         });
+                //       }
+                //     }
+                //   },
+                //   // onChanged: (value) {
+                //   //   setState(() {
+                //   //     opennumroom = value;
+                //   //   });
+                //   // },
+                // ),
+                // Divider(),
+                OpenAndCloseSwitch(
+                  size: size,
+                  open: openvat ?? false,
+                  showTextOpen: 'เปิด Vat 7 %',
+                  showTextClose: 'ปิด Vat 7 %',
+                  onChanged: (value) async {
+                    final SharedPreferences prefs = await SharedPreferences.getInstance();
+                    if (openvat == false) {
+                      final vat = await showDialog(
+                          context: context,
+                          builder: (context) => AlertDialogYesNo2(
                                 title: 'แจ้งเตือน',
-                                description: 'ต้องการปิดเลขห้องหรือไม่',
+                                description: 'เปิดใช้งาน Vat7% ',
                                 pressYes: () {
                                   Navigator.pop(context, true);
                                 },
@@ -587,61 +566,52 @@ class _SettingPageState extends State<SettingPage> {
                                   Navigator.pop(context, false);
                                 },
                                 orderNo: '',
-                              ),
-                            );
-                            if (numroom == true) {
-                              setState(() {
-                                opennumroom = value;
-                                prefs.setBool('statusnumroom', value);
-                              });
-                            }
-                          }
-                        },
-                        // onChanged: (value) {
-                        //   setState(() {
-                        //     opennumroom = value;
-                        //   });
-                        // },
-                      ),
-                    ],
-                  ),
-
-                  Row(
-                    children: [
-                      OpenAndCloseSwitch(
-                        size: size,
-                        open: openvat ?? false,
-                        showTextOpen: 'เปิด Vat 7 %',
-                        showTextClose: 'ปิด Vat 7 %',
-                        onChanged: (value) async {
-                          final SharedPreferences prefs = await SharedPreferences.getInstance();
-                          if (openvat == false) {
-                            final vat = await showDialog(
-                                context: context,
-                                builder: (context) => AlertDialogYesNo2(
-                                      title: 'แจ้งเตือน',
-                                      description: 'เปิดใช้งาน Vat7% ',
-                                      pressYes: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                      pressNo: () {
-                                        Navigator.pop(context, false);
-                                      },
-                                      orderNo: '',
-                                    ));
-                            if (vat == true) {
-                              setState(() {
-                                openvat = value;
-                                prefs.setBool('statusvat', value);
-                              });
-                              //Navigator.push(context, MaterialPageRoute(builder: (context) => Printter()));
-                            }
-                          } else {
-                            final vat = await showDialog(
-                              context: context,
-                              builder: (context) => AlertDialogYesNo2(
+                              ));
+                      if (vat == true) {
+                        setState(() {
+                          openvat = value;
+                          prefs.setBool('statusvat', value);
+                        });
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) => Printter()));
+                      }
+                    } else {
+                      final vat = await showDialog(
+                        context: context,
+                        builder: (context) => AlertDialogYesNo2(
+                          title: 'แจ้งเตือน',
+                          description: 'ปิดใช้งาน Vat7% ',
+                          pressYes: () {
+                            Navigator.pop(context, true);
+                          },
+                          pressNo: () {
+                            Navigator.pop(context, false);
+                          },
+                          orderNo: '',
+                        ),
+                      );
+                      if (vat == true) {
+                        setState(() {
+                          openvat = value;
+                          prefs.setBool('statusvat', value);
+                        });
+                      }
+                    }
+                  },
+                ),
+                Divider(),
+                OpenAndCloseSwitch(
+                  size: size,
+                  open: openservicecharge,
+                  showTextOpen: 'เปิด Service Charge %',
+                  showTextClose: 'ปิด Service Charge %',
+                  onChanged: (value) async {
+                    final SharedPreferences prefs = await SharedPreferences.getInstance();
+                    if (openservicecharge == false) {
+                      final servicecharge = await showDialog(
+                          context: context,
+                          builder: (context) => AlertDialogYesNo2(
                                 title: 'แจ้งเตือน',
-                                description: 'ปิดใช้งาน Vat7% ',
+                                description: 'เปิดใช้งาน Service Charge ',
                                 pressYes: () {
                                   Navigator.pop(context, true);
                                 },
@@ -649,101 +619,63 @@ class _SettingPageState extends State<SettingPage> {
                                   Navigator.pop(context, false);
                                 },
                                 orderNo: '',
-                              ),
-                            );
-                            if (vat == true) {
-                              setState(() {
-                                openvat = value;
-                                prefs.setBool('statusvat', value);
-                              });
-                            }
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      OpenAndCloseSwitch(
-                        size: size,
-                        open: openservicecharge,
-                        showTextOpen: 'เปิด Service Charge %',
-                        showTextClose: 'ปิด Service Charge %',
-                        onChanged: (value) async {
-                          final SharedPreferences prefs = await SharedPreferences.getInstance();
-                          if (openservicecharge == false) {
-                            final servicecharge = await showDialog(
-                                context: context,
-                                builder: (context) => AlertDialogYesNo2(
-                                      title: 'แจ้งเตือน',
-                                      description: 'เปิดใช้งาน Service Charge ',
-                                      pressYes: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                      pressNo: () {
-                                        Navigator.pop(context, false);
-                                      },
-                                      orderNo: '',
-                                    ));
-                            if (servicecharge == true) {
-                              setState(() {
-                                openservicecharge = value;
-                                prefs.setBool('statusservicecharge', value);
-                              });
-                              //Navigator.push(context, MaterialPageRoute(builder: (context) => Printter()));
-                            }
-                          } else {
-                            final servicecharge = await showDialog(
-                              context: context,
-                              builder: (context) => AlertDialogYesNo2(
-                                title: 'แจ้งเตือน',
-                                description: 'ปิดใช้งาน Service Charge ',
-                                pressYes: () {
-                                  Navigator.pop(context, true);
-                                },
-                                pressNo: () {
-                                  Navigator.pop(context, false);
-                                },
-                                orderNo: '',
-                              ),
-                            );
-                            if (servicecharge == true) {
-                              setState(() {
-                                openservicecharge = value;
-                                prefs.setBool('statusservicecharge', value);
-                              });
-                            }
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                  openservicecharge == true
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Service charge",
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            InputTextFormField(
-                              width: size.width * 0.9,
-                              controller: serviceChargeRate,
-                              keyboardType: TextInputType.number,
-                              label: Text("กรุณากรอกเลข ServiceCharge %"),
-                            ),
-                          ],
-                        )
-                      : SizedBox.shrink(),
-
-                  SizedBox(
-                    height: size.height * 0.15,
-                  ),
-                ],
-              ),
+                              ));
+                      if (servicecharge == true) {
+                        setState(() {
+                          openservicecharge = value;
+                          prefs.setBool('statusservicecharge', value);
+                        });
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) => Printter()));
+                      }
+                    } else {
+                      final servicecharge = await showDialog(
+                        context: context,
+                        builder: (context) => AlertDialogYesNo2(
+                          title: 'แจ้งเตือน',
+                          description: 'ปิดใช้งาน Service Charge ',
+                          pressYes: () {
+                            Navigator.pop(context, true);
+                          },
+                          pressNo: () {
+                            Navigator.pop(context, false);
+                          },
+                          orderNo: '',
+                        ),
+                      );
+                      if (servicecharge == true) {
+                        setState(() {
+                          openservicecharge = value;
+                          prefs.setBool('statusservicecharge', value);
+                        });
+                      }
+                    }
+                  },
+                ),
+                Divider(),
+                openservicecharge == true
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Service charge",
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          InputTextFormField(
+                            width: size.width * 0.9,
+                            controller: serviceChargeRate,
+                            keyboardType: TextInputType.number,
+                            label: Text("กรุณากรอกเลข ServiceCharge %"),
+                          ),
+                        ],
+                      )
+                    : SizedBox.shrink(),
+                SizedBox(
+                  height: size.height * 0.15,
+                ),
+              ],
             ),
           ),
         ),
@@ -754,6 +686,7 @@ class _SettingPageState extends State<SettingPage> {
           onTap: () async {
             if (selectBranch != null && selectDevice != null && selectPanel != null) {
               final prefs = await _prefs;
+              prefs.setBool('statusnumroom', true);
               await prefs.setInt('branch', selectBranch!.id);
               await prefs.setString("branchname", selectBranch!.name ?? "");
               await prefs.setInt("deviceid", selectDevice!.id);

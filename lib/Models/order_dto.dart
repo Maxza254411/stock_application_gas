@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'package:stock_application_gas/Models/orderitemsdto1.dart';
 
 part 'order_dto.g.dart';

@@ -13,6 +13,10 @@ import 'package:stock_application_gas/Models/nextpayment.dart';
 import 'package:stock_application_gas/Models/order.dart';
 import 'package:stock_application_gas/Models/profile.dart';
 import 'package:stock_application_gas/Product/ProductPage.dart';
+import 'package:stock_application_gas/Models/reservedatas.dart';
+import 'package:stock_application_gas/fristpage.dart';
+import 'package:stock_application_gas/order/OrderPage.dart';
+import 'package:stock_application_gas/order/OrderService.dart';
 import 'package:stock_application_gas/payment/service/paymentService.dart';
 import 'package:stock_application_gas/print.dart';
 import 'package:stock_application_gas/widgets/Dialog.dart';
@@ -24,13 +28,10 @@ class SuccessPage extends StatefulWidget {
     required this.page,
     required this.order,
     this.payment,
-    required this.orders,
   });
-  final Order order;
-  final Order orders;
+  final Reservedatas order;
   final String page;
   NextPayment? payment;
-
   @override
   State<SuccessPage> createState() => _SuccessPageState();
 }
@@ -98,7 +99,7 @@ class _SuccessPageState extends State<SuccessPage> {
   Future<void> _initialize() async {
     _timer = Timer.periodic(const Duration(seconds: 3), (timer) async {
       try {
-        final orderPayment = await Paymentservice.getOrderPayment(id: widget.payment!.orderPayment!.id);
+        final orderPayment = await OrderService.getOrderPayment(id: widget.payment!.orderPayment!.id);
         if (orderPayment.status == 'success') {
           timer.cancel();
           final photo = await capturePngPag();
@@ -110,9 +111,7 @@ class _SuccessPageState extends State<SuccessPage> {
             context: context,
             barrierDismissible: false,
             builder: (BuildContext context) {
-              return AlertDialogSuccessNew(
-                order: widget.order,
-                payment: widget.payment,
+              return AlertDialogYesNo(
                 title: 'ชำระเงินสำเร็จ',
                 description: 'กด หน้าแรก เพื่อกลับไปที่รายการอาหาร',
                 pressNo: () {
@@ -133,11 +132,11 @@ class _SuccessPageState extends State<SuccessPage> {
             // );
             if (!mounted) return;
             LoadingDialog.close(context);
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: ((context) => ProductPage())), (route) => false);
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: ((context) => OrderPage())), (route) => false);
           } else {
             if (!mounted) return;
             LoadingDialog.close(context);
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: ((context) => ProductPage())), (route) => false);
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: ((context) => OrderPage())), (route) => false);
           }
         }
       } on Exception catch (e) {
@@ -326,24 +325,24 @@ class _SuccessPageState extends State<SuccessPage> {
                                           ? SizedBox.shrink()
                                           : Center(
                                               child: Text(
-                                                'ห้อง: ${widget.order.roomNo}',
+                                                'บ้านเลขที่: ${widget.order.roomNo}',
                                                 style: TextStyle(
                                                   fontSize: 25,
                                                 ),
                                               ),
                                             ),
-                                      Text(
-                                        'Sodexo@ ${branch?.name ?? ''}',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                      Text(
-                                        'POS ID : HandHeld',
-                                        style: TextStyle(
-                                          fontSize: 22,
-                                        ),
-                                      ),
+                                      // Text(
+                                      //   'Sodexo@ ${branch?.name ?? ''}',
+                                      //   style: TextStyle(
+                                      //     fontSize: 20,
+                                      //   ),
+                                      // ),
+                                      // Text(
+                                      //   'POS ID : HandHeld',
+                                      //   style: TextStyle(
+                                      //     fontSize: 22,
+                                      //   ),
+                                      // ),
                                       Text(
                                         'DATE : ${DateFormat('dd-MM-y HH:mm').format((widget.order.orderDate ?? DateTime.now()).add(const Duration(hours: 7)))}',
                                         style: TextStyle(
@@ -601,7 +600,7 @@ class _SuccessPageState extends State<SuccessPage> {
                                       widget.order.Hn == '' || widget.order.Hn == null
                                           ? SizedBox.shrink()
                                           : Text(
-                                              'HN:  ${widget.order.Hn ?? ''}',
+                                              'เบอร์โทร:  ${widget.order.Hn ?? ''}',
                                               style: TextStyle(
                                                 fontSize: 22,
                                               ),
@@ -749,11 +748,11 @@ class _SuccessPageState extends State<SuccessPage> {
                                                     // );
                                                     LoadingDialog.close(context);
                                                     Navigator.pushAndRemoveUntil(
-                                                        context, MaterialPageRoute(builder: ((context) => ProductPage())), (route) => false);
+                                                        context, MaterialPageRoute(builder: ((context) => FirstPage())), (route) => false);
                                                   } else {
                                                     LoadingDialog.close(context);
                                                     Navigator.pushAndRemoveUntil(
-                                                        context, MaterialPageRoute(builder: ((context) => ProductPage())), (route) => false);
+                                                        context, MaterialPageRoute(builder: ((context) => FirstPage())), (route) => false);
                                                   }
                                                 });
                                               }

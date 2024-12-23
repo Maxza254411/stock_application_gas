@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stock_application_gas/Models/listProduct.dart';
 import 'package:stock_application_gas/Models/orderitemsdto.dart';
 
-// const String publicUrl = 'sct.dev-asha.com:8443';
+const String publicUrl = 'sct.dev-asha.com:8443';
 //BPH
 // const String publicUrl = "upos-ews.okontek.com:10302";
 //JTH

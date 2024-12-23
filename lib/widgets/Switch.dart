@@ -19,10 +19,29 @@ class OpenAndCloseSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: size.height * 0.1,
+        height: size.height * 0.08,
         width: size.width * 0.9,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            open == true
+                ? Expanded(
+                    flex: 6,
+                    child: Text(
+                      showTextOpen,
+                      style: TextStyle(
+                        fontFamily: 'IBMPlexSansThai',
+                      ),
+                    ))
+                : Expanded(
+                    flex: 6,
+                    child: Text(
+                      showTextClose,
+                      style: TextStyle(
+                        fontFamily: 'IBMPlexSansThai',
+                      ),
+                    ),
+                  ),
             Expanded(
               child: Switch(
                 value: open,
@@ -32,21 +51,6 @@ class OpenAndCloseSwitch extends StatelessWidget {
                 inactiveTrackColor: Colors.grey,
               ),
             ),
-            open == true
-                ? Expanded(
-                    child: Text(
-                    showTextOpen,
-                    style: TextStyle(
-                      fontFamily: 'IBMPlexSansThai',
-                    ),
-                  ))
-                : Expanded(
-                    child: Text(
-                    showTextClose,
-                    style: TextStyle(
-                      fontFamily: 'IBMPlexSansThai',
-                    ),
-                  ))
           ],
         ));
   }
