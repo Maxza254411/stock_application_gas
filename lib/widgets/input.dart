@@ -2,21 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class InputTextFormField extends StatefulWidget {
-  InputTextFormField({
-    super.key,
-    this.width,
-    this.height,
-    this.controller,
-    this.hintText,
-    this.label,
-    this.prefixIcon,
-    this.obscureText,
-    this.suffixIcon,
-    this.onFieldSubmitted,
-    this.keyboardType,
-    this.format,
-    this.validator,
-  });
+  InputTextFormField(
+      {super.key,
+      this.width,
+      this.height,
+      this.controller,
+      this.hintText,
+      this.label,
+      this.prefixIcon,
+      this.obscureText,
+      this.suffixIcon,
+      this.onFieldSubmitted,
+      this.keyboardType,
+      this.format,
+      this.validator,
+      this.fillcolor,
+      this.bordercolor});
 
   double? width;
   double? height;
@@ -30,6 +31,8 @@ class InputTextFormField extends StatefulWidget {
   TextInputType? keyboardType;
   List<TextInputFormatter>? format;
   String? Function(String?)? validator;
+  Color? fillcolor;
+  Color? bordercolor;
 
   @override
   State<InputTextFormField> createState() => _InputTextFormFieldState();
@@ -58,11 +61,11 @@ class _InputTextFormFieldState extends State<InputTextFormField> {
             hintStyle: TextStyle(fontSize: 22),
             prefixIcon: widget.prefixIcon,
             filled: true,
-            fillColor: const Color.fromARGB(255, 232, 232, 232),
+            fillColor: widget.fillcolor,
             suffixIcon: widget.suffixIcon,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.transparent),
+              borderSide: BorderSide(color: widget.bordercolor ?? Colors.black),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),

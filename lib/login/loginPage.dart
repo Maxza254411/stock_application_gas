@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_application_gas/Product/ProductPage.dart';
+import 'package:stock_application_gas/adminPage.dart';
 import 'package:stock_application_gas/constants.dart';
 import 'package:stock_application_gas/fristpage.dart';
 import 'package:stock_application_gas/login/loginService.dart';
@@ -48,162 +49,274 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      body: Container(
-        height: size.height * 1,
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.blue,
-              Colors.white,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     GestureDetector(
-                //       onTap: () {
-                //         Navigator.push(context, MaterialPageRoute(builder: (context) {
-                //           return SettingAPIPage();
-                //         }));
-                //       },
-                //       child: Container(
-                //         margin: EdgeInsets.all(8),
-                //         width: size.width * 0.25,
-                //         height: size.height * 0.06,
-                //         decoration: BoxDecoration(
-                //           color: Colors.blue,
-                //           borderRadius: BorderRadius.circular(10),
-                //         ),
-                //         child: Center(
-                //             child: Text(
-                //           'แก้ไข API',
-                //           style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-                //         )),
-                //       ),
-                //     ),
-                //     Padding(
-                //       padding: const EdgeInsets.all(8.0),
-                //       child: Text(
-                //         domain ?? '',
-                //         style: TextStyle(
-                //           fontSize: 15,
-                //           fontWeight: FontWeight.bold,
-                //           color: Colors.grey,
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                SizedBox(
-                  height: size.height * 0.1,
+      body: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        child: Stack(
+          children: [
+            Center(
+              child: SizedBox(
+                width: double.infinity,
+                child: Image.asset(
+                  "assets/images/Sign Up.jpg",
+                  fit: BoxFit.cover,
                 ),
-                // Image.asset('assets/images/bannerLogin.png'),
-                Text(
-                  'ระบบจัดการสต็อก',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-                SizedBox(
-                  height: size.height * 0.1,
-                ),
-                Text(
-                  'login',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                InputTextFormField(
-                  width: size.width * 0.8,
-                  controller: username,
-                  hintText: 'ชื่อผู้ใช้งาน',
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                InputTextFormField(
-                  width: size.width * 0.8,
-                  controller: password,
-                  hintText: 'รหัสผ่าน',
-                  obscureText: _obscureText,
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
-                    icon: Icon(
-                      _obscureText ? Icons.visibility : Icons.visibility_off,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+            Center(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: size.height * 0.1,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: height(context) / 7.5),
+                    child: Image.asset('assets/images/Gas Logo.png', scale: 3),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: size.height * 0.4,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 20,
+                            color: Colors.black.withOpacity(.1),
+                          )
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          // Text(
+                          //   'ระบบจัดการสต็อก',
+                          //   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),
+                          // ),
+                          Text(
+                            'login',
+                            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          InputTextFormField(
+                            width: size.width * 0.8,
+                            hintText: 'ชื่อผู้ใช้งาน',
+                            fillcolor: Colors.white,
+                            controller: username,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          InputTextFormField(
+                            width: size.width * 0.8,
+                            controller: password,
+                            hintText: 'รหัสผ่าน',
+                            obscureText: _obscureText,
+                            fillcolor: Colors.white,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              },
+                              icon: Icon(
+                                _obscureText ? Icons.visibility : Icons.visibility_off,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            color: Colors.transparent, // ทำให้พื้นหลังเป็นโปร่งใส
+                            child: Padding(
+                              padding: EdgeInsets.all(8),
+                              child: InkWell(
+                                onTap: () async {
+                                  if (username.text != '' && password.text != '') {
+                                    // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Adminpage()), (route) => true);
+                                    try {
+                                      LoadingDialog.open(context);
+                                      // final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+                                      // final SharedPreferences prefs = await _prefs;
+                                      // await prefs.setString('domain', publicUrl);
+                                      // final login = await LoginService.login(username.text, password.text);
+                                      // await prefs.setString('token', login);
+                                      // if (!mounted) return;
+                                      // LoadingDialog.close(context);
+                                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Adminpage()), (route) => true);
+                                    } on Exception catch (e) {
+                                      if (!mounted) return;
+                                      LoadingDialog.close(context);
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialogYes(
+                                          title: 'แจ้งเตือน',
+                                          description: '$e',
+                                          pressYes: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                      );
+                                    }
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialogYes(
+                                        title: 'แจ้งเตือน',
+                                        description: 'กรุณากรอกชื่อผู้ใช้งานและรหัสผ่าน',
+                                        pressYes: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: BottomNavigator(
+                                  size: size,
+                                  title: 'เข้าสู่ระบบ',
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                  // Text(
+                  //   'ระบบจัดการสต็อก',
+                  //   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+                  // ),
+                  // SizedBox(
+                  //   height: size.height * 0.05,
+                  // ),
+                  // Text(
+                  //   'login',
+                  //   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+                  // ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
+                  // InputTextFormField(
+                  //   width: size.width * 0.8,
+                  //   controller: username,
+                  //   hintText: 'ชื่อผู้ใช้งาน',
+                  // ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
+                  // InputTextFormField(
+                  //   width: size.width * 0.8,
+                  //   controller: password,
+                  //   hintText: 'รหัสผ่าน',
+                  //   obscureText: _obscureText,
+                  //   suffixIcon: IconButton(
+                  //     onPressed: () {
+                  //       setState(() {
+                  //         _obscureText = !_obscureText;
+                  //       });
+                  //     },
+                  //     icon: Icon(
+                  //       _obscureText ? Icons.visibility : Icons.visibility_off,
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16),
-        child: InkWell(
-          onTap: () async {
-            if (username.text != '' && password.text != '') {
-              try {
-                LoadingDialog.open(context);
-                final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-                final SharedPreferences prefs = await _prefs;
-                await prefs.setString('domain', publicUrl);
-                final login = await LoginService.login(username.text, password.text);
-                await prefs.setString('token', login);
-                if (!mounted) return;
-                LoadingDialog.close(context);
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => true);
-              } on Exception catch (e) {
-                if (!mounted) return;
-                LoadingDialog.close(context);
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialogYes(
-                    title: 'แจ้งเตือน',
-                    description: '$e',
-                    pressYes: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                );
-              }
-            } else {
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialogYes(
-                  title: 'แจ้งเตือน',
-                  description: 'กรุณากรอกชื่อผู้ใช้งานและรหัสผ่าน',
-                  pressYes: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              );
-            }
-          },
-          child: Container(
-            width: size.width * 0.8,
-            height: size.height * 0.06,
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(
-                child: Text(
-              'เข้าสู่ระบบ',
-              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-            )),
-          ),
+      // bottomNavigationBar: Container(
+      //   color: Colors.transparent, // ทำให้พื้นหลังเป็นโปร่งใส
+      //   child: Padding(
+      //     padding: EdgeInsets.all(8),
+      //     child: InkWell(
+      //       onTap: () async {
+      //         if (username.text != '' && password.text != '') {
+      //           try {
+      //             LoadingDialog.open(context);
+      //             final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+      //             final SharedPreferences prefs = await _prefs;
+      //             // await prefs.setString('domain', publicUrl);
+      //             // final login = await LoginService.login(username.text, password.text);
+      //             // await prefs.setString('token', login);
+      //             if (!mounted) return;
+      //             LoadingDialog.close(context);
+      //             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => true);
+      //           } on Exception catch (e) {
+      //             if (!mounted) return;
+      //             LoadingDialog.close(context);
+      //             showDialog(
+      //               context: context,
+      //               builder: (context) => AlertDialogYes(
+      //                 title: 'แจ้งเตือน',
+      //                 description: '$e',
+      //                 pressYes: () {
+      //                   Navigator.pop(context);
+      //                 },
+      //               ),
+      //             );
+      //           }
+      //         } else {
+      //           showDialog(
+      //             context: context,
+      //             builder: (context) => AlertDialogYes(
+      //               title: 'แจ้งเตือน',
+      //               description: 'กรุณากรอกชื่อผู้ใช้งานและรหัสผ่าน',
+      //               pressYes: () {
+      //                 Navigator.pop(context);
+      //               },
+      //             ),
+      //           );
+      //         }
+      //       },
+      //       child: Container(
+      //         width: size.width * 0.8,
+      //         height: size.height * 0.06,
+      //         decoration: BoxDecoration(
+      //           color: kbutton,
+      //           borderRadius: BorderRadius.circular(10),
+      //         ),
+      //         child: Center(
+      //           child: Text(
+      //             'เข้าสู่ระบบ',
+      //             style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
+    );
+  }
+}
+
+class BottomNavigator extends StatelessWidget {
+  const BottomNavigator({
+    super.key,
+    required this.size,
+    required this.title,
+  });
+
+  final Size size;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size.width * 0.8,
+      height: size.height * 0.06,
+      decoration: BoxDecoration(
+        color: kbutton,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Center(
+        child: Text(
+          title,
+          style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
         ),
       ),
     );

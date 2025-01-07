@@ -19,6 +19,7 @@ const kButtoncolor = Color(0xFFFC7716);
 const kTextDateColor = Color(0xffFA5A0E);
 const kCancleButton = Color(0xFFFF5252);
 const kSubtitleText = Color(0xFF424242);
+const kbutton = Color(0xff4CE5B1);
 
 //ฟังก์ชั่นคำนวน ราคา และ qty
 double sum(List<ListProduct> orders) => orders.fold(0, (previous, o) => previous + (o.product.qty * o.product.priceAll));
@@ -61,3 +62,69 @@ List<Map<String, String>> imagemog = [
     'image': 'assets/images/w960 15 kg.jpeg',
   },
 ];
+
+List<Map<String, String>> cardItems = [
+  {
+    'nameStore': 'ร้านค้าที่ 1',
+  },
+  {
+    'nameStore': 'ร้านค้าที่ 2',
+  },
+];
+List<Map<String, String>> gastank = [
+  {
+    'nameTank': 'ถังหมุนเวียน',
+  },
+  {
+    'nameTank': 'ถังใหม่ขาย',
+  },
+  {
+    'nameTank': 'ถังฝากเติม',
+  },
+];
+List<Map<String, String>> gas_km = [
+  {
+    'km': '4 กก',
+    'brand1': 'ปตท',
+    'sum1': '9',
+    'brand2': 'ส.ว.ย',
+    'sum2': '4',
+    'unit': 'ถัง',
+  },
+  {
+    'km': '7 กก',
+    'brand1': 'ปตท',
+    'sum1': '5',
+    'brand2': 'ส.ว.ย',
+    'sum2': '1',
+    'unit': 'ถัง',
+  },
+  {
+    'km': '15 กก',
+    'brand1': 'ปตท',
+    'sum1': '2',
+    'brand2': 'ส.ว.ย',
+    'sum2': '10',
+    'unit': 'ถัง',
+  },
+  {
+    'km': '48 กก',
+    'brand1': 'ปตท',
+    'sum1': '9',
+    'brand2': 'ส.ว.ย',
+    'sum2': '16',
+    'unit': 'ถัง',
+  },
+];
+List<Map<String, String>> oneItem = [
+  {
+    'km': '4 กก',
+    'brand1': 'ปตท',
+    'sum1': '9',
+    'brand2': 'ส.ว.ย',
+    'sum2': '4',
+    'unit': 'จำนวน',
+  },
+];
+double width(BuildContext context) => MediaQuery.of(context).size.width;
+double height(BuildContext context) => MediaQuery.of(context).size.height;

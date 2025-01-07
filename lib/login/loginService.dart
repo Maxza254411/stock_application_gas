@@ -23,7 +23,7 @@ class LoginService {
       return data['accessToken'];
     } else {
       final data = convert.jsonDecode(response.body);
-      throw ApiException(data['message']);
+      return ApiException(data['message']);
     }
   }
 
