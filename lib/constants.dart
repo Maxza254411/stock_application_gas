@@ -122,9 +122,18 @@ List<Map<String, String>> oneItem = [
     'brand1': 'ปตท',
     'sum1': '9',
     'brand2': 'ส.ว.ย',
-    'sum2': '4',
+    'sum2': '7',
     'unit': 'จำนวน',
   },
+  {
+    'km': '48 กก',
+    'brand1': 'ปตท',
+    'sum1': '5',
+    'brand2': 'ส.ว.ย',
+    'sum2': '16',
+    'unit': 'ถัง',
+  },
 ];
+
 double width(BuildContext context) => MediaQuery.of(context).size.width;
 double height(BuildContext context) => MediaQuery.of(context).size.height;

@@ -40,11 +40,13 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: domain == null
-            ? LoginPage()
-            : token == null
-                ? LoginPage()
-                : FirstPage(),
+        home: LoginPage(),
+        // home: domain == null
+        //     ?
+        //     LoginPage()
+        // : token == null
+        //     ? LoginPage()
+        //     : FirstPage(),
       ),
     );
   }

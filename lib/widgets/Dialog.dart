@@ -80,7 +80,7 @@ class _AlertDialogYesNoState extends State<AlertDialogYesNo> {
     final size = MediaQuery.of(context).size;
     return AlertDialog(
       surfaceTintColor: Colors.white,
-      backgroundColor: Colors.grey, // ตรวจสอบว่ามีการกำหนดค่า kTextButtonColor แล้ว
+      backgroundColor: Colors.white, // ตรวจสอบว่ามีการกำหนดค่า kTextButtonColor แล้ว
       title: Center(
         child: Text(
           widget.title,
@@ -107,16 +107,13 @@ class _AlertDialogYesNoState extends State<AlertDialogYesNo> {
             GestureDetector(
               onTap: widget.pressNo,
               child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: const Color.fromARGB(255, 227, 227, 227),
-                ),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.white, border: Border.all(color: kbutton)),
                 height: size.height * 0.05,
                 width: size.width * 0.3,
                 child: Center(
                   child: Text(
-                    'หน้าแรก',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                    'ยกเลิก',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: kbutton),
                   ),
                 ),
               ),
@@ -129,13 +126,13 @@ class _AlertDialogYesNoState extends State<AlertDialogYesNo> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: Colors.blue,
+                  color: kbutton,
                 ),
                 height: size.height * 0.05,
                 width: size.width * 0.3,
                 child: Center(
                   child: Text(
-                    'พิมพ์ใบเสร็จ',
+                    'ตกลง',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ),
