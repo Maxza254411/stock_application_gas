@@ -1,18 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stock_application_gas/adminPage.dart';
 import 'package:stock_application_gas/constants.dart';
 import 'package:stock_application_gas/store/stockStore/addOnItem.dart';
+import 'package:stock_application_gas/store/storePage.dart';
 import 'package:stock_application_gas/widgetHub/waterMark.dart';
 
 class Stockstorepage extends StatefulWidget {
-  const Stockstorepage({super.key});
+  Stockstorepage({super.key, this.title});
 
   @override
   State<Stockstorepage> createState() => _StockstorepageState();
+  String? title;
 }
 
 class _StockstorepageState extends State<Stockstorepage> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   int selectindex = 0;
   String? nametank;
+  String headtitle = '';
+
+  getprefs() async {
+    final SharedPreferences prefs = await _prefs;
+    prefs.setString('title', widget.title ?? '');
+    final title = prefs.getString('title');
+    setState(() {
+      headtitle = title ?? '';
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getprefs();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -27,7 +50,13 @@ class _StockstorepageState extends State<Stockstorepage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Storepage(
+                          store: headtitle,
+                        )),
+                (route) => false);
           },
         ),
         title: Row(

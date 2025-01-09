@@ -355,7 +355,8 @@ class _SelectpymentState extends State<Selectpyment> {
                                 trailing: Icon(Icons.arrow_forward_ios),
                               ),
                             );
-                          }),
+                          },
+                        ),
                 ],
               ),
             ),

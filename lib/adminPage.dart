@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_application_gas/constants.dart';
 import 'package:stock_application_gas/login/loginPage.dart';
-import 'package:stock_application_gas/store/stockStore/storePage.dart';
+import 'package:stock_application_gas/store/storePage.dart';
 import 'package:stock_application_gas/widgetHub/waterMark.dart';
 
 class Adminpage extends StatefulWidget {
