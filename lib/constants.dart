@@ -134,6 +134,37 @@ List<Map<String, String>> oneItem = [
     'unit': 'ถัง',
   },
 ];
+List<Map<String, String>> history = [
+  {
+    'name': 'ถังหมุนเวียน',
+    'km': '4 กก',
+    'brand1': 'ปตท',
+    'sum1': '9',
+    'sum2': '7',
+    'brand2': 'ส.ว.ย',
+    'km2': '48 กก',
+    'sum3': '5',
+    'sum4': '16',
+    'time': '30/07/2025 14:30',
+    'unit': 'ถัง',
+  },
+  {
+    'name': 'ถังใหม่ขาย',
+    'km': '4 กก',
+    'km2': '7 กก',
+    'km3': '48 กก',
+    'sum1': '8',
+    'sum2': '9',
+    'sum3': '5',
+    'sum4': '16',
+    'sum5': '20',
+    'sum6': '25',
+    'brand1': 'ปตท',
+    'brand2': 'ส.ว.ย',
+    'time': '30/07/2025 18:40',
+    'unit': 'ถัง',
+  },
+];
 
 double width(BuildContext context) => MediaQuery.of(context).size.width;
 double height(BuildContext context) => MediaQuery.of(context).size.height;

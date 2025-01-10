@@ -57,30 +57,28 @@ class _AddonitemState extends State<Addonitem> {
               height: size.height * 0.04,
             ),
             Padding(
-              padding: EdgeInsets.only(left: 20),
+              padding: EdgeInsets.only(left: 15),
               child: Row(
                 children: [
                   Container(
                     height: size.height * 0.045,
                     width: size.width * 0.3,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.white, border: Border.all(color: kbutton)),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: kbutton, border: Border.all(color: kbutton)),
                     child: Center(
                       child: Text(
                         widget.title,
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              width: double.infinity,
-              height: size.height * 0.7,
-              child: ListView.builder(
+            Column(
+              children: List.generate(
                 // controller: _scrollController,
-                itemCount: gas_km.length,
-                itemBuilder: (context, index) {
+                gas_km.length,
+                (index) {
                   final items = gas_km[index];
                   return Column(
                     children: [

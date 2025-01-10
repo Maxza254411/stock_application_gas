@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_application_gas/constants.dart';
 import 'package:stock_application_gas/login/loginPage.dart';
 import 'package:stock_application_gas/store/storePage.dart';
@@ -12,6 +13,7 @@ class Adminpage extends StatefulWidget {
 }
 
 class _AdminpageState extends State<Adminpage> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -76,6 +78,9 @@ class _AdminpageState extends State<Adminpage> {
                                     ),
                                     trailing: Icon(Icons.arrow_forward_ios),
                                     onTap: () async {
+                                      final SharedPreferences prefs = await _prefs;
+                                      prefs.setString('title', items['nameStore'] ?? '');
+
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(

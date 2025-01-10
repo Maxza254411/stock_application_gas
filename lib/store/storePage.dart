@@ -93,9 +93,10 @@ class _StorepageState extends State<Storepage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Setpicepage(
-                                  title: widget.store,
-                                )));
+                          builder: (context) => Setpicepage(
+                            title: widget.store,
+                          ),
+                        ));
                   },
                   child: Container(
                     width: size.width * 0.8,
@@ -132,17 +133,20 @@ class _StorepageState extends State<Storepage> {
                 SizedBox(
                   height: size.height * 0.03,
                 ),
-                Container(
-                  width: size.width * 0.8,
-                  height: size.height * 0.06,
-                  decoration: BoxDecoration(
-                    color: kbutton,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'รายการยืมถัง',
-                      style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: size.width * 0.8,
+                    height: size.height * 0.06,
+                    decoration: BoxDecoration(
+                      color: kbutton,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'รายการยืมถัง',
+                        style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),

@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_application_gas/adminPage.dart';
 import 'package:stock_application_gas/constants.dart';
 import 'package:stock_application_gas/store/stockStore/addOnItem.dart';
+import 'package:stock_application_gas/store/stockStore/historyAddOn.dart';
 import 'package:stock_application_gas/store/storePage.dart';
 import 'package:stock_application_gas/widgetHub/waterMark.dart';
 
@@ -22,7 +23,6 @@ class _StockstorepageState extends State<Stockstorepage> {
 
   getprefs() async {
     final SharedPreferences prefs = await _prefs;
-    prefs.setString('title', widget.title ?? '');
     final title = prefs.getString('title');
     setState(() {
       headtitle = title ?? '';
@@ -31,7 +31,6 @@ class _StockstorepageState extends State<Stockstorepage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getprefs();
   }
@@ -197,7 +196,29 @@ class _StockstorepageState extends State<Stockstorepage> {
                       );
                     },
                   ),
-                )
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Historyaddon()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    width: size.width * 0.5,
+                    height: size.height * 0.06,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'ประวัติการเพิ่ม/ลด',
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

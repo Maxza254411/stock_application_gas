@@ -25,7 +25,6 @@ class _SetpicepageState extends State<Setpicepage> {
 
   getprefs() async {
     final SharedPreferences prefs = await _prefs;
-    prefs.setString('title', widget.title ?? '');
     final title = prefs.getString('title');
     setState(() {
       headtitle = title ?? '';
@@ -85,7 +84,7 @@ class _SetpicepageState extends State<Setpicepage> {
                   children: List.generate(
                     producttype.length,
                     (index) {
-                      productselect = selectindex == 0 ? 'ถังใหม่' : 'น้้ำแก็ส';
+                      productselect = selectindex == 0 ? 'ถังใหม่' : 'น้ำแก็ส';
                       return GestureDetector(
                         onTap: () {
                           setState(() {

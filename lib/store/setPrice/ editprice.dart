@@ -59,7 +59,7 @@ class _EditpriceState extends State<Editprice> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.vertical,
           child: Column(
             children: [
               Padding(
@@ -79,562 +79,382 @@ class _EditpriceState extends State<Editprice> {
                   ],
                 ),
               ),
-              SizedBox(
-                width: size.width * 1,
-                height: size.height * 0.7,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: priceCategory.length,
-                  itemBuilder: (context, index) {
+              Column(
+                children: List.generate(
+                  priceCategory.length,
+                  (index) {
                     return Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: size.width * 0.95,
-                            height: size.height * 0.3,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.grey[300],
-                            ),
-                            padding: EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 3,
+                      child: Container(
+                        width: size.width * 0.95,
+                        height: size.height * 0.3,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.grey[300],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            // crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      '${priceCategory[index]['km']}',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Center(
                                       child: Text(
-                                        '${priceCategory[index]['km']}',
+                                        '${priceCategory[index]['brand1']}',
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Center(
-                                        child: Text(
-                                          '${priceCategory[index]['brand1']}',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: size.width * 0.1,
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Center(
-                                        child: Text(
-                                          '${priceCategory[index]['brand2']}',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 3,
+                                  ),
+                                  SizedBox(
+                                    width: size.width * 0.1,
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Center(
                                       child: Text(
-                                        '${priceCategory[index]['pricecategory1']}',
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        color: Colors.white,
-                                        height: size.height * 0.045,
-                                        width: size.width * 0.15,
-                                        child: TextField(
-                                          controller: TextEditingController(
-                                            text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.1'] ?? '0')),
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: 20),
-                                          onSubmitted: (value) {
-                                            setState(
-                                              () {
-                                                // อัปเดตค่าจาก TextField
-                                                int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                                if (newValue != null) {
-                                                  priceCategory[index]['sumgas1.1'] = newValue.toString();
-                                                }
-                                              },
-                                            );
-                                          },
-                                          decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                          ),
+                                        '${priceCategory[index]['brand2']}',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: size.width * 0.1,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      '${priceCategory[index]['pricecategory1']}',
+                                      style: TextStyle(fontSize: 16),
                                     ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        color: Colors.white,
-                                        height: size.height * 0.045,
-                                        width: size.width * 0.15,
-                                        child: TextField(
-                                          controller: TextEditingController(
-                                            text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.1'] ?? '0')),
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: 20),
-                                          onSubmitted: (value) {
-                                            setState(
-                                              () {
-                                                // อัปเดตค่าจาก TextField
-                                                int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                                if (newValue != null) {
-                                                  priceCategory[index]['sumgas2.1'] = newValue.toString();
-                                                }
-                                              },
-                                            );
-                                          },
-                                          decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                          ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      color: Colors.white,
+                                      height: size.height * 0.045,
+                                      width: size.width * 0.15,
+                                      child: TextField(
+                                        controller: TextEditingController(
+                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.1'] ?? '0')),
+                                        ),
+                                        keyboardType: TextInputType.number,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 20),
+                                        onSubmitted: (value) {
+                                          setState(
+                                            () {
+                                              // อัปเดตค่าจาก TextField
+                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                              if (newValue != null) {
+                                                priceCategory[index]['sumgas1.1'] = newValue.toString();
+                                              }
+                                            },
+                                          );
+                                        },
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.01,
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 3,
-                                      child: Text(
-                                        '${priceCategory[index]['pricecategory2']}',
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        color: Colors.white,
-                                        height: size.height * 0.045,
-                                        width: size.width * 0.15,
-                                        child: TextField(
-                                          controller: TextEditingController(
-                                            text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.2'] ?? '0')),
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: 20),
-                                          onSubmitted: (value) {
-                                            setState(
-                                              () {
-                                                // อัปเดตค่าจาก TextField
-                                                int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                                if (newValue != null) {
-                                                  priceCategory[index]['sumgas1.2'] = newValue.toString();
-                                                }
-                                              },
-                                            );
-                                          },
-                                          decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                          ),
+                                  ),
+                                  SizedBox(
+                                    width: size.width * 0.1,
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      color: Colors.white,
+                                      height: size.height * 0.045,
+                                      width: size.width * 0.15,
+                                      child: TextField(
+                                        controller: TextEditingController(
+                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.1'] ?? '0')),
+                                        ),
+                                        keyboardType: TextInputType.number,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 20),
+                                        onSubmitted: (value) {
+                                          setState(
+                                            () {
+                                              // อัปเดตค่าจาก TextField
+                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                              if (newValue != null) {
+                                                priceCategory[index]['sumgas2.1'] = newValue.toString();
+                                              }
+                                            },
+                                          );
+                                        },
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: size.width * 0.1,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: size.height * 0.01,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      '${priceCategory[index]['pricecategory2']}',
+                                      style: TextStyle(fontSize: 16),
                                     ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        color: Colors.white,
-                                        height: size.height * 0.045,
-                                        width: size.width * 0.15,
-                                        child: TextField(
-                                          controller: TextEditingController(
-                                            text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.2'] ?? '0')),
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: 20),
-                                          onSubmitted: (value) {
-                                            setState(
-                                              () {
-                                                // อัปเดตค่าจาก TextField
-                                                int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                                if (newValue != null) {
-                                                  priceCategory[index]['sumgas2.2'] = newValue.toString();
-                                                }
-                                              },
-                                            );
-                                          },
-                                          decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                          ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      color: Colors.white,
+                                      height: size.height * 0.045,
+                                      width: size.width * 0.15,
+                                      child: TextField(
+                                        controller: TextEditingController(
+                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.2'] ?? '0')),
+                                        ),
+                                        keyboardType: TextInputType.number,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 20),
+                                        onSubmitted: (value) {
+                                          setState(
+                                            () {
+                                              // อัปเดตค่าจาก TextField
+                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                              if (newValue != null) {
+                                                priceCategory[index]['sumgas1.2'] = newValue.toString();
+                                              }
+                                            },
+                                          );
+                                        },
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.01,
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 3,
-                                      child: Text(
-                                        '${priceCategory[index]['pricecategory3']}',
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        color: Colors.white,
-                                        height: size.height * 0.045,
-                                        width: size.width * 0.15,
-                                        child: TextField(
-                                          controller: TextEditingController(
-                                            text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.3'] ?? '0')),
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: 20),
-                                          onSubmitted: (value) {
-                                            setState(
-                                              () {
-                                                // อัปเดตค่าจาก TextField
-                                                int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                                if (newValue != null) {
-                                                  priceCategory[index]['sumgas1.3'] = newValue.toString();
-                                                }
-                                              },
-                                            );
-                                          },
-                                          decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                          ),
+                                  ),
+                                  SizedBox(
+                                    width: size.width * 0.1,
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      color: Colors.white,
+                                      height: size.height * 0.045,
+                                      width: size.width * 0.15,
+                                      child: TextField(
+                                        controller: TextEditingController(
+                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.2'] ?? '0')),
+                                        ),
+                                        keyboardType: TextInputType.number,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 20),
+                                        onSubmitted: (value) {
+                                          setState(
+                                            () {
+                                              // อัปเดตค่าจาก TextField
+                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                              if (newValue != null) {
+                                                priceCategory[index]['sumgas2.2'] = newValue.toString();
+                                              }
+                                            },
+                                          );
+                                        },
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: size.width * 0.1,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: size.height * 0.01,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      '${priceCategory[index]['pricecategory3']}',
+                                      style: TextStyle(fontSize: 16),
                                     ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        color: Colors.white,
-                                        height: size.height * 0.045,
-                                        width: size.width * 0.15,
-                                        child: TextField(
-                                          controller: TextEditingController(
-                                            text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.3'] ?? '0')),
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: 20),
-                                          onSubmitted: (value) {
-                                            setState(
-                                              () {
-                                                // อัปเดตค่าจาก TextField
-                                                int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                                if (newValue != null) {
-                                                  priceCategory[index]['sumgas2.3'] = newValue.toString();
-                                                }
-                                              },
-                                            );
-                                          },
-                                          decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                          ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      color: Colors.white,
+                                      height: size.height * 0.045,
+                                      width: size.width * 0.15,
+                                      child: TextField(
+                                        controller: TextEditingController(
+                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.3'] ?? '0')),
+                                        ),
+                                        keyboardType: TextInputType.number,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 20),
+                                        onSubmitted: (value) {
+                                          setState(
+                                            () {
+                                              // อัปเดตค่าจาก TextField
+                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                              if (newValue != null) {
+                                                priceCategory[index]['sumgas1.3'] = newValue.toString();
+                                              }
+                                            },
+                                          );
+                                        },
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.01,
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 3,
-                                      child: Text(
-                                        '${priceCategory[index]['pricecategory4']}',
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        color: Colors.white,
-                                        height: size.height * 0.045,
-                                        width: size.width * 0.15,
-                                        child: TextField(
-                                          controller: TextEditingController(
-                                            text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.4'] ?? '0')),
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: 20),
-                                          onSubmitted: (value) {
-                                            setState(
-                                              () {
-                                                // อัปเดตค่าจาก TextField
-                                                int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                                if (newValue != null) {
-                                                  priceCategory[index]['sumgas1.4'] = newValue.toString();
-                                                }
-                                              },
-                                            );
-                                          },
-                                          decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                          ),
+                                  ),
+                                  SizedBox(
+                                    width: size.width * 0.1,
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      color: Colors.white,
+                                      height: size.height * 0.045,
+                                      width: size.width * 0.15,
+                                      child: TextField(
+                                        controller: TextEditingController(
+                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.3'] ?? '0')),
+                                        ),
+                                        keyboardType: TextInputType.number,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 20),
+                                        onSubmitted: (value) {
+                                          setState(
+                                            () {
+                                              // อัปเดตค่าจาก TextField
+                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                              if (newValue != null) {
+                                                priceCategory[index]['sumgas2.3'] = newValue.toString();
+                                              }
+                                            },
+                                          );
+                                        },
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: size.width * 0.1,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: size.height * 0.01,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Text(
+                                      '${priceCategory[index]['pricecategory4']}',
+                                      style: TextStyle(fontSize: 16),
                                     ),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        color: Colors.white,
-                                        height: size.height * 0.045,
-                                        width: size.width * 0.15,
-                                        child: TextField(
-                                          controller: TextEditingController(
-                                            text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.4'] ?? '0')),
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: 20),
-                                          onSubmitted: (value) {
-                                            setState(
-                                              () {
-                                                // อัปเดตค่าจาก TextField
-                                                int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                                if (newValue != null) {
-                                                  priceCategory[index]['sumgas2.4'] = newValue.toString();
-                                                }
-                                              },
-                                            );
-                                          },
-                                          decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                          ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      color: Colors.white,
+                                      height: size.height * 0.045,
+                                      width: size.width * 0.15,
+                                      child: TextField(
+                                        controller: TextEditingController(
+                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.4'] ?? '0')),
+                                        ),
+                                        keyboardType: TextInputType.number,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 20),
+                                        onSubmitted: (value) {
+                                          setState(
+                                            () {
+                                              // อัปเดตค่าจาก TextField
+                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                              if (newValue != null) {
+                                                priceCategory[index]['sumgas1.4'] = newValue.toString();
+                                              }
+                                            },
+                                          );
+                                        },
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                  ),
+                                  SizedBox(
+                                    width: size.width * 0.1,
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      color: Colors.white,
+                                      height: size.height * 0.045,
+                                      width: size.width * 0.15,
+                                      child: TextField(
+                                        controller: TextEditingController(
+                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.4'] ?? '0')),
+                                        ),
+                                        keyboardType: TextInputType.number,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 20),
+                                        onSubmitted: (value) {
+                                          setState(
+                                            () {
+                                              // อัปเดตค่าจาก TextField
+                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                              if (newValue != null) {
+                                                priceCategory[index]['sumgas2.4'] = newValue.toString();
+                                              }
+                                            },
+                                          );
+                                        },
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-
-                          // Expanded(
-                          //   flex: 1,
-                          //   child: Container(
-                          //     height: size.height * 0.3,
-                          //     decoration: BoxDecoration(
-                          //       borderRadius: BorderRadius.circular(8),
-                          //       color: Colors.grey[300],
-                          //     ),
-                          //     child: Center(
-                          //       child: Column(
-                          //         mainAxisAlignment: MainAxisAlignment.center,
-                          //         children: [
-                          //           Text(
-                          //             '${priceCategory[index]['brand1']}',
-                          //             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                          //           ),
-                          //           SizedBox(height: 8),
-                          //           Container(
-                          //             color: Colors.white,
-                          //             height: size.height * 0.045,
-                          //             width: size.width * 0.15,
-                          //             child: TextField(
-                          //               controller: TextEditingController(
-                          //                 text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sum1'] ?? '0')),
-                          //               ),
-                          //               keyboardType: TextInputType.number,
-                          //               textAlign: TextAlign.center,
-                          //               style: TextStyle(fontSize: 20),
-                          //               onSubmitted: (value) {
-                          //                 setState(
-                          //                   () {
-                          //                     // อัปเดตค่าจาก TextField
-                          //                     int? newValue = int.tryParse(value.replaceAll(',', ''));
-                          //                     if (newValue != null) {
-                          //                       gas_km[index]['sum1'] = newValue.toString();
-                          //                     }
-                          //                   },
-                          //                 );
-                          //               },
-                          //               decoration: InputDecoration(
-                          //                 border: OutlineInputBorder(),
-                          //                 contentPadding: EdgeInsets.symmetric(vertical: 5),
-                          //               ),
-                          //             ),
-                          //           ),
-                          //           SizedBox(
-                          //             height: size.height * 0.01,
-                          //           ),
-                          //           // Text('100', style: TextStyle(fontSize: 18)),
-                          //           Container(
-                          //             color: Colors.white,
-                          //             height: size.height * 0.045,
-                          //             width: size.width * 0.15,
-                          //             child: TextField(
-                          //               controller: TextEditingController(
-                          //                 text: NumberFormat('#,##0', 'en_US').format(int.parse(gas_km[index]['sum1'] ?? '0')),
-                          //               ),
-                          //               keyboardType: TextInputType.number,
-                          //               textAlign: TextAlign.center,
-                          //               style: TextStyle(fontSize: 20),
-                          //               onSubmitted: (value) {
-                          //                 setState(
-                          //                   () {
-                          //                     // อัปเดตค่าจาก TextField
-                          //                     int? newValue = int.tryParse(value.replaceAll(',', ''));
-                          //                     if (newValue != null) {
-                          //                       gas_km[index]['sum1'] = newValue.toString();
-                          //                     }
-                          //                   },
-                          //                 );
-                          //               },
-                          //               decoration: InputDecoration(
-                          //                 border: OutlineInputBorder(),
-                          //                 contentPadding: EdgeInsets.symmetric(vertical: 5),
-                          //               ),
-                          //             ),
-                          //           ),
-                          //           SizedBox(
-                          //             height: size.height * 0.01,
-                          //           ),
-                          //           // Text('120', style: TextStyle(fontSize: 18)),
-                          //           Container(
-                          //             color: Colors.white,
-                          //             height: size.height * 0.045,
-                          //             width: size.width * 0.15,
-                          //             child: TextField(
-                          //               controller: TextEditingController(
-                          //                 text: NumberFormat('#,##0', 'en_US').format(int.parse(gas_km[index]['sum1'] ?? '0')),
-                          //               ),
-                          //               keyboardType: TextInputType.number,
-                          //               textAlign: TextAlign.center,
-                          //               style: TextStyle(fontSize: 20),
-                          //               onSubmitted: (value) {
-                          //                 setState(
-                          //                   () {
-                          //                     // อัปเดตค่าจาก TextField
-                          //                     int? newValue = int.tryParse(value.replaceAll(',', ''));
-                          //                     if (newValue != null) {
-                          //                       gas_km[index]['sum1'] = newValue.toString();
-                          //                     }
-                          //                   },
-                          //                 );
-                          //               },
-                          //               decoration: InputDecoration(
-                          //                 border: OutlineInputBorder(),
-                          //                 contentPadding: EdgeInsets.symmetric(vertical: 5),
-                          //               ),
-                          //             ),
-                          //           ),
-                          //           SizedBox(
-                          //             height: size.height * 0.01,
-                          //           ),
-                          //           // Text('150', style: TextStyle(fontSize: 18)),
-                          //           Container(
-                          //             color: Colors.white,
-                          //             height: size.height * 0.045,
-                          //             width: size.width * 0.15,
-                          //             child: TextField(
-                          //               controller: TextEditingController(
-                          //                 text: NumberFormat('#,##0', 'en_US').format(int.parse(gas_km[index]['sum1'] ?? '0')),
-                          //               ),
-                          //               keyboardType: TextInputType.number,
-                          //               textAlign: TextAlign.center,
-                          //               style: TextStyle(fontSize: 20),
-                          //               onSubmitted: (value) {
-                          //                 setState(
-                          //                   () {
-                          //                     // อัปเดตค่าจาก TextField
-                          //                     int? newValue = int.tryParse(value.replaceAll(',', ''));
-                          //                     if (newValue != null) {
-                          //                       gas_km[index]['sum1'] = newValue.toString();
-                          //                     }
-                          //                   },
-                          //                 );
-                          //               },
-                          //               decoration: InputDecoration(
-                          //                 border: OutlineInputBorder(),
-                          //                 contentPadding: EdgeInsets.symmetric(vertical: 5),
-                          //               ),
-                          //             ),
-                          //           ),
-                          //           // Text('200', style: TextStyle(fontSize: 18)),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
-                          // SizedBox(width: 8),
-                          // Expanded(
-                          //   flex: 1,
-                          //   child: Container(
-                          //     height: size.height * 0.2,
-                          //     decoration: BoxDecoration(
-                          //       borderRadius: BorderRadius.circular(8),
-                          //       color: Colors.grey[300],
-                          //     ),
-                          //     child: Center(
-                          //       child: Column(
-                          //         mainAxisAlignment: MainAxisAlignment.center,
-                          //         children: [
-                          //           Text(
-                          //             'ส.ว.ย',
-                          //             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                          //           ),
-                          //           SizedBox(height: 8),
-                          //           Text('300', style: TextStyle(fontSize: 18)),
-                          //           Text('450', style: TextStyle(fontSize: 18)),
-                          //           Text('930', style: TextStyle(fontSize: 18)),
-                          //           Text('200', style: TextStyle(fontSize: 18)),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
-                        ],
+                        ),
                       ),
                     );
                   },

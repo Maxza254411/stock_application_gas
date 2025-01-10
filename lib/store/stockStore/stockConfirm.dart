@@ -58,11 +58,11 @@ class _StockConfirmState extends State<StockConfirm> {
                       Container(
                         height: size.height * 0.045,
                         width: size.width * 0.3,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.white, border: Border.all(color: kbutton)),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: kbutton, border: Border.all(color: kbutton)),
                         child: Center(
                           child: Text(
                             widget.title,
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                           ),
                         ),
                       ),
@@ -159,7 +159,7 @@ class _StockConfirmState extends State<StockConfirm> {
                       );
                     },
                   ),
-                )
+                ),
               ],
             ),
           ),
