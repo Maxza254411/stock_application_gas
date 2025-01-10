@@ -82,6 +82,20 @@ List<Map<String, String>> gastank = [
     'nameTank': 'ถังฝากเติม',
   },
 ];
+List<Map<String, String>> sellreport = [
+  {
+    'nameTank': 'ถังหมุนเวียน',
+  },
+  {
+    'nameTank': 'ถังฝากอัด',
+  },
+  {
+    'nameTank': 'ถังไม่ได้อัด',
+  },
+  {
+    'nameTank': 'เชื้อเพลิง',
+  },
+];
 List<Map<String, String>> gas_km = [
   {
     'km': '4 กก',
@@ -164,6 +178,11 @@ List<Map<String, String>> history = [
     'time': '30/07/2025 18:40',
     'unit': 'ถัง',
   },
+];
+List<Map<String, String>> reportTank = [
+  {'date': '20/11/24', 'km': '4 กก', 'brand': 'ปตท', 'unit': '2', 'remark': 'เจ้ดำ'},
+  {'date': '01/12/22', 'km': '7 กก', 'brand': 'ส.ว.ย', 'unit': '10', 'remark': 'เจ้แดง'},
+  {'date': '02/12/22', 'km': '15 กก', 'brand': 'ส.ว.ย', 'unit': '10', 'remark': 'นายเขียว'},
 ];
 
 double width(BuildContext context) => MediaQuery.of(context).size.width;

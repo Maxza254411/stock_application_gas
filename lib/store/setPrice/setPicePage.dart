@@ -51,9 +51,10 @@ class _SetpicepageState extends State<Setpicepage> {
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => Storepage(
-                          store: headtitle!,
-                        )),
+                  builder: (context) => Storepage(
+                    store: headtitle!,
+                  ),
+                ),
                 (route) => false);
           },
         ),
@@ -99,10 +100,11 @@ class _SetpicepageState extends State<Setpicepage> {
                           width: size.width * 0.3,
                           height: size.height * 0.06,
                           child: Center(
-                              child: Text(
-                            producttype[index]['name'] ?? '',
-                            style: TextStyle(fontSize: 20, color: selectindex == index ? Colors.white : kbutton, fontWeight: FontWeight.bold),
-                          )),
+                            child: Text(
+                              producttype[index]['name'] ?? '',
+                              style: TextStyle(fontSize: 20, color: selectindex == index ? Colors.white : kbutton, fontWeight: FontWeight.bold),
+                            ),
+                          ),
                         ),
                       );
                     },

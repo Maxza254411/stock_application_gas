@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stock_application_gas/adminPage.dart';
 import 'package:stock_application_gas/constants.dart';
+import 'package:stock_application_gas/store/sellReport/sellReport.dart';
 import 'package:stock_application_gas/store/setPrice/setPicePage.dart';
 import 'package:stock_application_gas/store/stockStore/stockStorePage.dart';
+import 'package:stock_application_gas/store/tankReport/tankReportPage.dart';
 import 'package:stock_application_gas/widgetHub/waterMark.dart';
 
 class Storepage extends StatefulWidget {
@@ -91,12 +93,13 @@ class _StorepageState extends State<Storepage> {
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Setpicepage(
-                            title: widget.store,
-                          ),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Setpicepage(
+                          title: widget.store,
+                        ),
+                      ),
+                    );
                   },
                   child: Container(
                     width: size.width * 0.8,
@@ -134,7 +137,14 @@ class _StorepageState extends State<Storepage> {
                   height: size.height * 0.03,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Tankreportpage(),
+                      ),
+                    );
+                  },
                   child: Container(
                     width: size.width * 0.8,
                     height: size.height * 0.06,
@@ -153,17 +163,27 @@ class _StorepageState extends State<Storepage> {
                 SizedBox(
                   height: size.height * 0.03,
                 ),
-                Container(
-                  width: size.width * 0.8,
-                  height: size.height * 0.06,
-                  decoration: BoxDecoration(
-                    color: kbutton,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'รายงานรวมถังอัดบันจุ',
-                      style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Sellreport(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: size.width * 0.8,
+                    height: size.height * 0.06,
+                    decoration: BoxDecoration(
+                      color: kbutton,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'รายงานรวมถังอัดบันจุ',
+                        style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),

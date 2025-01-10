@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_application_gas/constants.dart';
 import 'package:stock_application_gas/store/setPrice/SetPicePage.dart';
+import 'package:stock_application_gas/store/setPrice/confirmSetPice.dart';
 import 'package:stock_application_gas/store/storePage.dart';
 import 'package:stock_application_gas/widgets/Dialog.dart';
 
@@ -39,7 +40,7 @@ class _EditpriceState extends State<Editprice> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Setpicepage()), (route) => false);
           },
         ),
         title: Row(
@@ -154,28 +155,67 @@ class _EditpriceState extends State<Editprice> {
                                       color: Colors.white,
                                       height: size.height * 0.045,
                                       width: size.width * 0.15,
-                                      child: TextField(
-                                        controller: TextEditingController(
-                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.1'] ?? '0')),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontSize: 20),
-                                        onSubmitted: (value) {
-                                          setState(
-                                            () {
-                                              // อัปเดตค่าจาก TextField
-                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                              if (newValue != null) {
-                                                priceCategory[index]['sumgas1.1'] = newValue.toString();
-                                              }
+                                      child: StatefulBuilder(
+                                        builder: (context, setState) {
+                                          // เก็บค่าเริ่มต้น
+                                          int originalValue = int.parse(priceCategory[index]['sumgas1.1'] ?? '0');
+
+                                          // ย้าย controller และ textColor ออกมาเพื่อให้คงค่าไว้
+                                          final TextEditingController controller = TextEditingController(
+                                            text: NumberFormat('#,##0', 'en_US').format(originalValue),
+                                          );
+                                          Color textColor = Colors.black;
+
+                                          return StatefulBuilder(
+                                            builder: (context, setInnerState) {
+                                              return TextField(
+                                                controller: controller,
+                                                keyboardType: TextInputType.number,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(fontSize: 20, color: textColor),
+                                                onChanged: (value) {
+                                                  // อัปเดตสีข้อความตามค่าใหม่เมื่อเปลี่ยนข้อความ
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green; // สีแดงถ้าค่าเพิ่มขึ้น
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red; // สีเขียวถ้าค่าลดลง
+                                                      } else {
+                                                        textColor = Colors.black; // สีปกติถ้าค่าเท่ากัน
+                                                      }
+                                                    });
+                                                  }
+                                                },
+                                                onSubmitted: (value) {
+                                                  // อัปเดตค่าล่าสุดกลับไปที่ data และตรวจสอบสีอีกครั้ง
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green;
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red;
+                                                      } else {
+                                                        textColor = Colors.black;
+                                                      }
+                                                      // บันทึกค่าใหม่กลับไปที่ originalValue
+                                                      originalValue = newValue;
+                                                      setState(() {
+                                                        priceCategory[index]['sumgas1.1'] = newValue.toString();
+                                                      });
+                                                    });
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
+                                                  contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                                ),
+                                              );
                                             },
                                           );
                                         },
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                        ),
                                       ),
                                     ),
                                   ),
@@ -464,56 +504,118 @@ class _EditpriceState extends State<Editprice> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        margin: EdgeInsets.all(8),
-        child: SizedBox(
-          height: size.height * 0.07,
-          width: size.width * 0.4,
-          child: Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
+      bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            margin: EdgeInsets.all(8),
+            child: SizedBox(
+              height: size.height * 0.07,
+              width: size.width * 0.4,
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kbutton,
-                // side: BorderSide(color: textColor),
-                padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),
-              onPressed: () async {
-                final ok = await showDialog(
-                  context: context,
-                  builder: (context) => AlertDialogYesNo(
-                    title: 'แจ้งเตือน',
-                    description: 'ต้องการ Up Date ราคาสินค้าหรือไม่?',
-                    pressYes: () {
-                      Navigator.pop(context, true);
-                    },
-                    pressNo: () {
-                      Navigator.pop(context, false);
-                    },
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    // side: BorderSide(color: textColor),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                   ),
-                );
-                if (ok == true) {
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Setpicepage()), (route) => false);
-                }
-              },
-              child: Text(
-                'ตกลง',
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                  onPressed: () async {
+                    final ok = await showDialog(
+                      context: context,
+                      builder: (context) => AlertDialogYesNo(
+                        title: 'แจ้งเตือน',
+                        description: 'คุณต้องการยกเลิกการแก้ไขราคาหรือไม่',
+                        pressYes: () {
+                          Navigator.pop(context, true);
+                        },
+                        pressNo: () {
+                          Navigator.pop(context, false);
+                        },
+                      ),
+                    );
+                    if (ok == true) {
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Setpicepage()), (route) => false);
+                    }
+                  },
+                  child: Text(
+                    'ยกเลิก',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
+          Container(
+            margin: EdgeInsets.all(8),
+            child: SizedBox(
+              height: size.height * 0.07,
+              width: size.width * 0.4,
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kbutton,
+                    // side: BorderSide(color: textColor),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                  onPressed: () async {
+                    final ok = await showDialog(
+                      context: context,
+                      builder: (context) => AlertDialogYesNo(
+                        title: 'แจ้งเตือน',
+                        description: 'ต้องการ Up Date ราคาสินค้าหรือไม่?',
+                        pressYes: () {
+                          Navigator.pop(context, true);
+                        },
+                        pressNo: () {
+                          Navigator.pop(context, false);
+                        },
+                      ),
+                    );
+                    if (ok == true) {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Confirmsetpice(
+                                    productselect: widget.productselect,
+                                  )),
+                          (route) => false);
+                    }
+                  },
+                  child: Text(
+                    'ตกลง',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -629,5 +731,31 @@ List<Map<String, String>> priceCategory = [
     'sumgas2.2': '120',
     'sumgas2.3': '300',
     'sumgas2.4': '500',
+  },
+];
+List<Map<String, String>> priceConfirm = [
+  {
+    'km': '4 กก',
+    'pricecategory1': 'ราคารับหน้าร้าน',
+    'pricecategory3': 'ราคากรณีซื้อเยอะ',
+    'pricecategory4': 'ราคารับฝากเติม',
+    'brand1': 'ปตท',
+    'brand2': 'ส.ว.ย',
+    'sumgas1.3': '300',
+    'sumgas1.4': '500',
+    'sumgas2.1': '100',
+    'sumgas2.2': '120',
+  },
+  {
+    'km': '7 กก',
+    'pricecategory1': 'ราคารับหน้าร้าน',
+    'pricecategory3': 'ราคากรณีซื้อเยอะ',
+    'pricecategory4': 'ราคารับฝากเติม',
+    'brand1': 'ปตท',
+    'brand2': 'ส.ว.ย',
+    'sumgas1.3': '300',
+    'sumgas1.4': '500',
+    'sumgas2.1': '100',
+    'sumgas2.2': '120',
   },
 ];
