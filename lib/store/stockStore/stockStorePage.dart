@@ -67,7 +67,7 @@ class _StockstorepageState extends State<Stockstorepage> {
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             Image.asset(
-              'assets/images/Gas Logo.png',
+              'assets/icons/backgroundAsset_LoGo_24x 2.png',
               scale: 10,
             ),
           ],
@@ -76,7 +76,7 @@ class _StockstorepageState extends State<Stockstorepage> {
       body: SafeArea(
         child: Watermark(
           backgroundImage: const AssetImage(
-            'assets/images/Gas Logo.png',
+            'assets/icons/backgroundAsset_LoGo_24x 2.png',
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),

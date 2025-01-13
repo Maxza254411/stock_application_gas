@@ -23,6 +23,13 @@ class _SellreportState extends State<Sellreport> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getprefs();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -56,7 +63,7 @@ class _SellreportState extends State<Sellreport> {
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             Image.asset(
-              'assets/images/Gas Logo.png',
+              'assets/icons/backgroundAsset_LoGo_24x 2.png',
               scale: 10,
             ),
           ],

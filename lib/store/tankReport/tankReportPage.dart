@@ -63,7 +63,7 @@ class _TankreportpageState extends State<Tankreportpage> {
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             Image.asset(
-              'assets/images/Gas Logo.png',
+              'assets/icons/backgroundAsset_LoGo_24x 2.png',
               scale: 10,
             ),
           ],
@@ -75,6 +75,7 @@ class _TankreportpageState extends State<Tankreportpage> {
           child: Column(children: [
             Center(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(
                   reportTank.length,
                   (index) {
@@ -91,61 +92,83 @@ class _TankreportpageState extends State<Tankreportpage> {
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             children: [
+                              SizedBox(
+                                height: size.height * 0.01,
+                              ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
-                                  Text(
-                                    'วันที่',
-                                    style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text(
+                                        'ขนาด${reportTank[index]['km'] ?? ''}',
+                                        style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
                                   ),
-                                  Text(
-                                    reportTank[index]['date'] ?? '',
-                                    style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text(
+                                        reportTank[index]['date'] ?? '',
+                                        style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
                                   )
                                 ],
                               ),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text(reportTank[index]['brand'] ?? '',
+                                          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text('จำนวน ${reportTank[index]['unit']}',
+                                          style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'ขนาด',
-                                    style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    reportTank[index]['km'] ?? '',
-                                    style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                                  Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 10),
+                                        child: Text('หมายเหตุ',
+                                            style: TextStyle(
+                                              color: Color(0xff5C5C5C),
+                                              fontSize: 20,
+                                            )),
+                                      )),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text(reportTank[index]['remark'] ?? '',
+                                          style: TextStyle(
+                                            color: Color(0xff5C5C5C),
+                                            fontSize: 20,
+                                          )),
+                                    ),
                                   )
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'ยี่ห้อ',
-                                    style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(reportTank[index]['brand'] ?? '',
-                                      style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold))
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('จำนวน', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
-                                  Text(reportTank[index]['unit'] ?? '',
-                                      style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold))
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('หมายเหตุ', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
-                                  Text(reportTank[index]['remark'] ?? '',
-                                      style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold))
                                 ],
                               ),
                               SizedBox(
-                                height: size.height * 0.02,
+                                height: size.height * 0.05,
                               ),
                               Container(
                                 decoration: BoxDecoration(

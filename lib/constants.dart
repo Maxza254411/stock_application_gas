@@ -19,7 +19,7 @@ const kButtoncolor = Color(0xFFFC7716);
 const kTextDateColor = Color(0xffFA5A0E);
 const kCancleButton = Color(0xFFFF5252);
 const kSubtitleText = Color(0xFF424242);
-const kbutton = Color(0xff4CE5B1);
+const kbutton = Color(0xff2C4288);
 
 //ฟังก์ชั่นคำนวน ราคา และ qty
 double sum(List<ListProduct> orders) => orders.fold(0, (previous, o) => previous + (o.product.qty * o.product.priceAll));

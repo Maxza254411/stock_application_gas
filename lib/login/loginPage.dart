@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
               child: SizedBox(
                 width: double.infinity,
                 child: Image.asset(
-                  "assets/images/Sign Up.jpg",
+                  "assets/images/login.jpg",
                   fit: BoxFit.cover,
                 ),
               ),
@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: height(context) / 7.5),
-                    child: Image.asset('assets/images/Gas Logo.png', scale: 3),
+                    child: Image.asset('assets/icons/backgroundAsset_LoGo_24x 2.png', scale: 3),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

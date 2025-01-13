@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_application_gas/adminPage.dart';
 import 'package:stock_application_gas/constants.dart';
+import 'package:stock_application_gas/store/%20dailysales/%20dailySalesPage.dart';
 import 'package:stock_application_gas/store/sellReport/sellReport.dart';
 import 'package:stock_application_gas/store/setPrice/setPicePage.dart';
 import 'package:stock_application_gas/store/stockStore/stockStorePage.dart';
@@ -47,7 +48,7 @@ class _StorepageState extends State<Storepage> {
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             Image.asset(
-              'assets/images/Gas Logo.png',
+              'assets/icons/backgroundAsset_LoGo_24x 2.png',
               scale: 10,
             ),
           ],
@@ -56,7 +57,7 @@ class _StorepageState extends State<Storepage> {
       body: SafeArea(
         child: Watermark(
           backgroundImage: const AssetImage(
-            'assets/images/Gas Logo.png',
+            'assets/icons/backgroundAsset_LoGo_24x 2.png',
           ),
           child: Center(
             child: Column(
@@ -119,17 +120,22 @@ class _StorepageState extends State<Storepage> {
                 SizedBox(
                   height: size.height * 0.03,
                 ),
-                Container(
-                  width: size.width * 0.8,
-                  height: size.height * 0.06,
-                  decoration: BoxDecoration(
-                    color: kbutton,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'รายงานการขาย',
-                      style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => DailySalesPage()));
+                  },
+                  child: Container(
+                    width: size.width * 0.8,
+                    height: size.height * 0.06,
+                    decoration: BoxDecoration(
+                      color: kbutton,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'รายงานการขาย',
+                        style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),

@@ -67,7 +67,7 @@ class _SetpicepageState extends State<Setpicepage> {
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             Image.asset(
-              'assets/images/Gas Logo.png',
+              'assets/icons/backgroundAsset_LoGo_24x 2.png',
               scale: 10,
             ),
           ],
