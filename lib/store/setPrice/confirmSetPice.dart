@@ -37,7 +37,7 @@ class _ConfirmsetpiceState extends State<Confirmsetpice> {
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             Image.asset(
-              'assets/images/Gas Logo.png',
+              'assets/icons/backgroundAsset_LoGo_24x 2.png',
               scale: 10,
             ),
           ],
@@ -356,7 +356,7 @@ class _ConfirmsetpiceState extends State<Confirmsetpice> {
                   },
                   child: Text(
                     'แก้ไข',
-                    style: TextStyle(color: Colors.white, fontSize: 17),
+                    style: TextStyle(color: Colors.black, fontSize: 17),
                   ),
                 ),
               ),

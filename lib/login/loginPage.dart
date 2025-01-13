@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_application_gas/Product/ProductPage.dart';
 import 'package:stock_application_gas/adminPage.dart';
 import 'package:stock_application_gas/constants.dart';
+import 'package:stock_application_gas/diver/diverPage.dart';
 import 'package:stock_application_gas/fristpage.dart';
 import 'package:stock_application_gas/login/loginService.dart';
 import 'package:stock_application_gas/login/settingAPI.dart';
@@ -146,7 +147,13 @@ class _LoginPageState extends State<LoginPage> {
                                       // await prefs.setString('token', login);
                                       // if (!mounted) return;
                                       // LoadingDialog.close(context);
-                                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Adminpage()), (route) => true);
+                                      if (username.text == 'admin') {
+                                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Adminpage()), (route) => true);
+                                      } else if (username.text == 'diver') {
+                                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Diverpage()), (route) => true);
+                                      } else if (username.text == 'cashier') {
+                                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Adminpage()), (route) => true);
+                                      }
                                     } on Exception catch (e) {
                                       if (!mounted) return;
                                       LoadingDialog.close(context);

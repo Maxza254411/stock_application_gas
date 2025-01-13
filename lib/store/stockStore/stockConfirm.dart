@@ -36,132 +36,127 @@ class _StockConfirmState extends State<StockConfirm> {
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             Image.asset(
-              'assets/images/Gas Logo.png',
+              'assets/icons/backgroundAsset_LoGo_24x 2.png',
               scale: 10,
             ),
           ],
         ),
       ),
       body: SafeArea(
-        child: Watermark(
-          backgroundImage: const AssetImage(
-            'assets/images/Gas Logo.png',
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: size.height * 0.045,
-                        width: size.width * 0.3,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: kbutton, border: Border.all(color: kbutton)),
-                        child: Center(
-                          child: Text(
-                            widget.title,
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-                          ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Row(
+                  children: [
+                    Container(
+                      height: size.height * 0.045,
+                      width: size.width * 0.3,
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: kbutton, border: Border.all(color: kbutton)),
+                      child: Center(
+                        child: Text(
+                          widget.title,
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  height: size.height * 0.5,
-                  child: ListView.builder(
-                    // controller: _scrollController,
-                    itemCount: oneItem.length,
-                    itemBuilder: (context, index) {
-                      final items = oneItem[index];
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          ListTile(
-                            leading: Container(
-                              decoration: BoxDecoration(
-                                color: kbutton,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              width: size.width * 0.3,
-                              height: size.height * 0.05,
-                              child: Center(
-                                child: Text(
-                                  '${oneItem[index]['km']}',
-                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-                                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: size.height * 0.5,
+                child: ListView.builder(
+                  // controller: _scrollController,
+                  itemCount: oneItem.length,
+                  itemBuilder: (context, index) {
+                    final items = oneItem[index];
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        ListTile(
+                          leading: Container(
+                            decoration: BoxDecoration(
+                              color: kbutton,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            width: size.width * 0.3,
+                            height: size.height * 0.05,
+                            child: Center(
+                              child: Text(
+                                '${oneItem[index]['km']}',
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                               ),
                             ),
-                            title: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        '${oneItem[index]['brand1']}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '${oneItem[index]['sum1']}',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: oneItem[index]['sum1'] == '9'
-                                                ? Colors.green
-                                                : oneItem[index]['sum1'] == '5'
-                                                    ? Colors.red
-                                                    : Colors.black),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '${oneItem[index]['unit']}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        '${oneItem[index]['brand2']}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '${oneItem[index]['sum2']}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '${oneItem[index]['unit']}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            // trailing: Icon(Icons.arrow_forward_ios),
-                            onTap: () async {},
                           ),
-                          Divider(),
-                        ],
-                      );
-                    },
-                  ),
+                          title: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      '${oneItem[index]['brand1']}',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      '${oneItem[index]['sum1']}',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: oneItem[index]['sum1'] == '9'
+                                              ? Colors.green
+                                              : oneItem[index]['sum1'] == '5'
+                                                  ? Colors.red
+                                                  : Colors.black),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      '${oneItem[index]['unit']}',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      '${oneItem[index]['brand2']}',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      '${oneItem[index]['sum2']}',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      '${oneItem[index]['unit']}',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          // trailing: Icon(Icons.arrow_forward_ios),
+                          onTap: () async {},
+                        ),
+                        Divider(),
+                      ],
+                    );
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

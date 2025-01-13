@@ -20,7 +20,7 @@ class _AlertDialogYesState extends State<AlertDialogYes> {
     final size = MediaQuery.of(context).size;
     return AlertDialog(
       surfaceTintColor: Colors.white,
-      backgroundColor: Colors.grey, // ตรวจสอบว่ามีการกำหนดค่า kTextButtonColor แล้ว
+      backgroundColor: Colors.white, // ตรวจสอบว่ามีการกำหนดค่า kTextButtonColor แล้ว
       title: Center(
         child: Text(
           widget.title,
@@ -47,7 +47,7 @@ class _AlertDialogYesState extends State<AlertDialogYes> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Colors.blue,
+              color: kbutton,
             ),
             height: size.height * 0.05,
             width: size.width * 0.3,

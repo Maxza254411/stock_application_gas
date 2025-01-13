@@ -74,153 +74,148 @@ class _StockstorepageState extends State<Stockstorepage> {
         ),
       ),
       body: SafeArea(
-        child: Watermark(
-          backgroundImage: const AssetImage(
-            'assets/icons/backgroundAsset_LoGo_24x 2.png',
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(
-                    gastank.length,
-                    (index) {
-                      nametank = gastank[index]['nameTank'];
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: List.generate(
+                  gastank.length,
+                  (index) {
+                    nametank = gastank[index]['nameTank'];
 
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectindex = index;
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: selectindex == index ? kbutton : Colors.white,
-                              border: Border.all(color: kbutton)),
-                          width: size.width * 0.3,
-                          height: size.height * 0.06,
-                          child: Center(
-                              child: Text(
-                            gastank[index]['nameTank'] ?? '',
-                            style: TextStyle(fontSize: 20, color: selectindex == index ? Colors.white : kbutton, fontWeight: FontWeight.bold),
-                          )),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: size.height * 0.5,
-                  child: ListView.builder(
-                    // controller: _scrollController,
-                    itemCount: gas_km.length,
-                    itemBuilder: (context, index) {
-                      final items = gas_km[index];
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          ListTile(
-                            leading: Container(
-                              decoration: BoxDecoration(
-                                color: kbutton,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              width: size.width * 0.3,
-                              height: size.height * 0.05,
-                              child: Center(
-                                child: Text(
-                                  '${gas_km[index]['km']}',
-                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-                                ),
-                              ),
-                            ),
-                            title: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        '${gas_km[index]['brand1']}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '${gas_km[index]['sum1']}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '${gas_km[index]['unit']}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        '${gas_km[index]['brand2']}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '${gas_km[index]['sum2']}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '${gas_km[index]['unit']}',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            // trailing: Icon(Icons.arrow_forward_ios),
-                            onTap: () async {},
-                          ),
-                          Divider(),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Historyaddon()));
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectindex = index;
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: selectindex == index ? kbutton : Colors.white,
+                            border: Border.all(color: kbutton)),
+                        width: size.width * 0.3,
+                        height: size.height * 0.06,
+                        child: Center(
+                            child: Text(
+                          gastank[index]['nameTank'] ?? '',
+                          style: TextStyle(fontSize: 20, color: selectindex == index ? Colors.white : kbutton, fontWeight: FontWeight.bold),
+                        )),
+                      ),
+                    );
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    width: size.width * 0.5,
-                    height: size.height * 0.06,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: Text(
-                          'ประวัติการเพิ่ม/ลด',
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: size.height * 0.5,
+                child: ListView.builder(
+                  // controller: _scrollController,
+                  itemCount: gas_km.length,
+                  itemBuilder: (context, index) {
+                    final items = gas_km[index];
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 10,
                         ),
+                        ListTile(
+                          leading: Container(
+                            decoration: BoxDecoration(
+                              color: kbutton,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            width: size.width * 0.3,
+                            height: size.height * 0.05,
+                            child: Center(
+                              child: Text(
+                                '${gas_km[index]['km']}',
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          title: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      '${gas_km[index]['brand1']}',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      '${gas_km[index]['sum1']}',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      '${gas_km[index]['unit']}',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      '${gas_km[index]['brand2']}',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      '${gas_km[index]['sum2']}',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      '${gas_km[index]['unit']}',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          // trailing: Icon(Icons.arrow_forward_ios),
+                          onTap: () async {},
+                        ),
+                        Divider(),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Historyaddon()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  width: size.width * 0.5,
+                  height: size.height * 0.06,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Text(
+                        'ประวัติการเพิ่ม/ลด',
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

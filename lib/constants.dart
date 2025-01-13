@@ -82,20 +82,6 @@ List<Map<String, String>> gastank = [
     'nameTank': 'ถังฝากเติม',
   },
 ];
-List<Map<String, String>> sellreport = [
-  {
-    'nameTank': 'ถังหมุนเวียน',
-  },
-  {
-    'nameTank': 'ถังฝากอัด',
-  },
-  {
-    'nameTank': 'ถังไม่ได้อัด',
-  },
-  {
-    'nameTank': 'เชื้อเพลิง',
-  },
-];
 List<Map<String, String>> gas_km = [
   {
     'km': '4 กก',
@@ -185,5 +171,25 @@ List<Map<String, String>> reportTank = [
   {'date': '02/12/22', 'km': '15 กก', 'brand': 'ส.ว.ย', 'unit': '10', 'remark': 'นายเขียว'},
 ];
 
+const List<Map<String, dynamic>> store = [
+  {'store': 'ร้านที่1'},
+  {'store': 'ร้านที่1'},
+  {'store': 'ร้านที่1'}
+];
+
+List<Map<String, String>> sellreport = [
+  {
+    'nameTank': 'ถังหมุนเวียน',
+  },
+  {
+    'nameTank': 'ถังฝากอัด',
+  },
+  {
+    'nameTank': 'ถังไม่ได้อัด',
+  },
+  {
+    'nameTank': 'เชื้อเพลิง',
+  },
+];
 double width(BuildContext context) => MediaQuery.of(context).size.width;
 double height(BuildContext context) => MediaQuery.of(context).size.height;

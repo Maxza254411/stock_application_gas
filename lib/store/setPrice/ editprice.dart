@@ -52,7 +52,7 @@ class _EditpriceState extends State<Editprice> {
               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
             Image.asset(
-              'assets/images/Gas Logo.png',
+              'assets/icons/backgroundAsset_LoGo_24x 2.png',
               scale: 10,
             ),
           ],
@@ -222,34 +222,104 @@ class _EditpriceState extends State<Editprice> {
                                   SizedBox(
                                     width: size.width * 0.1,
                                   ),
+                                  // Expanded(
+                                  //   flex: 1,
+                                  //   child: Container(
+                                  //     color: Colors.white,
+                                  //     height: size.height * 0.045,
+                                  //     width: size.width * 0.15,
+                                  //     child: TextField(
+                                  //       controller: TextEditingController(
+                                  //         text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.1'] ?? '0')),
+                                  //       ),
+                                  //       keyboardType: TextInputType.number,
+                                  //       textAlign: TextAlign.center,
+                                  //       style: TextStyle(fontSize: 20),
+                                  //       onSubmitted: (value) {
+                                  //         setState(
+                                  //           () {
+                                  //             // อัปเดตค่าจาก TextField
+                                  //             int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                  //             if (newValue != null) {
+                                  //               priceCategory[index]['sumgas2.1'] = newValue.toString();
+                                  //             }
+                                  //           },
+                                  //         );
+                                  //       },
+                                  //       decoration: InputDecoration(
+                                  //         border: OutlineInputBorder(),
+                                  //         contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Expanded(
                                     flex: 1,
                                     child: Container(
                                       color: Colors.white,
                                       height: size.height * 0.045,
                                       width: size.width * 0.15,
-                                      child: TextField(
-                                        controller: TextEditingController(
-                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.1'] ?? '0')),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontSize: 20),
-                                        onSubmitted: (value) {
-                                          setState(
-                                            () {
-                                              // อัปเดตค่าจาก TextField
-                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                              if (newValue != null) {
-                                                priceCategory[index]['sumgas2.1'] = newValue.toString();
-                                              }
+                                      child: StatefulBuilder(
+                                        builder: (context, setState) {
+                                          // เก็บค่าเริ่มต้น
+                                          int originalValue = int.parse(priceCategory[index]['sumgas2.1'] ?? '0');
+
+                                          // ย้าย controller และ textColor ออกมาเพื่อให้คงค่าไว้
+                                          final TextEditingController controller = TextEditingController(
+                                            text: NumberFormat('#,##0', 'en_US').format(originalValue),
+                                          );
+                                          Color textColor = Colors.black;
+
+                                          return StatefulBuilder(
+                                            builder: (context, setInnerState) {
+                                              return TextField(
+                                                controller: controller,
+                                                keyboardType: TextInputType.number,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(fontSize: 20, color: textColor),
+                                                onChanged: (value) {
+                                                  // อัปเดตสีข้อความตามค่าใหม่เมื่อเปลี่ยนข้อความ
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green; // สีแดงถ้าค่าเพิ่มขึ้น
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red; // สีเขียวถ้าค่าลดลง
+                                                      } else {
+                                                        textColor = Colors.black; // สีปกติถ้าค่าเท่ากัน
+                                                      }
+                                                    });
+                                                  }
+                                                },
+                                                onSubmitted: (value) {
+                                                  // อัปเดตค่าล่าสุดกลับไปที่ data และตรวจสอบสีอีกครั้ง
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green;
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red;
+                                                      } else {
+                                                        textColor = Colors.black;
+                                                      }
+                                                      // บันทึกค่าใหม่กลับไปที่ originalValue
+                                                      originalValue = newValue;
+                                                      setState(() {
+                                                        priceCategory[index]['sumgas2.1'] = newValue.toString();
+                                                      });
+                                                    });
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
+                                                  contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                                ),
+                                              );
                                             },
                                           );
                                         },
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                        ),
                                       ),
                                     ),
                                   ),
@@ -267,68 +337,208 @@ class _EditpriceState extends State<Editprice> {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
+                                  // Expanded(
+                                  //   flex: 1,
+                                  //   child: Container(
+                                  //     color: Colors.white,
+                                  //     height: size.height * 0.045,
+                                  //     width: size.width * 0.15,
+                                  //     child: TextField(
+                                  //       controller: TextEditingController(
+                                  //         text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.2'] ?? '0')),
+                                  //       ),
+                                  //       keyboardType: TextInputType.number,
+                                  //       textAlign: TextAlign.center,
+                                  //       style: TextStyle(fontSize: 20),
+                                  //       onSubmitted: (value) {
+                                  //         setState(
+                                  //           () {
+                                  //             // อัปเดตค่าจาก TextField
+                                  //             int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                  //             if (newValue != null) {
+                                  //               priceCategory[index]['sumgas1.2'] = newValue.toString();
+                                  //             }
+                                  //           },
+                                  //         );
+                                  //       },
+                                  //       decoration: InputDecoration(
+                                  //         border: OutlineInputBorder(),
+                                  //         contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Expanded(
                                     flex: 1,
                                     child: Container(
                                       color: Colors.white,
                                       height: size.height * 0.045,
                                       width: size.width * 0.15,
-                                      child: TextField(
-                                        controller: TextEditingController(
-                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.2'] ?? '0')),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontSize: 20),
-                                        onSubmitted: (value) {
-                                          setState(
-                                            () {
-                                              // อัปเดตค่าจาก TextField
-                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                              if (newValue != null) {
-                                                priceCategory[index]['sumgas1.2'] = newValue.toString();
-                                              }
+                                      child: StatefulBuilder(
+                                        builder: (context, setState) {
+                                          // เก็บค่าเริ่มต้น
+                                          int originalValue = int.parse(priceCategory[index]['sumgas1.2'] ?? '0');
+
+                                          // ย้าย controller และ textColor ออกมาเพื่อให้คงค่าไว้
+                                          final TextEditingController controller = TextEditingController(
+                                            text: NumberFormat('#,##0', 'en_US').format(originalValue),
+                                          );
+                                          Color textColor = Colors.black;
+
+                                          return StatefulBuilder(
+                                            builder: (context, setInnerState) {
+                                              return TextField(
+                                                controller: controller,
+                                                keyboardType: TextInputType.number,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(fontSize: 20, color: textColor),
+                                                onChanged: (value) {
+                                                  // อัปเดตสีข้อความตามค่าใหม่เมื่อเปลี่ยนข้อความ
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green; // สีแดงถ้าค่าเพิ่มขึ้น
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red; // สีเขียวถ้าค่าลดลง
+                                                      } else {
+                                                        textColor = Colors.black; // สีปกติถ้าค่าเท่ากัน
+                                                      }
+                                                    });
+                                                  }
+                                                },
+                                                onSubmitted: (value) {
+                                                  // อัปเดตค่าล่าสุดกลับไปที่ data และตรวจสอบสีอีกครั้ง
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green;
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red;
+                                                      } else {
+                                                        textColor = Colors.black;
+                                                      }
+                                                      // บันทึกค่าใหม่กลับไปที่ originalValue
+                                                      originalValue = newValue;
+                                                      setState(() {
+                                                        priceCategory[index]['sumgas1.2'] = newValue.toString();
+                                                      });
+                                                    });
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
+                                                  contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                                ),
+                                              );
                                             },
                                           );
                                         },
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                        ),
                                       ),
                                     ),
                                   ),
                                   SizedBox(
                                     width: size.width * 0.1,
                                   ),
+                                  // Expanded(
+                                  //   flex: 1,
+                                  //   child: Container(
+                                  //     color: Colors.white,
+                                  //     height: size.height * 0.045,
+                                  //     width: size.width * 0.15,
+                                  //     child: TextField(
+                                  //       controller: TextEditingController(
+                                  //         text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.2'] ?? '0')),
+                                  //       ),
+                                  //       keyboardType: TextInputType.number,
+                                  //       textAlign: TextAlign.center,
+                                  //       style: TextStyle(fontSize: 20),
+                                  //       onSubmitted: (value) {
+                                  //         setState(
+                                  //           () {
+                                  //             // อัปเดตค่าจาก TextField
+                                  //             int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                  //             if (newValue != null) {
+                                  //               priceCategory[index]['sumgas2.2'] = newValue.toString();
+                                  //             }
+                                  //           },
+                                  //         );
+                                  //       },
+                                  //       decoration: InputDecoration(
+                                  //         border: OutlineInputBorder(),
+                                  //         contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Expanded(
                                     flex: 1,
                                     child: Container(
                                       color: Colors.white,
                                       height: size.height * 0.045,
                                       width: size.width * 0.15,
-                                      child: TextField(
-                                        controller: TextEditingController(
-                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.2'] ?? '0')),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontSize: 20),
-                                        onSubmitted: (value) {
-                                          setState(
-                                            () {
-                                              // อัปเดตค่าจาก TextField
-                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                              if (newValue != null) {
-                                                priceCategory[index]['sumgas2.2'] = newValue.toString();
-                                              }
+                                      child: StatefulBuilder(
+                                        builder: (context, setState) {
+                                          // เก็บค่าเริ่มต้น
+                                          int originalValue = int.parse(priceCategory[index]['sumgas2.2'] ?? '0');
+
+                                          // ย้าย controller และ textColor ออกมาเพื่อให้คงค่าไว้
+                                          final TextEditingController controller = TextEditingController(
+                                            text: NumberFormat('#,##0', 'en_US').format(originalValue),
+                                          );
+                                          Color textColor = Colors.black;
+
+                                          return StatefulBuilder(
+                                            builder: (context, setInnerState) {
+                                              return TextField(
+                                                controller: controller,
+                                                keyboardType: TextInputType.number,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(fontSize: 20, color: textColor),
+                                                onChanged: (value) {
+                                                  // อัปเดตสีข้อความตามค่าใหม่เมื่อเปลี่ยนข้อความ
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green; // สีแดงถ้าค่าเพิ่มขึ้น
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red; // สีเขียวถ้าค่าลดลง
+                                                      } else {
+                                                        textColor = Colors.black; // สีปกติถ้าค่าเท่ากัน
+                                                      }
+                                                    });
+                                                  }
+                                                },
+                                                onSubmitted: (value) {
+                                                  // อัปเดตค่าล่าสุดกลับไปที่ data และตรวจสอบสีอีกครั้ง
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green;
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red;
+                                                      } else {
+                                                        textColor = Colors.black;
+                                                      }
+                                                      // บันทึกค่าใหม่กลับไปที่ originalValue
+                                                      originalValue = newValue;
+                                                      setState(() {
+                                                        priceCategory[index]['sumgas2.2'] = newValue.toString();
+                                                      });
+                                                    });
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
+                                                  contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                                ),
+                                              );
                                             },
                                           );
                                         },
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                        ),
                                       ),
                                     ),
                                   ),
@@ -346,68 +556,209 @@ class _EditpriceState extends State<Editprice> {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
+                                  // Expanded(
+                                  //   flex: 1,
+                                  //   child: Container(
+                                  //     color: Colors.white,
+                                  //     height: size.height * 0.045,
+                                  //     width: size.width * 0.15,
+                                  //     child: TextField(
+                                  //       controller: TextEditingController(
+                                  //         text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.3'] ?? '0')),
+                                  //       ),
+                                  //       keyboardType: TextInputType.number,
+                                  //       textAlign: TextAlign.center,
+                                  //       style: TextStyle(fontSize: 20),
+                                  //       onSubmitted: (value) {
+                                  //         setState(
+                                  //           () {
+                                  //             // อัปเดตค่าจาก TextField
+                                  //             int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                  //             if (newValue != null) {
+                                  //               priceCategory[index]['sumgas1.3'] = newValue.toString();
+                                  //             }
+                                  //           },
+                                  //         );
+                                  //       },
+                                  //       decoration: InputDecoration(
+                                  //         border: OutlineInputBorder(),
+                                  //         contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Expanded(
                                     flex: 1,
                                     child: Container(
                                       color: Colors.white,
                                       height: size.height * 0.045,
                                       width: size.width * 0.15,
-                                      child: TextField(
-                                        controller: TextEditingController(
-                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.3'] ?? '0')),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontSize: 20),
-                                        onSubmitted: (value) {
-                                          setState(
-                                            () {
-                                              // อัปเดตค่าจาก TextField
-                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                              if (newValue != null) {
-                                                priceCategory[index]['sumgas1.3'] = newValue.toString();
-                                              }
+                                      child: StatefulBuilder(
+                                        builder: (context, setState) {
+                                          // เก็บค่าเริ่มต้น
+                                          int originalValue = int.parse(priceCategory[index]['sumgas1.3'] ?? '0');
+
+                                          // ย้าย controller และ textColor ออกมาเพื่อให้คงค่าไว้
+                                          final TextEditingController controller = TextEditingController(
+                                            text: NumberFormat('#,##0', 'en_US').format(originalValue),
+                                          );
+                                          Color textColor = Colors.black;
+
+                                          return StatefulBuilder(
+                                            builder: (context, setInnerState) {
+                                              return TextField(
+                                                controller: controller,
+                                                keyboardType: TextInputType.number,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(fontSize: 20, color: textColor),
+                                                onChanged: (value) {
+                                                  // อัปเดตสีข้อความตามค่าใหม่เมื่อเปลี่ยนข้อความ
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green; // สีแดงถ้าค่าเพิ่มขึ้น
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red; // สีเขียวถ้าค่าลดลง
+                                                      } else {
+                                                        textColor = Colors.black; // สีปกติถ้าค่าเท่ากัน
+                                                      }
+                                                    });
+                                                  }
+                                                },
+                                                onSubmitted: (value) {
+                                                  // อัปเดตค่าล่าสุดกลับไปที่ data และตรวจสอบสีอีกครั้ง
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green;
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red;
+                                                      } else {
+                                                        textColor = Colors.black;
+                                                      }
+                                                      // บันทึกค่าใหม่กลับไปที่ originalValue
+                                                      originalValue = newValue;
+                                                      setState(() {
+                                                        priceCategory[index]['sumgas1.3'] = newValue.toString();
+                                                      });
+                                                    });
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
+                                                  contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                                ),
+                                              );
                                             },
                                           );
                                         },
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                        ),
                                       ),
                                     ),
                                   ),
                                   SizedBox(
                                     width: size.width * 0.1,
                                   ),
+
+                                  // Expanded(
+                                  //   flex: 1,
+                                  //   child: Container(
+                                  //     color: Colors.white,
+                                  //     height: size.height * 0.045,
+                                  //     width: size.width * 0.15,
+                                  //     child: TextField(
+                                  //       controller: TextEditingController(
+                                  //         text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.3'] ?? '0')),
+                                  //       ),
+                                  //       keyboardType: TextInputType.number,
+                                  //       textAlign: TextAlign.center,
+                                  //       style: TextStyle(fontSize: 20),
+                                  //       onSubmitted: (value) {
+                                  //         setState(
+                                  //           () {
+                                  //             // อัปเดตค่าจาก TextField
+                                  //             int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                  //             if (newValue != null) {
+                                  //               priceCategory[index]['sumgas2.3'] = newValue.toString();
+                                  //             }
+                                  //           },
+                                  //         );
+                                  //       },
+                                  //       decoration: InputDecoration(
+                                  //         border: OutlineInputBorder(),
+                                  //         contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Expanded(
                                     flex: 1,
                                     child: Container(
                                       color: Colors.white,
                                       height: size.height * 0.045,
                                       width: size.width * 0.15,
-                                      child: TextField(
-                                        controller: TextEditingController(
-                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.3'] ?? '0')),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontSize: 20),
-                                        onSubmitted: (value) {
-                                          setState(
-                                            () {
-                                              // อัปเดตค่าจาก TextField
-                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                              if (newValue != null) {
-                                                priceCategory[index]['sumgas2.3'] = newValue.toString();
-                                              }
+                                      child: StatefulBuilder(
+                                        builder: (context, setState) {
+                                          // เก็บค่าเริ่มต้น
+                                          int originalValue = int.parse(priceCategory[index]['sumgas2.3'] ?? '0');
+
+                                          // ย้าย controller และ textColor ออกมาเพื่อให้คงค่าไว้
+                                          final TextEditingController controller = TextEditingController(
+                                            text: NumberFormat('#,##0', 'en_US').format(originalValue),
+                                          );
+                                          Color textColor = Colors.black;
+
+                                          return StatefulBuilder(
+                                            builder: (context, setInnerState) {
+                                              return TextField(
+                                                controller: controller,
+                                                keyboardType: TextInputType.number,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(fontSize: 20, color: textColor),
+                                                onChanged: (value) {
+                                                  // อัปเดตสีข้อความตามค่าใหม่เมื่อเปลี่ยนข้อความ
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green; // สีแดงถ้าค่าเพิ่มขึ้น
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red; // สีเขียวถ้าค่าลดลง
+                                                      } else {
+                                                        textColor = Colors.black; // สีปกติถ้าค่าเท่ากัน
+                                                      }
+                                                    });
+                                                  }
+                                                },
+                                                onSubmitted: (value) {
+                                                  // อัปเดตค่าล่าสุดกลับไปที่ data และตรวจสอบสีอีกครั้ง
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green;
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red;
+                                                      } else {
+                                                        textColor = Colors.black;
+                                                      }
+                                                      // บันทึกค่าใหม่กลับไปที่ originalValue
+                                                      originalValue = newValue;
+                                                      setState(() {
+                                                        priceCategory[index]['sumgas2.3'] = newValue.toString();
+                                                      });
+                                                    });
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
+                                                  contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                                ),
+                                              );
                                             },
                                           );
                                         },
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                        ),
                                       ),
                                     ),
                                   ),
@@ -425,68 +776,208 @@ class _EditpriceState extends State<Editprice> {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
+                                  // Expanded(
+                                  //   flex: 1,
+                                  //   child: Container(
+                                  //     color: Colors.white,
+                                  //     height: size.height * 0.045,
+                                  //     width: size.width * 0.15,
+                                  //     child: TextField(
+                                  //       controller: TextEditingController(
+                                  //         text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.4'] ?? '0')),
+                                  //       ),
+                                  //       keyboardType: TextInputType.number,
+                                  //       textAlign: TextAlign.center,
+                                  //       style: TextStyle(fontSize: 20),
+                                  //       onSubmitted: (value) {
+                                  //         setState(
+                                  //           () {
+                                  //             // อัปเดตค่าจาก TextField
+                                  //             int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                  //             if (newValue != null) {
+                                  //               priceCategory[index]['sumgas1.4'] = newValue.toString();
+                                  //             }
+                                  //           },
+                                  //         );
+                                  //       },
+                                  //       decoration: InputDecoration(
+                                  //         border: OutlineInputBorder(),
+                                  //         contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Expanded(
                                     flex: 1,
                                     child: Container(
                                       color: Colors.white,
                                       height: size.height * 0.045,
                                       width: size.width * 0.15,
-                                      child: TextField(
-                                        controller: TextEditingController(
-                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.4'] ?? '0')),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontSize: 20),
-                                        onSubmitted: (value) {
-                                          setState(
-                                            () {
-                                              // อัปเดตค่าจาก TextField
-                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                              if (newValue != null) {
-                                                priceCategory[index]['sumgas1.4'] = newValue.toString();
-                                              }
+                                      child: StatefulBuilder(
+                                        builder: (context, setState) {
+                                          // เก็บค่าเริ่มต้น
+                                          int originalValue = int.parse(priceCategory[index]['sumgas1.4'] ?? '0');
+
+                                          // ย้าย controller และ textColor ออกมาเพื่อให้คงค่าไว้
+                                          final TextEditingController controller = TextEditingController(
+                                            text: NumberFormat('#,##0', 'en_US').format(originalValue),
+                                          );
+                                          Color textColor = Colors.black;
+
+                                          return StatefulBuilder(
+                                            builder: (context, setInnerState) {
+                                              return TextField(
+                                                controller: controller,
+                                                keyboardType: TextInputType.number,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(fontSize: 20, color: textColor),
+                                                onChanged: (value) {
+                                                  // อัปเดตสีข้อความตามค่าใหม่เมื่อเปลี่ยนข้อความ
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green; // สีแดงถ้าค่าเพิ่มขึ้น
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red; // สีเขียวถ้าค่าลดลง
+                                                      } else {
+                                                        textColor = Colors.black; // สีปกติถ้าค่าเท่ากัน
+                                                      }
+                                                    });
+                                                  }
+                                                },
+                                                onSubmitted: (value) {
+                                                  // อัปเดตค่าล่าสุดกลับไปที่ data และตรวจสอบสีอีกครั้ง
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green;
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red;
+                                                      } else {
+                                                        textColor = Colors.black;
+                                                      }
+                                                      // บันทึกค่าใหม่กลับไปที่ originalValue
+                                                      originalValue = newValue;
+                                                      setState(() {
+                                                        priceCategory[index]['sumgas1.4'] = newValue.toString();
+                                                      });
+                                                    });
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
+                                                  contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                                ),
+                                              );
                                             },
                                           );
                                         },
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                        ),
                                       ),
                                     ),
                                   ),
                                   SizedBox(
                                     width: size.width * 0.1,
                                   ),
+                                  // Expanded(
+                                  //   flex: 1,
+                                  //   child: Container(
+                                  //     color: Colors.white,
+                                  //     height: size.height * 0.045,
+                                  //     width: size.width * 0.15,
+                                  //     child: TextField(
+                                  //       controller: TextEditingController(
+                                  //         text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.4'] ?? '0')),
+                                  //       ),
+                                  //       keyboardType: TextInputType.number,
+                                  //       textAlign: TextAlign.center,
+                                  //       style: TextStyle(fontSize: 20),
+                                  //       onSubmitted: (value) {
+                                  //         setState(
+                                  //           () {
+                                  //             // อัปเดตค่าจาก TextField
+                                  //             int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                  //             if (newValue != null) {
+                                  //               priceCategory[index]['sumgas2.4'] = newValue.toString();
+                                  //             }
+                                  //           },
+                                  //         );
+                                  //       },
+                                  //       decoration: InputDecoration(
+                                  //         border: OutlineInputBorder(),
+                                  //         contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Expanded(
                                     flex: 1,
                                     child: Container(
                                       color: Colors.white,
                                       height: size.height * 0.045,
                                       width: size.width * 0.15,
-                                      child: TextField(
-                                        controller: TextEditingController(
-                                          text: NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.4'] ?? '0')),
-                                        ),
-                                        keyboardType: TextInputType.number,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontSize: 20),
-                                        onSubmitted: (value) {
-                                          setState(
-                                            () {
-                                              // อัปเดตค่าจาก TextField
-                                              int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                              if (newValue != null) {
-                                                priceCategory[index]['sumgas2.4'] = newValue.toString();
-                                              }
+                                      child: StatefulBuilder(
+                                        builder: (context, setState) {
+                                          // เก็บค่าเริ่มต้น
+                                          int originalValue = int.parse(priceCategory[index]['sumgas2.4'] ?? '0');
+
+                                          // ย้าย controller และ textColor ออกมาเพื่อให้คงค่าไว้
+                                          final TextEditingController controller = TextEditingController(
+                                            text: NumberFormat('#,##0', 'en_US').format(originalValue),
+                                          );
+                                          Color textColor = Colors.black;
+
+                                          return StatefulBuilder(
+                                            builder: (context, setInnerState) {
+                                              return TextField(
+                                                controller: controller,
+                                                keyboardType: TextInputType.number,
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(fontSize: 20, color: textColor),
+                                                onChanged: (value) {
+                                                  // อัปเดตสีข้อความตามค่าใหม่เมื่อเปลี่ยนข้อความ
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green; // สีแดงถ้าค่าเพิ่มขึ้น
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red; // สีเขียวถ้าค่าลดลง
+                                                      } else {
+                                                        textColor = Colors.black; // สีปกติถ้าค่าเท่ากัน
+                                                      }
+                                                    });
+                                                  }
+                                                },
+                                                onSubmitted: (value) {
+                                                  // อัปเดตค่าล่าสุดกลับไปที่ data และตรวจสอบสีอีกครั้ง
+                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                  if (newValue != null) {
+                                                    setInnerState(() {
+                                                      if (newValue > originalValue) {
+                                                        textColor = Colors.green;
+                                                      } else if (newValue < originalValue) {
+                                                        textColor = Colors.red;
+                                                      } else {
+                                                        textColor = Colors.black;
+                                                      }
+                                                      // บันทึกค่าใหม่กลับไปที่ originalValue
+                                                      originalValue = newValue;
+                                                      setState(() {
+                                                        priceCategory[index]['sumgas2.4'] = newValue.toString();
+                                                      });
+                                                    });
+                                                  }
+                                                },
+                                                decoration: InputDecoration(
+                                                  border: OutlineInputBorder(),
+                                                  contentPadding: EdgeInsets.symmetric(vertical: 5),
+                                                ),
+                                              );
                                             },
                                           );
                                         },
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          contentPadding: EdgeInsets.symmetric(vertical: 5),
-                                        ),
                                       ),
                                     ),
                                   ),

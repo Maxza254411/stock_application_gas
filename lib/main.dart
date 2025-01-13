@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         //     LoginPage()
         // : token == null
         //     ? LoginPage()
-        //     : FirstPage(),
+        // : FirstPage(),
       ),
     );
   }

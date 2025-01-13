@@ -187,7 +187,6 @@ class _SellreportState extends State<Sellreport> {
                         ],
                       ),
                       // trailing: Icon(Icons.arrow_forward_ios),
-                      onTap: () async {},
                     ),
                     Divider(),
                   ],
