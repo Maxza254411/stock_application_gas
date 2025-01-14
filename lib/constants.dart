@@ -90,6 +90,8 @@ List<Map<String, String>> gas_km = [
     'brand2': 'ส.ว.ย',
     'sum2': '4',
     'unit': 'ถัง',
+    'originalSum1': '9',
+    'originalSum2': '4',
   },
   {
     'km': '7 กก',
@@ -98,6 +100,8 @@ List<Map<String, String>> gas_km = [
     'brand2': 'ส.ว.ย',
     'sum2': '1',
     'unit': 'ถัง',
+    'originalSum1': '5',
+    'originalSum2': '1',
   },
   {
     'km': '15 กก',
@@ -106,6 +110,8 @@ List<Map<String, String>> gas_km = [
     'brand2': 'ส.ว.ย',
     'sum2': '10',
     'unit': 'ถัง',
+    'originalSum1': '2',
+    'originalSum2': '10',
   },
   {
     'km': '48 กก',
@@ -114,6 +120,8 @@ List<Map<String, String>> gas_km = [
     'brand2': 'ส.ว.ย',
     'sum2': '16',
     'unit': 'ถัง',
+    'originalSum1': '9',
+    'originalSum2': '16',
   },
 ];
 List<Map<String, String>> oneItem = [
@@ -191,5 +199,19 @@ List<Map<String, String>> sellreport = [
     'nameTank': 'เชื้อเพลิง',
   },
 ];
+
+List<String> tanktype = [
+  'ถังหมุนเวียน',
+  'ถังฝากอัด',
+  'ถังไม่ได้อัด',
+  'เชื้อเพลิง',
+];
+List<String> numberStore = [
+  'ร้านที่ 1',
+  'ร้านที่ 2',
+  'ร้านที่ 3',
+  'ร้านที่ 4',
+];
+
 double width(BuildContext context) => MediaQuery.of(context).size.width;
 double height(BuildContext context) => MediaQuery.of(context).size.height;

@@ -24,11 +24,85 @@ class _AdminpageState extends State<Adminpage> {
         toolbarHeight: size.height * 0.1,
         automaticallyImplyLeading: false,
         backgroundColor: kbutton,
-        title: Center(
-          child: Text(
-            'หน้าการจัดการของเเอดมิน',
-            style: TextStyle(color: kTextButtonColor, fontWeight: FontWeight.bold),
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(''),
+            Text(
+              'หน้าการจัดการแอดมิน',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            Image.asset(
+              'assets/icons/backgroundAsset_LoGo_24x 2.png',
+              scale: 10,
+            ),
+          ],
+        ),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return GestureDetector(
+              onTap: () {
+                Scaffold.of(context).openDrawer(); // เปิด Drawer
+              },
+              child: Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
+            );
+          },
+        ),
+      ),
+      drawer: Drawer(
+        backgroundColor: Colors.white,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: kbutton,
+              ),
+              child: Row(
+                children: [
+                  Image.asset(
+                    'assets/icons/backgroundAsset_LoGo_24x 2.png',
+                    scale: 10,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'NEW PETRO',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.output_outlined),
+              title: Text('Logout'),
+              onTap: () async {
+                final ok = await showDialog(
+                  context: context,
+                  builder: (context) => AlertDialogYesNo(
+                    title: 'แจ้งเตือน',
+                    description: 'คุณต้องการออกจากระบบหรือไม่',
+                    pressYes: () {
+                      Navigator.pop(context, true);
+                    },
+                    pressNo: () {
+                      Navigator.pop(context, false);
+                    },
+                  ),
+                );
+                if (ok == true) {
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
+                }
+              },
+            ),
+          ],
         ),
       ),
       body: Padding(

@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
+        scrollDirection: Axis.vertical,
         child: Stack(
           children: [
             Center(
@@ -148,9 +148,9 @@ class _LoginPageState extends State<LoginPage> {
                                       // if (!mounted) return;
                                       // LoadingDialog.close(context);
                                       if (username.text == 'admin') {
-                                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Adminpage()), (route) => true);
+                                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Adminpage()), (route) => false);
                                       } else if (username.text == 'diver') {
-                                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Diverpage()), (route) => true);
+                                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => DiverPage()), (route) => false);
                                       } else if (username.text == 'cashier') {
                                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Adminpage()), (route) => true);
                                       }
