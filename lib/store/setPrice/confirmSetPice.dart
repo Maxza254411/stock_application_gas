@@ -69,185 +69,306 @@ class _ConfirmsetpiceState extends State<Confirmsetpice> {
                   priceConfirm.length,
                   (index) {
                     return Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Container(
-                        width: size.width * 0.95,
-                        height: size.height * 0.3,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.grey[300],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            // crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      '${priceConfirm[index]['km']}',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                        padding: EdgeInsets.all(8.0),
+                        child: widget.productselect == 'ถังใหม่'
+                            ? Container(
+                                width: size.width * 0.95,
+                                // height: size.height * 0.3,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Colors.grey[300],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              '${priceConfirm[index]['km']}',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Center(
+                                              child: Text(
+                                                '${priceConfirm[index]['brand1']}',
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.1,
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Center(
+                                              child: Text(
+                                                '${priceConfirm[index]['brand2']}',
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: Text(
-                                        '${priceConfirm[index]['brand1']}',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      SizedBox(
+                                        height: size.height * 0.01,
                                       ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: size.width * 0.1,
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: Text(
-                                        '${priceConfirm[index]['brand2']}',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              '${priceConfirm[index]['pricecategory1']}',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Center(
+                                              child: Text(
+                                                '${priceConfirm[index]['sumgas1.3']}',
+                                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.1,
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Center(
+                                              child: Text(
+                                                '${priceConfirm[index]['sumgas1.4']}',
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      '${priceConfirm[index]['pricecategory1']}',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                                      SizedBox(
+                                        height: size.height * 0.01,
                                       ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: Text(
-                                        '${priceConfirm[index]['sumgas1.3']}',
-                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              '${priceConfirm[index]['pricecategory3']}',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Center(
+                                              child: Text(
+                                                '${priceConfirm[index]['sumgas2.1']}',
+                                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.1,
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Center(
+                                              child: Text(
+                                                '${priceConfirm[index]['sumgas2.2']}',
+                                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: size.width * 0.1,
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: Text(
-                                        '${priceConfirm[index]['sumgas1.4']}',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      SizedBox(
+                                        height: size.height * 0.01,
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      '${priceConfirm[index]['pricecategory3']}',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              '${priceConfirm[index]['pricecategory4']}',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Center(
+                                              child: Text(
+                                                '${priceConfirm[index]['sumgas2.1']}',
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.1,
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Center(
+                                              child: Text(
+                                                '${priceConfirm[index]['sumgas2.2']}',
+                                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: Text(
-                                        '${priceConfirm[index]['sumgas2.1']}',
-                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green),
+                                ),
+                              )
+                            : Container(
+                                width: size.width * 0.95,
+                                // height: size.height * 0.3,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Colors.grey[300],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              '${priceConfirm[index]['km']}',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Center(
+                                              child: Text(
+                                                '${priceConfirm[index]['brand1']}',
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: size.width * 0.1,
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: Text(
-                                        '${priceConfirm[index]['sumgas2.2']}',
-                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red),
+                                      SizedBox(
+                                        height: size.height * 0.01,
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(
-                                      '${priceConfirm[index]['pricecategory4']}',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              '${priceConfirm[index]['pricecategory1']}',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Center(
+                                              child: Text(
+                                                '${priceConfirm[index]['sumgas1.3']}',
+                                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: Text(
-                                        '${priceConfirm[index]['sumgas2.1']}',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      SizedBox(
+                                        height: size.height * 0.01,
                                       ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: size.width * 0.1,
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Center(
-                                      child: Text(
-                                        '${priceConfirm[index]['sumgas2.2']}',
-                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              '${priceConfirm[index]['pricecategory3']}',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Center(
+                                              child: Text(
+                                                '${priceConfirm[index]['sumgas2.1']}',
+                                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
+                                      SizedBox(
+                                        height: size.height * 0.01,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              '${priceConfirm[index]['pricecategory4']}',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Center(
+                                              child: Text(
+                                                '${priceConfirm[index]['sumgas2.1']}',
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
+                                ),
+                              ));
                   },
                 ),
               ),
@@ -322,7 +443,7 @@ class _ConfirmsetpiceState extends State<Confirmsetpice> {
                 ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.yellow,
+                    backgroundColor: kbutton,
                     // side: BorderSide(color: textColor),
                     padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
                     shape: RoundedRectangleBorder(
@@ -356,7 +477,7 @@ class _ConfirmsetpiceState extends State<Confirmsetpice> {
                   },
                   child: Text(
                     'แก้ไข',
-                    style: TextStyle(color: Colors.black, fontSize: 17),
+                    style: TextStyle(color: Colors.white, fontSize: 17),
                   ),
                 ),
               ),

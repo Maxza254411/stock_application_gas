@@ -146,8 +146,14 @@ class _HistoryaddonState extends State<Historyaddon> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(history[index]['name'] ?? ''),
-                              Text(history[index]['time'] ?? ''),
+                              Text(
+                                history[index]['name'] ?? '',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              Text(
+                                history[index]['time'] ?? '',
+                                style: TextStyle(fontSize: 18),
+                              ),
                             ],
                           ),
                           SizedBox(
@@ -155,17 +161,33 @@ class _HistoryaddonState extends State<Historyaddon> {
                           ),
                           Row(
                             children: [
-                              Expanded(flex: 1, child: Text(history[index]['km'] ?? '')),
-                              Expanded(flex: 1, child: Text(history[index]['brand1'] ?? '')),
+                              Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    history[index]['km'] ?? '',
+                                    style: TextStyle(fontSize: 16),
+                                  )),
+                              Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    history[index]['brand1'] ?? '',
+                                    style: TextStyle(fontSize: 16),
+                                  )),
                               Expanded(
                                 flex: 1,
                                 child: Text(
                                   history[index]['sum1'] ?? '',
-                                  style:
-                                      TextStyle(color: history[index]['sum1'] == '9' || history[index]['sum1'] == '8' ? Colors.green : Colors.black),
+                                  style: TextStyle(
+                                      color: history[index]['sum1'] == '9' || history[index]['sum1'] == '8' ? Colors.green : Colors.black,
+                                      fontSize: 16),
                                 ),
                               ),
-                              Expanded(flex: 1, child: Text(history[index]['brand2'] ?? '')),
+                              Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    history[index]['brand2'] ?? '',
+                                    style: TextStyle(fontSize: 16),
+                                  )),
                               Expanded(
                                 flex: 1,
                                 child: Text(
@@ -183,32 +205,83 @@ class _HistoryaddonState extends State<Historyaddon> {
                                   child: Text(
                                     history[index]['km2'] ?? '',
                                   )),
-                              Expanded(flex: 1, child: Text(history[index]['brand1'] ?? '')),
+                              Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    history[index]['brand1'] ?? '',
+                                    style: TextStyle(fontSize: 16),
+                                  )),
                               Expanded(
                                   flex: 1,
                                   child: Text(
                                     history[index]['sum3'] ?? '',
-                                    style: TextStyle(color: history[index]['sum3'] == '5' ? Colors.red : Colors.black),
+                                    style: TextStyle(
+                                      color: history[index]['sum3'] == '5' ? Colors.red : Colors.black,
+                                      fontSize: 16,
+                                    ),
                                   )),
-                              Expanded(flex: 1, child: Text(history[index]['brand2'] ?? '')),
-                              Expanded(flex: 1, child: Text(history[index]['sum4'] ?? '')),
-                              Expanded(flex: 1, child: Text(history[index]['unit'] ?? '')),
+                              Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    history[index]['brand2'] ?? '',
+                                    style: TextStyle(fontSize: 16),
+                                  )),
+                              Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    history[index]['sum4'] ?? '',
+                                    style: TextStyle(fontSize: 16),
+                                  )),
+                              Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    history[index]['unit'] ?? '',
+                                    style: TextStyle(fontSize: 16),
+                                  )),
                             ],
                           ),
                           history[index]['km3'] != null
                               ? Row(
                                   children: [
-                                    Expanded(flex: 1, child: Text(history[index]['km3'] ?? '')),
-                                    Expanded(flex: 1, child: Text(history[index]['brand1'] ?? '')),
-                                    Expanded(flex: 1, child: Text(history[index]['sum5'] ?? '')),
-                                    Expanded(flex: 1, child: Text(history[index]['brand2'] ?? '')),
+                                    Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          history[index]['km3'] ?? '',
+                                          style: TextStyle(fontSize: 16),
+                                        )),
+                                    Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          history[index]['brand1'] ?? '',
+                                          style: TextStyle(fontSize: 16),
+                                        )),
+                                    Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          history[index]['sum5'] ?? '',
+                                          style: TextStyle(fontSize: 16),
+                                        )),
+                                    Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          history[index]['brand2'] ?? '',
+                                          style: TextStyle(fontSize: 16),
+                                        )),
                                     Expanded(
                                         flex: 1,
                                         child: Text(
                                           history[index]['sum6'] ?? '',
-                                          style: TextStyle(color: history[index]['sum6'] == '25' ? Colors.green : Colors.black),
+                                          style: TextStyle(
+                                            color: history[index]['sum6'] == '25' ? Colors.green : Colors.black,
+                                            fontSize: 16,
+                                          ),
                                         )),
-                                    Expanded(flex: 1, child: Text(history[index]['unit'] ?? '')),
+                                    Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          history[index]['unit'] ?? '',
+                                          style: TextStyle(fontSize: 16),
+                                        )),
                                   ],
                                 )
                               : SizedBox.shrink()

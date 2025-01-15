@@ -56,34 +56,37 @@ class _TankDownState extends State<TankDown> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(
-                    gastank.length,
-                    (index) {
-                      nametank = gastank[index]['nameTank'];
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(
+                      gastankDiver.length,
+                      (index) {
+                        nametank = gastankDiver[index]['nameTank'];
 
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectindex = index;
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: selectindex == index ? kbutton : Colors.white,
-                              border: Border.all(color: kbutton)),
-                          width: size.width * 0.3,
-                          height: size.height * 0.06,
-                          child: Center(
-                              child: Text(
-                            gastank[index]['nameTank'] ?? '',
-                            style: TextStyle(fontSize: 20, color: selectindex == index ? Colors.white : kbutton, fontWeight: FontWeight.bold),
-                          )),
-                        ),
-                      );
-                    },
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectindex = index;
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: selectindex == index ? kbutton : Colors.white,
+                                border: Border.all(color: kbutton)),
+                            width: size.width * 0.3,
+                            height: size.height * 0.06,
+                            child: Center(
+                                child: Text(
+                              gastankDiver[index]['nameTank'] ?? '',
+                              style: TextStyle(fontSize: 20, color: selectindex == index ? Colors.white : kbutton, fontWeight: FontWeight.bold),
+                            )),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
                 Column(
@@ -158,15 +161,32 @@ class _TankDownState extends State<TankDown> {
                                             textAlign: TextAlign.center,
                                             style: TextStyle(fontSize: 20),
                                             onSubmitted: (value) {
-                                              setState(
-                                                () {
-                                                  // อัปเดตค่าจาก TextField
-                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                                  if (newValue != null) {
+                                              setState(() {
+                                                int maxValue = int.parse(gas_km[index]['sum1'] ?? '0');
+
+                                                int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                if (newValue != null) {
+                                                  if (newValue > maxValue) {
+                                                    // ScaffoldMessenger.of(context).showSnackBar(
+                                                    //   SnackBar(
+                                                    //     content: Text('ค่าที่กรอกต้องไม่เกิน $maxValue'),
+                                                    //   ),
+                                                    // );
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (context) => AlertDialogYes(
+                                                        title: 'แจ้งเตือน',
+                                                        description: 'ค่าที่กรอกต้องไม่เกิน $maxValue',
+                                                        pressYes: () {
+                                                          Navigator.pop(context);
+                                                        },
+                                                      ),
+                                                    );
+                                                  } else {
                                                     gas_km[index]['sum1'] = newValue.toString();
                                                   }
-                                                },
-                                              );
+                                                }
+                                              });
                                             },
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(),
@@ -175,26 +195,6 @@ class _TankDownState extends State<TankDown> {
                                           ),
                                         ),
                                         SizedBox(width: 20),
-                                        // GestureDetector(
-                                        //   onTap: () {
-                                        //     setState(() {
-                                        //       // เพิ่มค่า
-                                        //       gas_km[index]['sum1'] = (int.parse(gas_km[index]['sum1'] ?? '0') + 1).toString();
-                                        //     });
-                                        //   },
-                                        //   child: Container(
-                                        //     width: size.width * 0.07,
-                                        //     height: size.width * 0.07,
-                                        //     decoration: BoxDecoration(
-                                        //       color: Color(0xFFCFD8DC),
-                                        //       borderRadius: BorderRadius.circular(30),
-                                        //     ),
-                                        //     child: Icon(
-                                        //       Icons.add,
-                                        //       size: 15,
-                                        //     ),
-                                        //   ),
-                                        // ),
                                         GestureDetector(
                                           onTap: () {
                                             setState(() {
@@ -256,6 +256,7 @@ class _TankDownState extends State<TankDown> {
                                           ),
                                         ),
                                         SizedBox(width: 20),
+
                                         Container(
                                           color: Colors.white,
                                           height: size.height * 0.045,
@@ -268,15 +269,32 @@ class _TankDownState extends State<TankDown> {
                                             textAlign: TextAlign.center,
                                             style: TextStyle(fontSize: 20),
                                             onSubmitted: (value) {
-                                              setState(
-                                                () {
-                                                  // อัปเดตค่าจาก TextField
-                                                  int? newValue = int.tryParse(value.replaceAll(',', ''));
-                                                  if (newValue != null) {
+                                              setState(() {
+                                                int maxValue = int.parse(gas_km[index]['sum2'] ?? '0');
+
+                                                int? newValue = int.tryParse(value.replaceAll(',', ''));
+                                                if (newValue != null) {
+                                                  if (newValue > maxValue) {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (context) => AlertDialogYes(
+                                                        title: 'แจ้งเตือน',
+                                                        description: 'ค่าที่กรอกต้องไม่เกิน $maxValue',
+                                                        pressYes: () {
+                                                          Navigator.pop(context);
+                                                        },
+                                                      ),
+                                                    );
+                                                    // ScaffoldMessenger.of(context).showSnackBar(
+                                                    //   SnackBar(
+                                                    //     content: Text('ค่าที่กรอกต้องไม่เกิน $maxValue'),
+                                                    //   ),
+                                                    // );
+                                                  } else {
                                                     gas_km[index]['sum2'] = newValue.toString();
                                                   }
-                                                },
-                                              );
+                                                }
+                                              });
                                             },
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(),

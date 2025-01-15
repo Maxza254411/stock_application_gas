@@ -43,36 +43,37 @@ class _InputTextFormFieldState extends State<InputTextFormField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: widget.width ?? 250,
-        height: widget.height ?? 60,
-        child: TextFormField(
-          controller: widget.controller,
-          // onTap: () async {},
-          style: TextStyle(fontSize: 22),
-          obscureText: widget.obscureText ?? false,
-          onFieldSubmitted: widget.onFieldSubmitted,
-          keyboardType: widget.keyboardType,
-          inputFormatters: widget.format,
-          validator: widget.validator,
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-            label: widget.label,
-            hintText: widget.hintText,
-            hintStyle: TextStyle(fontSize: 22),
-            prefixIcon: widget.prefixIcon,
-            filled: true,
-            fillColor: widget.fillcolor,
-            suffixIcon: widget.suffixIcon,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: widget.bordercolor ?? Colors.black),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.transparent),
-            ),
+      width: widget.width ?? 250,
+      height: widget.height ?? 60,
+      child: TextFormField(
+        controller: widget.controller,
+        // onTap: () async {},
+        style: TextStyle(fontSize: 22),
+        obscureText: widget.obscureText ?? false,
+        onFieldSubmitted: widget.onFieldSubmitted,
+        keyboardType: widget.keyboardType,
+        inputFormatters: widget.format,
+        validator: widget.validator,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+          label: widget.label,
+          hintText: widget.hintText,
+          hintStyle: TextStyle(fontSize: 22),
+          prefixIcon: widget.prefixIcon,
+          filled: true,
+          fillColor: widget.fillcolor,
+          suffixIcon: widget.suffixIcon,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: widget.bordercolor ?? Colors.black),
           ),
-        ));
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: widget.bordercolor ?? Colors.black),
+          ),
+        ),
+      ),
+    );
   }
 }
 

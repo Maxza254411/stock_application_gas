@@ -56,34 +56,37 @@ class _TankUpState extends State<TankUp> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(
-                    gastank.length,
-                    (index) {
-                      nametank = gastank[index]['nameTank'];
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(
+                      gastankDiver.length,
+                      (index) {
+                        nametank = gastankDiver[index]['nameTank'];
 
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectindex = index;
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: selectindex == index ? kbutton : Colors.white,
-                              border: Border.all(color: kbutton)),
-                          width: size.width * 0.3,
-                          height: size.height * 0.06,
-                          child: Center(
-                              child: Text(
-                            gastank[index]['nameTank'] ?? '',
-                            style: TextStyle(fontSize: 20, color: selectindex == index ? Colors.white : kbutton, fontWeight: FontWeight.bold),
-                          )),
-                        ),
-                      );
-                    },
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectindex = index;
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: selectindex == index ? kbutton : Colors.white,
+                                border: Border.all(color: kbutton)),
+                            width: size.width * 0.3,
+                            height: size.height * 0.06,
+                            child: Center(
+                                child: Text(
+                              gastankDiver[index]['nameTank'] ?? '',
+                              style: TextStyle(fontSize: 20, color: selectindex == index ? Colors.white : kbutton, fontWeight: FontWeight.bold),
+                            )),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
                 Column(

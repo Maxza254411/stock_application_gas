@@ -82,6 +82,14 @@ List<Map<String, String>> gastank = [
     'nameTank': 'ถังฝากเติม',
   },
 ];
+List<Map<String, String>> gastankDiver = [
+  {
+    'nameTank': 'ถังหมุนเวียน',
+  },
+  {
+    'nameTank': 'ถังฝากเติม',
+  },
+];
 List<Map<String, String>> gas_km = [
   {
     'km': '4 กก',

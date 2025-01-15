@@ -58,28 +58,6 @@ class _StoragetankPageState extends State<StoragetankPage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => TankDown()));
-                  },
-                  child: Container(
-                    width: size.width * 0.8,
-                    height: size.height * 0.06,
-                    decoration: BoxDecoration(
-                      color: kbutton,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'เก็บถังอัดบรรจุ (ลงรถ)',
-                        style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: size.height * 0.03,
-                ),
-                GestureDetector(
-                  onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => TankUp()));
                   },
                   child: Container(
@@ -92,6 +70,28 @@ class _StoragetankPageState extends State<StoragetankPage> {
                     child: Center(
                       child: Text(
                         'เก็บถังอัดบรรจุ (ขึ้นรถ)',
+                        style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: size.height * 0.03,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => TankDown()));
+                  },
+                  child: Container(
+                    width: size.width * 0.8,
+                    height: size.height * 0.06,
+                    decoration: BoxDecoration(
+                      color: kbutton,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'เก็บถังอัดบรรจุ (ลงรถ)',
                         style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),

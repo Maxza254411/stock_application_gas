@@ -107,7 +107,7 @@ class _DiverPageState extends State<DiverPage> {
             ),
             ListTile(
               leading: Icon(Icons.output_outlined),
-              title: Text('LogOut'),
+              title: Text('Logout'),
               onTap: () async {
                 final ok = await showDialog(
                   context: context,
@@ -152,103 +152,6 @@ class _DiverPageState extends State<DiverPage> {
                         ),
                         child: Column(
                           children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: size.width * 0.7,
-                                  height: size.height * 0.08,
-                                  child: Card(
-                                    surfaceTintColor: Colors.white,
-                                    color: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    elevation: 2,
-                                    child: DropdownSearch<String>(
-                                      selectedItem: index < selectedItemtank.length ? selectedItemtank[index] : null,
-                                      items: tanktype,
-                                      popupProps: PopupProps.menu(
-                                        menuProps: MenuProps(
-                                          backgroundColor: Colors.white,
-                                        ),
-                                        fit: FlexFit.loose,
-                                        constraints: BoxConstraints(),
-                                        itemBuilder: (context, item, isSelected) => Container(
-                                          margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                item,
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      dropdownDecoratorProps: DropDownDecoratorProps(
-                                        textAlignVertical: TextAlignVertical.center,
-                                        baseStyle: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          fontFamily: 'Prompt',
-                                        ),
-                                        dropdownSearchDecoration: InputDecoration(
-                                          prefix: SizedBox(
-                                            width: 15,
-                                          ),
-                                          hintText: 'เลือกประเภทถัง',
-                                          hintStyle: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'Prompt',
-                                          ),
-                                          border: InputBorder.none,
-                                          suffixIconColor: Colors.grey,
-                                        ),
-                                      ),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          if (index < selectedItemtank.length) {
-                                            selectedItemtank[index] = value;
-                                          }
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    index != 0
-                                        ? GestureDetector(
-                                            onTap: () async {
-                                              final ok = await showDialog(
-                                                context: context,
-                                                builder: (context) => AlertDialogYesNo(
-                                                  title: 'แจ้งเตือน',
-                                                  description: 'คุณต้องการจะลบรายการนี้ใช่หรือไม่',
-                                                  pressYes: () {
-                                                    Navigator.pop(context, true);
-                                                  },
-                                                  pressNo: () {
-                                                    Navigator.pop(context, false);
-                                                  },
-                                                ),
-                                              );
-                                              if (ok == true) {
-                                                _removeContainer(index);
-                                              }
-                                            },
-                                            child: Icon(Icons.highlight_remove_outlined),
-                                          )
-                                        : SizedBox.shrink()
-                                  ],
-                                ),
-                              ],
-                            ),
                             Row(
                               children: [
                                 SizedBox(
@@ -319,6 +222,34 @@ class _DiverPageState extends State<DiverPage> {
                                     ),
                                   ),
                                 ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    index != 0
+                                        ? GestureDetector(
+                                            onTap: () async {
+                                              final ok = await showDialog(
+                                                context: context,
+                                                builder: (context) => AlertDialogYesNo(
+                                                  title: 'แจ้งเตือน',
+                                                  description: 'คุณต้องการจะลบรายการนี้ใช่หรือไม่',
+                                                  pressYes: () {
+                                                    Navigator.pop(context, true);
+                                                  },
+                                                  pressNo: () {
+                                                    Navigator.pop(context, false);
+                                                  },
+                                                ),
+                                              );
+                                              if (ok == true) {
+                                                _removeContainer(index);
+                                              }
+                                            },
+                                            child: Icon(Icons.highlight_remove_outlined),
+                                          )
+                                        : SizedBox.shrink()
+                                  ],
+                                ),
                               ],
                             ),
                           ],
@@ -344,7 +275,6 @@ class _DiverPageState extends State<DiverPage> {
                       ),
                       child: Icon(
                         Icons.add,
-                        size: 15,
                       ),
                     ),
                   ),

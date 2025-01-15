@@ -4,7 +4,9 @@ import 'package:stock_application_gas/constants.dart';
 import 'package:stock_application_gas/store/storePage.dart';
 
 class Sellreport extends StatefulWidget {
-  const Sellreport({super.key});
+  const Sellreport({
+    super.key,
+  });
 
   @override
   State<Sellreport> createState() => _SellreportState();

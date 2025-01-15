@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stock_application_gas/constants.dart';
 import 'package:stock_application_gas/diver/StorageTank/StoragetankPage.dart';
 import 'package:stock_application_gas/diver/diverPage.dart';
+import 'package:stock_application_gas/store/sellReport/sellReport.dart';
 import 'package:stock_application_gas/widgetHub/waterMark.dart';
 
 class Divermenupage extends StatefulWidget {
@@ -122,12 +123,12 @@ class _DivermenupageState extends State<Divermenupage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => Tankreportpage(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Sellreport(),
+                      ),
+                    );
                   },
                   child: Container(
                     width: size.width * 0.8,

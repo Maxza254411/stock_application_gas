@@ -218,64 +218,64 @@ class _AdminpageState extends State<Adminpage> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        margin: EdgeInsets.all(8),
-        child: SizedBox(
-          height: size.height * 0.07,
-          width: size.width * 0.4,
-          child: Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kbutton,
-                // side: BorderSide(color: textColor),
-                padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),
-              onPressed: () async {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => LoginPage(),
-                //   ),
-                // );
-                // show
-                final ok = await showDialog(
-                  context: context,
-                  builder: (context) => AlertDialogYesNo(
-                    title: 'แจ้งเตือน',
-                    description: 'คุณต้องการออกจากระบบหรือไม่',
-                    pressYes: () {
-                      Navigator.pop(context, true);
-                    },
-                    pressNo: () {
-                      Navigator.pop(context, false);
-                    },
-                  ),
-                );
-                if (ok == true) {
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
-                }
-              },
-              child: Text(
-                'ออกจากระบบ',
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-            ),
-          ),
-        ),
-      ),
+      // bottomNavigationBar: Container(
+      //   margin: EdgeInsets.all(8),
+      //   child: SizedBox(
+      //     height: size.height * 0.07,
+      //     width: size.width * 0.4,
+      //     child: Container(
+      //       decoration: BoxDecoration(
+      //         boxShadow: [
+      //           BoxShadow(
+      //             color: Colors.black.withOpacity(0.2),
+      //             spreadRadius: 2,
+      //             blurRadius: 5,
+      //             offset: Offset(0, 3),
+      //           ),
+      //         ],
+      //       ),
+      //       child: ElevatedButton(
+      //         style: ElevatedButton.styleFrom(
+      //           backgroundColor: kbutton,
+      //           // side: BorderSide(color: textColor),
+      //           padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+      //           shape: RoundedRectangleBorder(
+      //             borderRadius: BorderRadius.circular(8.0),
+      //           ),
+      //         ),
+      //         onPressed: () async {
+      //           // Navigator.push(
+      //           //   context,
+      //           //   MaterialPageRoute(
+      //           //     builder: (context) => LoginPage(),
+      //           //   ),
+      //           // );
+      //           // show
+      //           final ok = await showDialog(
+      //             context: context,
+      //             builder: (context) => AlertDialogYesNo(
+      //               title: 'แจ้งเตือน',
+      //               description: 'คุณต้องการออกจากระบบหรือไม่',
+      //               pressYes: () {
+      //                 Navigator.pop(context, true);
+      //               },
+      //               pressNo: () {
+      //                 Navigator.pop(context, false);
+      //               },
+      //             ),
+      //           );
+      //           if (ok == true) {
+      //             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
+      //           }
+      //         },
+      //         child: Text(
+      //           'ออกจากระบบ',
+      //           style: TextStyle(color: Colors.white, fontSize: 20),
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

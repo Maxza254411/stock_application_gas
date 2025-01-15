@@ -48,7 +48,7 @@ class _StockConfirmState extends State<StockConfirm> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 20),
+                padding: EdgeInsets.only(left: 15),
                 child: Row(
                   children: [
                     Container(
@@ -227,7 +227,7 @@ class _StockConfirmState extends State<StockConfirm> {
                 ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.yellow,
+                    backgroundColor: kbutton,
                     // side: BorderSide(color: textColor),
                     padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
                     shape: RoundedRectangleBorder(

@@ -111,126 +111,218 @@ class _SetpicepageState extends State<Setpicepage> {
                   ),
                 ),
               ),
-              SizedBox(
-                width: size.width,
-                height: size.height * 0.7,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: priceCategory.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 3,
-                            child: Container(
-                              height: size.height * 0.2,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Colors.grey[300],
-                              ),
-                              padding: EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '${priceCategory[index]['km']}',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+              productselect == 'ถังใหม่'
+                  ? SizedBox(
+                      width: size.width,
+                      height: size.height * 0.7,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: priceCategory.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 3,
+                                  child: Container(
+                                    height: size.height * 0.2,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                    ),
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${priceCategory[index]['km']}',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(height: 8),
+                                        Text(
+                                          '${priceCategory[index]['pricecategory1']}',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        Text(
+                                          '${priceCategory[index]['pricecategory2']}',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        Text(
+                                          '${priceCategory[index]['pricecategory3']}',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        Text(
+                                          '${priceCategory[index]['pricecategory4']}',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    '${priceCategory[index]['pricecategory1']}',
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                  Text(
-                                    '${priceCategory[index]['pricecategory2']}',
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                  Text(
-                                    '${priceCategory[index]['pricecategory3']}',
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                  Text(
-                                    '${priceCategory[index]['pricecategory4']}',
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 8),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              height: size.height * 0.2,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Colors.grey[300],
-                              ),
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      '${priceCategory[index]['brand1']}',
-                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(height: 8),
-                                    Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.1'] ?? '0')),
-                                        style: TextStyle(fontSize: 18)),
-                                    Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.2'] ?? '0')),
-                                        style: TextStyle(fontSize: 18)),
-                                    Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.3'] ?? '0')),
-                                        style: TextStyle(fontSize: 18)),
-                                    Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.4'] ?? '0')),
-                                        style: TextStyle(fontSize: 18)),
-                                  ],
                                 ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 8),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              height: size.height * 0.2,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Colors.grey[300],
-                              ),
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      priceCategory[index]['brand2'] ?? '',
-                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                SizedBox(width: 8),
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    height: size.height * 0.2,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
                                     ),
-                                    SizedBox(height: 8),
-                                    Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.1'] ?? '0')),
-                                        style: TextStyle(fontSize: 18)),
-                                    Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.2'] ?? '0')),
-                                        style: TextStyle(fontSize: 18)),
-                                    Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.3'] ?? '0')),
-                                        style: TextStyle(fontSize: 18)),
-                                    Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.4'] ?? '0')),
-                                        style: TextStyle(fontSize: 18)),
-                                  ],
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '${priceCategory[index]['brand1']}',
+                                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(height: 8),
+                                          Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.1'] ?? '0')),
+                                              style: TextStyle(fontSize: 18)),
+                                          Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.2'] ?? '0')),
+                                              style: TextStyle(fontSize: 18)),
+                                          Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.3'] ?? '0')),
+                                              style: TextStyle(fontSize: 18)),
+                                          Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.4'] ?? '0')),
+                                              style: TextStyle(fontSize: 18)),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                SizedBox(width: 8),
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    height: size.height * 0.2,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                    ),
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            priceCategory[index]['brand2'] ?? '',
+                                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(height: 8),
+                                          Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.1'] ?? '0')),
+                                              style: TextStyle(fontSize: 18)),
+                                          Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.2'] ?? '0')),
+                                              style: TextStyle(fontSize: 18)),
+                                          Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.3'] ?? '0')),
+                                              style: TextStyle(fontSize: 18)),
+                                          Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas2.4'] ?? '0')),
+                                              style: TextStyle(fontSize: 18)),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
-              ),
+                    )
+                  : SizedBox(
+                      width: size.width,
+                      height: size.height * 0.7,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: priceCategory.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: Container(
+                                    height: size.height * 0.2,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                    ),
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${priceCategory[index]['km']}',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(height: 8),
+                                        Text(
+                                          '${priceCategory[index]['pricecategory1']}',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        Text(
+                                          '${priceCategory[index]['pricecategory2']}',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        Text(
+                                          '${priceCategory[index]['pricecategory3']}',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        Text(
+                                          '${priceCategory[index]['pricecategory4']}',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 8),
+                                Expanded(
+                                  flex: 2,
+                                  child: Container(
+                                    height: size.height * 0.2,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.grey[300],
+                                    ),
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '${priceCategory[index]['gas']}',
+                                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(height: 8),
+                                          Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.1'] ?? '0')),
+                                              style: TextStyle(fontSize: 18)),
+                                          Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.2'] ?? '0')),
+                                              style: TextStyle(fontSize: 18)),
+                                          Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.3'] ?? '0')),
+                                              style: TextStyle(fontSize: 18)),
+                                          Text(NumberFormat('#,##0', 'en_US').format(int.parse(priceCategory[index]['sumgas1.4'] ?? '0')),
+                                              style: TextStyle(fontSize: 18)),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    )
             ],
           ),
         ),
