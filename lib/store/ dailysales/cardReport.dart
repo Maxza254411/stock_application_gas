@@ -36,7 +36,6 @@ class _CardReportState extends State<CardReport> {
       padding: EdgeInsets.all(8.0),
       child: Container(
         width: size.width * 1,
-        // height: size.height * 0.25,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: Colors.white,
