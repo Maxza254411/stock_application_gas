@@ -174,7 +174,9 @@ class _StorepageState extends State<Storepage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Sellreport(),
+                        builder: (context) => Sellreport(
+                          check: 1,
+                        ),
                       ),
                     );
                   },

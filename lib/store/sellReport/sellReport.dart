@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_application_gas/constants.dart';
+import 'package:stock_application_gas/diver/diverMenu/diverMenuPage.dart';
 import 'package:stock_application_gas/store/storePage.dart';
 
 class Sellreport extends StatefulWidget {
-  const Sellreport({
-    super.key,
-  });
+  Sellreport({super.key, required this.check});
 
   @override
   State<Sellreport> createState() => _SellreportState();
+  int check;
 }
 
 class _SellreportState extends State<Sellreport> {
@@ -46,14 +46,21 @@ class _SellreportState extends State<Sellreport> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Storepage(
-                    store: headtitle,
-                  ),
-                ),
-                (route) => false);
+            widget.check == 1
+                ? Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Storepage(
+                        store: headtitle,
+                      ),
+                    ),
+                    (route) => false)
+                : Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Divermenupage(),
+                    ),
+                    (route) => false);
           },
         ),
         title: Row(

@@ -105,6 +105,31 @@ class _TankreportpageState extends State<Tankreportpage> {
                                       child: Padding(
                                         padding: const EdgeInsets.only(left: 10),
                                         child: Text(
+                                          'ชื่อร้านค้า',
+                                          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 10),
+                                        child: Text(
+                                          'ร้านเจ้ดำ',
+                                          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 10),
+                                        child: Text(
                                           'ขนาด${reportTank[index]['km'] ?? ''}',
                                           style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
                                         ),
@@ -170,7 +195,7 @@ class _TankreportpageState extends State<Tankreportpage> {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: size.height * 0.06,
+                                  height: size.height * 0.03,
                                 ),
                                 GestureDetector(
                                   onTap: () async {

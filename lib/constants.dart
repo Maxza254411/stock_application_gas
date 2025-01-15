@@ -192,6 +192,85 @@ const List<Map<String, dynamic>> store = [
   {'store': 'ร้านที่1'},
   {'store': 'ร้านที่1'}
 ];
+const List<Map<String, dynamic>> dataTable = [
+  {
+    'date': 'วันที่',
+    'productcode': 'รหัสสินค้า',
+    'type': 'ประเภท',
+    'weight': 'น้ำหนัก',
+    'brand': 'ยี่ห้อ',
+    'pice': 'ราคา',
+    'unit': 'จำนวน',
+    'claimtank': 'ถังเคลม',
+    'paymenttype': 'ประเภทการจ่าย',
+    'totalamount': 'จำวนรวม'
+  },
+  {
+    'date': 'วันที่',
+    'productcode': 'รหัสสินค้า',
+    'type': 'ประเภท',
+    'weight': 'น้ำหนัก',
+    'brand': 'ยี่ห้อ',
+    'pice': 'ราคา',
+    'unit': 'จำนวน',
+    'claimtank': 'ถังเคลม',
+    'paymenttype': 'ประเภทการจ่าย',
+    'totalamount': 'จำวนรวม'
+  },
+  {
+    'date': 'วันที่',
+    'productcode': 'รหัสสินค้า',
+    'type': 'ประเภท',
+    'weight': 'น้ำหนัก',
+    'brand': 'ยี่ห้อ',
+    'pice': 'ราคา',
+    'unit': 'จำนวน',
+    'claimtank': 'ถังเคลม',
+    'paymenttype': 'ประเภทการจ่าย',
+    'totalamount': 'จำวนรวม'
+  },
+];
+const List<Map<String, dynamic>> dataTablerow = [
+  {
+    'date': '1-12-2025',
+    'productcode': '0734',
+    'type': 'ถังใหม่',
+    'weight': '15',
+    'brand': 'ปตท',
+    'pice': '425',
+    'unit': '2',
+    'claimtank': 'ปกติ',
+    'paymenttype': 'เงินสด',
+    'totalamount': '160',
+    'capital': '1',
+  },
+  {
+    'date': '1-12-2025',
+    'productcode': '0742',
+    'type': 'ประเภท',
+    'weight': 'น้ำหนัก',
+    'brand': 'ยี่ห้อ',
+    'pice': 'ราคา',
+    'unit': 'จำนวน',
+    'claimtank': 'ถังเคลม',
+    'paymenttype': 'ประเภทการจ่าย',
+    'totalamount': 'จำวนรวม',
+    'capital': '1',
+  },
+  {
+    'date': 'วันที่',
+    'productcode': 'รหัสสินค้า',
+    'type': 'ประเภท',
+    'weight': 'น้ำหนัก',
+    'brand': 'ยี่ห้อ',
+    'pice': 'ราคา',
+    'unit': 'จำนวน',
+    'claimtank': 'ถังเคลม',
+    'paymenttype': 'ประเภทการจ่าย',
+    'totalamount': 'จำวนรวม',
+    'capital': '1',
+  },
+];
 
 List<Map<String, String>> sellreport = [
   {

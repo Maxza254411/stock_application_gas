@@ -274,7 +274,7 @@ class _ConfirmsetpiceState extends State<Confirmsetpice> {
                                             flex: 1,
                                             child: Center(
                                               child: Text(
-                                                '${priceConfirm[index]['brand1']}',
+                                                '${priceConfirm[index]['gas']}',
                                                 style: TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,

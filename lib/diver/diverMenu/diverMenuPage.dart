@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stock_application_gas/constants.dart';
+import 'package:stock_application_gas/diver/Refuelinglist/RefuelingPage.dart';
+import 'package:stock_application_gas/diver/StorageReport/storageReportPage.dart';
 import 'package:stock_application_gas/diver/StorageTank/StoragetankPage.dart';
 import 'package:stock_application_gas/diver/diverPage.dart';
+import 'package:stock_application_gas/store/%20dailysales/%20dailySalesPage.dart';
 import 'package:stock_application_gas/store/sellReport/sellReport.dart';
 import 'package:stock_application_gas/widgetHub/waterMark.dart';
 
@@ -79,7 +82,7 @@ class _DivermenupageState extends State<Divermenupage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => StoragetankPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Storagereportpage()));
                   },
                   child: Container(
                     width: size.width * 0.8,
@@ -101,7 +104,7 @@ class _DivermenupageState extends State<Divermenupage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => DailySalesPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => RefuelingPage()));
                   },
                   child: Container(
                     width: size.width * 0.8,
@@ -126,7 +129,9 @@ class _DivermenupageState extends State<Divermenupage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Sellreport(),
+                        builder: (context) => Sellreport(
+                          check: 2,
+                        ),
                       ),
                     );
                   },
